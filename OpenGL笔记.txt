@@ -1,0 +1,6 @@
+
+
+若提示gl.h等有错，头文件前须有#include <Windows.h>
+
+glut,glew,freeglut:
+http://johnhany.net/2014/01/environment-for-opengl-with-vs2010/

@@ -1,0 +1,168 @@
+﻿Sublime Text 使用笔记
+
+1.Sublime Text 2 中文包(目前2014.1月网上存在的中文包不能完美匹配，不建议使用)
+下载文件解压后Default放进AppData\Roaming\Sublime Text 2\Packages(具体为菜单栏->Preferences->Browse Packages处文件夹)下面即可
+
+2.主要快捷键列表：
+Tab              缩进       
+Shift+Tab        去除缩进     
+Ctrl+Enter       插入行后       
+Ctrl+Shift+Enter 插入行前     
+Ctrl+Shift+UP    与上行互换       
+Ctrl+Shift+DOWN  与下行互换     
+Ctrl+Shift+V     粘贴并自动缩进(无需担心代码格式问题了，建议抛弃Ctrl+V)       
+Ctrl+/           行注释       
+Ctrl+Shift+/     块注释     
+Ctrl+M           跳到光标匹配位置（匹配位置会有下划线，一般为括号）     
+Ctrl+Shift+M     选择括号内的内容（继续按则继续选择父括号）     
+Ctrl+J           合并选择的多行     
+Ctrl+L           选择整行（继续按则选择下行）       
+Ctrl+K,Ctrl+K    从光标处删除至行尾       
+Ctrl+K,Ctrl+Backspace  从光标处删除至行首     
+Ctrl+Shift+K     删除整行       
+Ctrl+Shift+D     复制光标所在整行，插入在该行之前 
+
+多行改：     
+Ctrl+D           选中光标所在处词（继续按就向下继续选相同词）       
+Alt+F3           选中与光标处相同的全部词       
+按住Ctrl左键选择代码，可选不连续代码       
+按住Shift右键（或者仅按鼠标中键）框选代码，可选矩形区代码
+Ctrl+Shift+L      同时编辑所选行
+
+Ctrl+K,Ctrl+U    改为大写     
+Ctrl+K,Ctrl+L    改为小写
+
+Ctrl+Shift+[     折叠代码     
+Ctrl+Shift+]     展开代码
+
+Ctrl+P           跳转面板       
+Ctrl+Shift+P     控制面板       
+Ctrl+G           跳到行(Ctrl + P , : )       
+Ctrl+R           调到标识符(Ctrl+P , @ )
+
+@ : 可以在跳转面板混用 如 test.cpp@main，跳到test.cpp文件的main函数
+
+F11  Shift+F11 两种全屏模式
+
+3.加入右键菜单（带图标）
+a 注册表HKEY_CLASSSES_ROOT→ * → Shell 下面新建项命名为 Edit with Sublime Text
+b 在新建字符串值 命名为Icon，值为 “Sublime text 所在路径,0″，我这里就是D:\Program Files (x86)\Sublime Text 2\sublime_text.exe,0
+c 在Edith with Sublime Text ，下面新建项command ,在默认中输入值为D:\Program Files (x86)\Sublime Text 2\sublime_text.exe %1     （%1 用tab方式打开不同的文档）
+
+4.安装包控制（Package Control）
+打开Sublime Text 2，按快捷键 ctrl+` 或者点击 Tools → Command Palette 调出控制台Console；
+将以下代码复制粘贴进命令行后回车：
+import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
+重新启动Sublime Text 2，如果在Preferences → Package Settings 中看到 Package Control 这一项，就说明安装成功了。
+
+5.让Sublime Text 2支持GB2312和GBK
+使用Ctrl+Shift+P打开命令行模式，在里面输入Install Package即可搜索需要的Package。一般使用“ConvertToUTF8”和“GBK Encoding Support”即可.
+
+6.编译和运行C/C++程序(通过visual studio)
+“环境变量”添加：
+<1>名字: VS100Common
+值: C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7
+<2>名字: VS100VC
+值: C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC
+<3>名字: VS100SDK
+值: C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A
+
+<1>名字: PATH
+值 ：%VS100VC%\BIN;%VS100Common%\IDE;%VS100Common%\TOOLS;%VS100SDK%\BIN;%PATH%
+<2>名字: INCLUDE
+值 ：%VS100VC%\INCLUDE;%VS100VC%\ATLMFC\INCLUDE;%VS100SDK%\INCLUDE;%INCLUDE%
+<3>名字: LIB
+值 ：%VS100VC%\LIB;%VS100VC%\ATLMFC\LIB;%VS100SDK%\LIB;%LIB%
+
+打开Sublime Text2，选择tools，然后选择Build System，然后选择 New Build System。
+然后在里面输入下面的代码：（显然是JSON 格式）
+{
+	"cmd": ["CL", "/Fo${file_base_name}", "/O2", "${file}"],
+	"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+	"working_dir": "${file_path}",
+	"selector": "source.c, source.c++",
+	"encoding":"cp936",
+
+	"variants":
+	[
+		{
+			"name": "Run",
+			"cmd": ["CMD", "/U", "/C", "CL /Fo${file_base_name} /O2 ${file} && ${file_base_name}"]
+		}
+	]
+}
+注意某些大小写；然后保存为：MSComplie.sublime-build
+上面的这个代码有两个问题
+<1>编译的结果放在Sublime Text 2文件夹下,而不是代码文件所在文件夹
+<2>无法进行输入操作(弹出cmd窗口)
+进行修改为下：
+{
+	"cmd": ["CL", "/EHsc", "${file}"],
+	"file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+	"selector": "source.c, source.c++",
+	"encoding": "GBK",
+
+	"variants":
+	[
+		{
+			"name": "Run",
+			"shell": true,
+			"cmd": ["CMD", "/U", "/C", "${file_base_name}"]
+		},
+		{
+			"name": "RunInCommand",
+			"shell": true,
+			"cmd": ["start", "cmd", "/c", "${file_base_name} & pause"]
+		}
+	]
+}
+倒数第4行中，缺少"start"就不会弹出cmd窗口；缺少pause则cmd窗口一闪而过；cmd /c dir 是执行完dir命令后关闭命令窗口
+"encoding": "GBK"否则输出中文时出错
+点击preference->Key Binding -User，并加入{ "keys": ["ctrl+alt+shift+b"], "command": "build", "args": {"variant": "RunInCommand"} }
+Key Bindings - Default 是默认的快捷键配置文件，不建议直接在这里修改(升级后修改将无效)。两边都有时会以 - User 文件里面定义的为准。
+编辑完保存，然后ctrl+shift+c就可以调用cmd运行了
+
+官方文档Build_Systems，以供参考： http://docs.sublimetext.info/en/latest/reference/build_systems.html
+
+7.Vim 模式
+Preferences：Settings - User 修改为下
+{
+	"font_size": 10,
+	"ignored_packages":
+	[
+//		"Vintage"
+	]
+}
+
+8.多光标操作(Multiple Selections)
+对文本中的多个地方同时做修改
+Ctrl+Shift+L to split the selection into lines
+Ctrl+D to select the next occurrence of the selected word. 
+
+9.Split Editing
+Take a look at the View/Layout menu for split editing options. 
+
+10.快捷键支持双重组合
+譬如默认情况下，将选中的文字改成大写的热键是“Ctrl+K, Ctrl+U”，意思是当你先按下 Ctrl+K 之后迅速再按 Ctrl+U 进行触发
+
+11.编辑状态恢复
+当你修改了一个文件，但没有保存，这时退出软件，是不会很烦人地提示你要不要保存的，因为无论是用户自发退出还是意外崩溃退出，下次启动软件后，你之前的编辑状态都会被完整恢复
+
+12.跳转面板
+Ctrl+P,实现快速文件切换功能，支持模糊匹配；
+先输入一个 @ ，列出这文件里全部的 Function
+先输入一个英文冒号 : ，然后再输入一个数字，则可以跳到指定的行数；
+先输入一个 # ，可以罗列/搜索文本；
+而且你还可以使用更快速的快捷键，譬如快速列出/跳转函数就是 Ctrl+R，等同于Ctrl+P之后输入@；跳转到指定行号是 Ctrl+G
+这些切换定位方法还可以配合在一起使用，如 abc@asd
+
+13.ColorPicker调色板
+可以在调色板中选择一个颜色，然后按“确定”按钮把该值填写到 SublimeText 中活动文档的当前位置
+也可以在活动文档中选择一个颜色的值，按此插件的快捷键就会在显示的调色板中定位到该值所对应的颜色
+
+14.MarkDown Editing
+SublimeText不仅仅是能够查看和编辑 Markdown 文件，但它会视它们为格式很糟糕的纯文本。这个插件通过适当的颜色高亮和其它功能来更好地完成这些任务。
+
+15.MarkDown Preview
+在浏览器中预览Markdown文件，还可以导出html代码
+命令面板，输入mdp

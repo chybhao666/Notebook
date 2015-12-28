@@ -1,0 +1,85 @@
+#模拟器中安装apk
+adb install D:\ucweb-7.2.2.54-999-139-10070817.apk
+
+#想使用手机调试程序，查看手机是否可用(查看可用设备)
+adb devices
+
+Ctrl+F12 模拟器切换到横屏
+
+文件目录
+    src
+      项目中所有Java源文件
+    lib
+      第三方Java库文件
+    assets
+      静态资源文件
+    doc
+      项目相关文档
+    res
+      drawable
+        图像资源文件
+      layout
+        XML布局文件
+      values
+        常量和字符串等资源（方便快速配置程序状态，方便加入多语言支持）
+    AndroidManifest.xml
+      设定了构建和安装该应用程序所需要满足的一些条件
+    .classpath
+      保存标准JAva类和类库的具体位置
+    .project
+      存放工程相关的一些信息
+    bin
+      编译结果
+R.java由SDK基于布局文件自动生成，包含所有用户界面元素的引用
+
+AndroidManifest.xml文件
+  1.<manifest ... package="
+  程序中所有模块都位于这个包中
+  2.<user-permission android:name=...
+  声明需要用到的一些系统权限（可在开发文档中找到）
+  3.<activity android:name=".MicroJobs" android:label="@string/app_name">
+  name指定活动名称，但所有模块都在同一个包中，所以没必要列出包名，而用“.XXX”作为活动名称，名称中“.”也可以省略
+  label会出现在屏幕顶端的标题栏里
+  4.意图过滤器<intent-filter>
+  <action android:name="android.intent.action.MAIN" />
+  程序启动后运行的第一个活动
+  <category android:name="android.intent.category.LAUNCHER" />
+  在系统应用程序菜单中显示
+
+尺寸
+1.px：（pixels）像素
+2.dip或dp：（Device-independent Pixels）设备无关像素
+3.sp：（Scaled Pixels）缩放像素
+4.in：英寸
+5.mm：毫米
+色彩
+以#开始的八位十六进制数字，Alpha值确定透明度（FF为完全不透明）
+
+import缺少的包
+Ctrl+Shift+O
+
+获取开发数字证书的认证指纹（MD5,SHA1）
+C:\Users\Naivete\.android>keytool -list -v -keystore "C:\Users\Naivete\.android\
+debug.keystore" -alias androiddebugkey -storepass android -keypass android
+
+Eclipse调试
+1.Display
+Window--show view--Display，输入表达式，右击，选择“Display”
+2.Logcat
+可以打印自定义的Logcat日志（详细略）
+3.DDMS
+Threads视图显示当前进程的所有活动线程
+Heap视图用于显示Dalvik虚拟机中堆内存的使用情况
+模拟电话功能和定位功能
+屏幕截图
+
+性能测试工具--Traceview
+
+Android SDK Manager 下载缓慢解决办法
+不使用SDK Manager，而使用其他工具下载（如浏览器）
+地址类似于https://dl-ssl.google.com/android/repository/samples-19_r05.zip，最后的文件名可以sdk\temp文件夹里下载不完整的文件得到
+将下载得的文件放在temp文件夹即可
+
+samples的使用方法
+打开samples文件夹没有像早期那样看到一个个android程序代码
+需要创建Android Sample Project,选择具体项目
