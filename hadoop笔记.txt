@@ -1,0 +1,8 @@
+安装版本
+hadoop 1.2.1
+hbase 0.94.27
+hive 0.13.1
+
+http://localhost:50030/     - Hadoop 管理介面
+http://localhost:50060/     - Hadoop Task Tracker 状态
+http://localhost:50070/     - Hadoop DFS 状态

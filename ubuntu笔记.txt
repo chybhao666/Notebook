@@ -1,0 +1,82 @@
+查看文本：nano
+
+Gedit中文乱码
+Gedit 3.x 版本设置
+方法一.命令方式
+gsettings set org.gnome.gedit.preferences.encodings auto-detected "['GB18030', 'UTF-8', 'CURRENT', 'ISO-8859-15', 'UTF-16']"
+方法二.图形方式
+安装并运行dconf-editor
+展开/org/gnome/gedit/preferences/encodings auto-detected的Value中加入 'GB18030' ，加在UTF-8前面；
+
+groups 
+查看当前用户所属的组
+groups <user1> <user2> <user3> 
+查看<user1>, <user2> 和 <user3>所属的组
+
+在终端中用命令打开文件夹：
+nautilus
+
+Ubuntu如何设置才能用命令行模式启动:
+启动之后按CTRL+ALT+(F1-F6),进入虚拟控制台比较方便.恢复图形界面是CTRL+ALT+F7.
+
+SSH连接的时候Host key verification failed.
+选择最低的安全级别。在.ssh/config（或者/etc/ssh/ssh_config）中配置：StrictHostKeyChecking no
+
+安装flash插件
+firefox:software center直接搜flash
+chrome: 1)拷贝 libflashplayer.so，尝试失败
+2)sudo apt-get install pepperflashplugin-nonfree
+  sudo update-pepperflashplugin-nonfree --install
+成功
+
+显示桌面
+ctrl + super + d
+
+检查ssh server是否启动：
+ps -e|grep ssh
+
+截图
+screenshot
+
+搜狗输入法安装：
+官网下载，ubuntu14.04直接双击安装即可
+发现ctrl+空格的快捷键切换输入法无效，是因为ibus和fcitx快捷键冲突。
+在dash面板找到 “系统设置”，进入”文本输入”，修改 “切换到下一个源的快捷方式”，不要设置成ctrl+空格或ctrl+shift，再次点击ctrl+space就可以切换搜狗输入法了。
+
+#查看已安装软件包的方法
+在终端输入sudo dpkg -l 即可,然后在终端的界面里复制列出来的信息就可以了(终端查看时,一定要做如下步骤:点终端界面上的"编辑"-->配置文件首选项-->滚动-->回滚-->不限制"打上勾",这样输入到界面的信息就完整显示了)
+
+#apt命令
+apt-cache search foo  搜索和"foo"匹配的包。
+apt-cache show foo    顯示"foo"包的相關信息，例如描述、版本、大小、依賴以及衝突。
+dpkg -l *foo*         查找包含有"foo"字樣的包。與apt-cache show foo類似，但是還會顯示每個包是安裝了還是沒安裝。
+
+#修改权限
+chmod 755 hello.py
+chmod +x hello.py
+
+单独查看内存使用情况的命令：free -m
+查看内存及cpu使用情况的命令：top
+
+压缩，解压缩
+.zip
+解压：unzip FileName.zip
+压缩：zip FileName.zip DirName
+.rar
+解压：rar -x FileName.zip
+压缩：rar -a FileName.rar DirName
+.tar.gz或tgz
+解压：tar -zxvf FileName.tar.gz
+压缩：tar -zcvf FileName.tar.gz DirName
+
+压缩文件夹
+zip –q –r xahot.zip xahot
+比如现在我的xahot目录下,我操作的zip压缩命令是
+zip –q –r xahot.zip *
+
+管理员登录
+首先创建密码
+sudo passwd root
+之后使用
+su root
+输入密码就可以了
