@@ -4,7 +4,7 @@
 ## 从源中安装git
 $sudo apt-get install git
 
-## 用户信息
+## 配置用户信息
 $git config --global user.name "Your Name Here"
 $git config --global user.email your_email@example.com
 查看已有的配置信息：
@@ -14,14 +14,22 @@ $git config --list
 $git clone git_address
 (地址如：https://github.com/hritt/Notebook.git)
 
+## 获取远程的更新
+$git pull
+
 ## 提交日志
 $git log
 
-## 添加新增文件到本地库
-git add .
+## 把要提交的文件的信息添加到索引库中
+$git add .
+也可以指定文件
+$git add a.cpp
 
-## 提交文件到本地
+## 提交暂存区里面的内容
+$git commit   默认使用 vi 添加描述
 $git commit -m "comment ×××"
+除了将暂存区里的文件提交外，还提交被修改但未添加到暂存区的文件
+$git commit -a 
 
 ## 创建验证用的公钥(要先有ssh)
 使用命令：ssh-keygen -t rsa
@@ -32,7 +40,16 @@ $git commit -m "comment ×××"
 git push origin master 
 这边要输入用户名和密码，是github的，千万别输错成操作系统的；输错给出的提示是fatal: Authentication failed for 'https://github.com/hritt/Notebook.git/'
 
+## 在本地新建库并提交到远程
+$git init
+$git add .
+$git commit -m 'Initial commit project'
+$git remote add origin https://github.com/hritt/new.git
+$git push origin master
 
+## 查看最近一次改变的內容
+$git diff
 
+##
 
 
