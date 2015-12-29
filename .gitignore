@@ -1,4 +1,6 @@
+# 在windows中一些不想提交的文件
 ~*.*
+＃ ubuntu中gedit自动保存的文件
 *.*~
 
 # Windows image file caches
