@@ -1,29 +1,38 @@
 2015/12/28 目前github没有linux客户端
 
 （已有github账户情况下）
-1.从源中安装git
+## 从源中安装git
 $sudo apt-get install git
 
-2.用户信息
+## 用户信息
 $git config --global user.name "Your Name Here"
 $git config --global user.email your_email@example.com
 查看已有的配置信息：
 $git config --list
 
-3.把GitHub里的项目复制到本地：
+## 把GitHub里的项目复制到本地：
 $git clone git_address
 (地址如：https://github.com/hritt/Notebook.git)
 
-4.提交日志
+## 提交日志
 $git log
 
-5.提交文件
+## 添加新增文件到本地库
+git add .
+
+## 提交文件到本地
 $git commit -m "comment ×××"
 
-6.创建验证用的公钥(要先有ssh)
-使用命令：ssh-keygen -C 'you email address@gmail.com' -t rsa
+## 创建验证用的公钥(要先有ssh)
+使用命令：ssh-keygen -t rsa
 会在用户目录 ~/.ssh/ 下建立相应的密钥文件， 将public key(id_rsa.pub文件)拷贝到github服务器的Account settings——> SSH Keys中
 可以使用 ssh -v git@github.com 命令来测试链接是否畅通
 
-7.
+## 提交到远程
 git push origin master 
+这边要输入用户名和密码，是github的，千万别输错成操作系统的；输错给出的提示是fatal: Authentication failed for 'https://github.com/hritt/Notebook.git/'
+
+
+
+
+
