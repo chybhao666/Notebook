@@ -1,0 +1,17 @@
+Sublime Text 使用笔记
+
+1.修改用户设置：
+Sublime Text->Preferences->Setting-User，添加：
+"open_files_in_new_window": false,  #取消打开文件时会新生成一个窗口，默认设置每次打开一个项目会重新生成一个窗口
+
+2.安装package control
+见官方：https://packagecontrol.io/installation
+
+3.快捷键
+Cmd+Shift+P     命令面板
+Ctr+`           控制台
+
+4.SublimeClang是Sublime Text中的C/C++自动补全插件，自带语法检查功能
+在命令面板中输入“run”，选择”Build:run”,可以运行。（是否要在mac上先安装Command Line Tools？）
+
+5.

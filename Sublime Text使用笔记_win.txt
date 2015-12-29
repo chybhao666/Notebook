@@ -5,38 +5,38 @@
 
 2.主要快捷键列表：
 Tab              缩进       
-Shift+Tab        去除缩进     
-Ctrl+Enter       插入行后       
-Ctrl+Shift+Enter 插入行前     
-Ctrl+Shift+UP    与上行互换       
+Shift+Tab        去除缩进
+Ctrl+Enter       插入行后
+Ctrl+Shift+Enter 插入行前
+Ctrl+Shift+UP    与上行互换
 Ctrl+Shift+DOWN  与下行互换     
 Ctrl+Shift+V     粘贴并自动缩进(无需担心代码格式问题了，建议抛弃Ctrl+V)       
-Ctrl+/           行注释       
-Ctrl+Shift+/     块注释     
-Ctrl+M           跳到光标匹配位置（匹配位置会有下划线，一般为括号）     
-Ctrl+Shift+M     选择括号内的内容（继续按则继续选择父括号）     
-Ctrl+J           合并选择的多行     
-Ctrl+L           选择整行（继续按则选择下行）       
-Ctrl+K,Ctrl+K    从光标处删除至行尾       
-Ctrl+K,Ctrl+Backspace  从光标处删除至行首     
+Ctrl+/           行注释
+Ctrl+Shift+/     块注释
+Ctrl+M           跳到光标匹配位置（匹配位置会有下划线，一般为括号）
+Ctrl+Shift+M     选择括号内的内容（继续按则继续选择父括号）
+Ctrl+J           合并选择的多行
+Ctrl+L           选择整行（继续按则选择下行）
+Ctrl+K,Ctrl+K    从光标处删除至行尾
+Ctrl+K,Ctrl+Backspace  从光标处删除至行首
 Ctrl+Shift+K     删除整行       
 Ctrl+Shift+D     复制光标所在整行，插入在该行之前 
 
 多行改：     
-Ctrl+D           选中光标所在处词（继续按就向下继续选相同词）       
-Alt+F3           选中与光标处相同的全部词       
-按住Ctrl左键选择代码，可选不连续代码       
+Ctrl+D           选中光标所在处词（继续按就向下继续选相同词）
+Alt+F3           选中与光标处相同的全部词
+按住Ctrl左键选择代码，可选不连续代码
 按住Shift右键（或者仅按鼠标中键）框选代码，可选矩形区代码
 Ctrl+Shift+L      同时编辑所选行
 
-Ctrl+K,Ctrl+U    改为大写     
+Ctrl+K,Ctrl+U    改为大写
 Ctrl+K,Ctrl+L    改为小写
 
-Ctrl+Shift+[     折叠代码     
+Ctrl+Shift+[     折叠代码
 Ctrl+Shift+]     展开代码
 
-Ctrl+P           跳转面板       
-Ctrl+Shift+P     控制面板       
+Ctrl+P           跳转面板
+Ctrl+Shift+P     控制面板
 Ctrl+G           跳到行(Ctrl + P , : )       
 Ctrl+R           调到标识符(Ctrl+P , @ )
 
@@ -51,9 +51,12 @@ c 在Edith with Sublime Text ，下面新建项command ,在默认中输入值为
 
 4.安装包控制（Package Control）
 打开Sublime Text 2，按快捷键 ctrl+` 或者点击 Tools → Command Palette 调出控制台Console；
-将以下代码复制粘贴进命令行后回车：
+将以下代码复制粘贴进命令行后回车：(见mac版的笔记)
 import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print('Please restart Sublime Text to finish installation')
 重新启动Sublime Text 2，如果在Preferences → Package Settings 中看到 Package Control 这一项，就说明安装成功了。
+Sublime Text 2安装插件有两种方法：
+　　1）离线安装，先下载好安装包，解压之后放到Packages文件夹下，重启Sublime即可。
+　　2）在线安装，在线安装之前，需要安装”Packages Control“这个包管理插件
 
 5.让Sublime Text 2支持GB2312和GBK
 使用Ctrl+Shift+P打开命令行模式，在里面输入Install Package即可搜索需要的Package。一般使用“ConvertToUTF8”和“GBK Encoding Support”即可.
