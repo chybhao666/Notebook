@@ -17,19 +17,17 @@ $git clone git_address
 ## 获取远程的更新
 $git pull
 
-## 提交日志
-$git log
-
 ## 把要提交的文件的信息添加到索引库中
-$git add .
-也可以指定文件
-$git add a.cpp
+$git add . 整个目录
+$git add a.cpp 指定文件
+$git add -u 所有tracked文件中被修改过或已删除文件的信息添加到索引库,不处理untracted的文件
+$git add -A所有tracked文件中被修改过或已删除文件和所有untracted的文件信息添加到索引库
 
 ## 提交暂存区里面的内容
-$git commit   默认使用 vi 添加描述
-$git commit -m "comment ×××"
+$git commit   使用编辑器添加描述，可以使用 git config --global core.editor 命令更改为你喜欢的编辑器
+$git commit -m "comment msg"
 除了将暂存区里的文件提交外，还提交被修改但未添加到暂存区的文件
-$git commit -a 
+$git commit -a -m "comment msg"
 
 ## 创建验证用的公钥(要先有ssh)
 使用命令：ssh-keygen -t rsa
@@ -47,9 +45,12 @@ $git commit -m 'Initial commit project'
 $git remote add origin https://github.com/hritt/new.git
 $git push origin master
 
+## 提交日志
+$git log
 ## 查看最近一次改变的內容
 $git diff
+## 目前工作树的状态
+git status
 
-##
 
 
