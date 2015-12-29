@@ -9,9 +9,6 @@ $git config --global user.name "Your Name Here"
 $git config --global user.email your_email@example.com
 查看已有的配置信息：
 $git config --list
-## 分支推送
-$git config --global push.default matching  推送所有有对应的远程分支的本地分支
-$git config --global push.default simple  只推送当前分支
 
 ## 把GitHub里的项目复制到本地：
 $git clone git_address
@@ -35,11 +32,10 @@ $git commit -a -m "comment msg"
 ## 创建验证用的公钥(要先有ssh)
 使用命令：ssh-keygen -t rsa
 会在用户目录 ~/.ssh/ 下建立相应的密钥文件， 将public key(id_rsa.pub文件)拷贝到github服务器的Account settings——> SSH Keys中
-可以使用 ssh -v git@github.com 命令来测试链接是否畅通（我连接不通也能提交的？）
+可以使用 ssh -v git@github.com 命令来测试链接是否畅通
 
 ## 提交到远程
-命令格式：git push <远程主机名> <本地分支名>:<远程分支名>
-$git push origin master 将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建。
+git push origin master 
 这边要输入用户名和密码，是github的，千万别输错成操作系统的；输错给出的提示是fatal: Authentication failed for 'https://github.com/hritt/Notebook.git/'
 
 ## 在本地新建库并提交到远程
@@ -54,6 +50,7 @@ $git log
 ## 查看最近一次改变的內容
 $git diff
 ## 目前工作树的状态
-$git status
+git status
+
 
 
