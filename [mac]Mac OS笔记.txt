@@ -1,0 +1,75 @@
+查看命令的详细帮助：man 命令名
+运行脚本命令：sh 脚本文件名
+文本编辑：nano 文件名
+
+mac os x terminal清屏快捷键: cammand+k （clear其实没鸟用）
+linux系统清屏快捷键 : ctrl+l (reset)
+windows 命令行清屏命令: cls
+
+重启Finder：鼠标单击窗口左上角的苹果标志-->强制退出-->Finder-->重新启动；
+
+终端中打开文件夹：open 路径
+
+安装命令行工具Command Line Tools: xcode-select --install
+可以使用clang
+
+vi下退出insert模式可以用Ctrl＋C(先按cmd+esc,再按esc，也可以)
+
+没有终端的快捷键，可以在spotlight里输入终端来快速开启终端
+cmd+w可以退出终端
+
+切换程序      command＋tab
+
+退出程序快捷键  command＋Q
+关闭窗口       command＋W
+最小化窗口     command＋M
+最大化窗口     command+ctrl+F
+
+显示简介       command＋i
+
+强制退出程序    option+command+esc
+
+再次打开当前程序 command+n
+
+快速显示桌面    Command + F3 或 四指展开
+
+废纸篓
+	清空      command＋shift+delete
+	恢复文件   command＋delete
+	推出硬盘   将图标拖至废纸篓
+
+全屏截图        command＋shift＋3
+区域截图        command＋shift＋4
+窗口截图        command＋shift＋4，再按空格
+
+ctrl+A	移动到行／段落开头
+ctrl+E	移动到行／段落结尾
+ctrl+N	下移一行
+ctrl+P	上移一行
+ctrl+D	删除光标前的字符
+ctrl+H	删除光标后的字符（fn＋delete）
+ctrl+V	下移一个页面
+
+显示／隐藏Dock  option+command＋D
+
+删除Mac App Store安装的应用程序：按住图标至抖动，点击“X”。
+删除不是Mac App Store安装的应用程序：在“应用程序”文件夹中删除
+
+安装程序包：
+	dmg 删除时拖到废纸篓即可 (dmg是MAC上的压缩镜像文件，相当于在Windows上常见的iso文件。)
+	pkg 自带卸载程序 (pkg文件也就是安装包配置文件)
+
+按option时，菜单中的执行命令立即可执行，关机不需确认
+
+批量调整图片大小：多选图片打开，菜单栏－工具－调整大小
+
+快速预览（视频，音频，图片，文本，文件）：选中按空格或三指单击
+
+听写功能：fn键两次 或 编辑－开始听写
+
+Quick Time可用于录制音频／视频／屏幕录像
+
+桌面与屏幕保护程序中有个触发角功能，能够设置鼠标移到屏幕左上 左下 右上 右下时的功能
+
+全屏应用软件将出现在Mission Control中
+

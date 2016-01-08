@@ -1,0 +1,6 @@
+clang完美兼容gcc，g++
+一般编译c时：
+clang/gcc -Wall -g xxx.c -o xxx
+编译c＋＋：
+clang＋＋ -Wall -g -std=c＋＋11 -stdlib=libc＋＋ crypt1.cpp -o crypt1
+
