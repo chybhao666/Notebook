@@ -1,4 +1,4 @@
 ## ORACLE ##
-复制表：
-如果表不存在可以使用
+澶嶅埗琛細
+濡傛灉琛ㄤ笉瀛樺湪鍙互浣跨敤
 create table table2 as select * from table1;

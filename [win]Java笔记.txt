@@ -1,18 +1,18 @@
-#MyEclipse ÏÂµÄ  javaÎÄ¼şÂÒÂëÎÊÌâ
-Window  -- Preferences¡­  -- General  --  Content Types  -- Text  -- Java Source File ÖĞDefault encoding ¸ÄĞ´³ÉUTF-8£¨ÄãËùĞèµÄ±àÂëÀàĞÍ£©  È»ºóUpdate
+#MyEclipse ä¸‹çš„  javaæ–‡ä»¶ä¹±ç é—®é¢˜
+Window  -- Preferencesâ€¦  -- General  --  Content Types  -- Text  -- Java Source File ä¸­Default encoding æ”¹å†™æˆUTF-8ï¼ˆä½ æ‰€éœ€çš„ç¼–ç ç±»å‹ï¼‰  ç„¶åUpdate
 
-#È¡ÏûEclipse format ×Ô¶¯»»ĞĞ
-´ò¿ªEclipseµÄWindow²Ëµ¥£¬È»ºóPreferences->Java->Code Style->Formatter->Edit/Show(¸ù¾İ²»Í¬°æ±¾¿ÉÓÃµÄ°´Å¥»á²»Ò»Ñù) ->Line Wrapping->Maximum line width:ÓÉ80¸Ä³É800¾ÍĞĞÁË
+#å–æ¶ˆEclipse format è‡ªåŠ¨æ¢è¡Œ
+æ‰“å¼€Eclipseçš„Windowèœå•ï¼Œç„¶åPreferences->Java->Code Style->Formatter->Edit/Show(æ ¹æ®ä¸åŒç‰ˆæœ¬å¯ç”¨çš„æŒ‰é’®ä¼šä¸ä¸€æ ·) ->Line Wrapping->Maximum line width:ç”±80æ”¹æˆ800å°±è¡Œäº†
 
-#ÖĞÎÄ×ÖÌåºÜĞ¡
-µã»÷²Ëµ¥À¸ÉÏµÄ¡°Windows¡±¡ª¡ªµã»÷¡°Preferences¡±¡ª¡ªµã»÷¡°Genneral¡±¡ª¡ªµã»÷¡°Appearance¡±¡ª¡ªµã»÷¡°Colors and Font¡±¡ª¡ªÔÚÓÒ²à¿òÕ¹¿ª¡°Basic¡±ÎÄ¼ş¼Ğ--Ë«»÷¡°Text Font¡±¡ª¡ªÔÚµ¯³ö´°Ñ¡Ôñ¡°Courier New¡±£¨×¢£ºÕâÀï¿ÉÄÜÕÒ²»µ½¡°Courier New¡±£¬µã»÷×ÖÌåÑ¡Ôñ¿ò×óÏÂ½ÇµÄ¡°ÏÔÊ¾¸ü¶à×ÖÌå¡±Á´½ÓÀ´´ò¿ªÉèÖÃ×ÖÌåµÄ¿ØÖÆÃæ°å£¬ÕÒµ½¡°Courier New¡±£¬ÓÒ¼üÑ¡Ôñ¡°ÏÔÊ¾¡±¼´¿É¼¤»î¸Ã×ÖÌå£©¡ª¡ªµã»÷°´Å¥¡°È·¶¨¡±¡ª¡ªµã»÷°´Å¥¡°OK¡±£¬Íê³É
+#ä¸­æ–‡å­—ä½“å¾ˆå°
+ç‚¹å‡»èœå•æ ä¸Šçš„â€œWindowsâ€â€”â€”ç‚¹å‡»â€œPreferencesâ€â€”â€”ç‚¹å‡»â€œGenneralâ€â€”â€”ç‚¹å‡»â€œAppearanceâ€â€”â€”ç‚¹å‡»â€œColors and Fontâ€â€”â€”åœ¨å³ä¾§æ¡†å±•å¼€â€œBasicâ€æ–‡ä»¶å¤¹--åŒå‡»â€œText Fontâ€â€”â€”åœ¨å¼¹å‡ºçª—é€‰æ‹©â€œCourier Newâ€ï¼ˆæ³¨ï¼šè¿™é‡Œå¯èƒ½æ‰¾ä¸åˆ°â€œCourier Newâ€ï¼Œç‚¹å‡»å­—ä½“é€‰æ‹©æ¡†å·¦ä¸‹è§’çš„â€œæ˜¾ç¤ºæ›´å¤šå­—ä½“â€é“¾æ¥æ¥æ‰“å¼€è®¾ç½®å­—ä½“çš„æ§åˆ¶é¢æ¿ï¼Œæ‰¾åˆ°â€œCourier Newâ€ï¼Œå³é”®é€‰æ‹©â€œæ˜¾ç¤ºâ€å³å¯æ¿€æ´»è¯¥å­—ä½“ï¼‰â€”â€”ç‚¹å‡»æŒ‰é’®â€œç¡®å®šâ€â€”â€”ç‚¹å‡»æŒ‰é’®â€œOKâ€ï¼Œå®Œæˆ
 
-±³¾°ÑÕÉ«£º
-²Ëµ¥À¸ windows-->preferences-->general-->editors-->text editorsÖĞ
-ÔÚAppearance color optionsÏÂĞŞ¸Ä background colorÎª£¨½«system defaultÇ°µÄ¹´µãµô£©
-red:204;green:232;blue:207¼´¿É
+èƒŒæ™¯é¢œè‰²ï¼š
+èœå•æ  windows-->preferences-->general-->editors-->text editorsä¸­
+åœ¨Appearance color optionsä¸‹ä¿®æ”¹ background colorä¸ºï¼ˆå°†system defaultå‰çš„å‹¾ç‚¹æ‰ï¼‰
+red:204;green:232;blue:207å³å¯
 
-Ò»Ğ©ÓÉMyEclipseĞ´µÄ³ÌĞòÔÙEclipseÖĞ´ò¿ªÊ±³öÏÖ¡°The import javax.servlet.ServletContext cannot be resolved¡±ÕâÑùµÄ´íÎó£¬ÊÇÒòÎª MyEclipseÊÇEclipseµÄÉı¼¶°æ£¬Á½¸öÈí¼şµÄ²»Í¬Ö®´¦¾ÍÊÇMyEclipseÖĞÖ§³ÖºÃ¶à³£¼ûµÄ¿ò¼Ü£¬Èçstruth£¬hibernate,springµÈ¡£¶øÇÒËûÃÇµÄÅäÖÃÎÄ¼şÊôĞÔÒ²²»Í¬£¬Ò»°ãÀ´ËµMyeclipse¿ÉÒÔÔËĞĞEclipseÖĞµÄ³ÌĞò£¬·´Ö®ÔòÄÑ£¡ÉÏÃæÕâ¸öÎÊÌâµÄ½â¾ö·½·¨ÊÇ½«TomcatÏÂµÄservlet-api.jar¼ÓÈëbuild path£¨×¢£ºÈôÊÇ½«servlet-api.jar·ÅÈëÏîÄ¿Àï£¬ÔÚpathÖĞÌí¼ÓjarÇ°ÏÈË¢ĞÂÏîÄ¿£¬²»È»Ã»·¨¿´µ½Õâ¸öµÄjar£©
+ä¸€äº›ç”±MyEclipseå†™çš„ç¨‹åºå†Eclipseä¸­æ‰“å¼€æ—¶å‡ºç°â€œThe import javax.servlet.ServletContext cannot be resolvedâ€è¿™æ ·çš„é”™è¯¯ï¼Œæ˜¯å› ä¸º MyEclipseæ˜¯Eclipseçš„å‡çº§ç‰ˆï¼Œä¸¤ä¸ªè½¯ä»¶çš„ä¸åŒä¹‹å¤„å°±æ˜¯MyEclipseä¸­æ”¯æŒå¥½å¤šå¸¸è§çš„æ¡†æ¶ï¼Œå¦‚struthï¼Œhibernate,springç­‰ã€‚è€Œä¸”ä»–ä»¬çš„é…ç½®æ–‡ä»¶å±æ€§ä¹Ÿä¸åŒï¼Œä¸€èˆ¬æ¥è¯´Myeclipseå¯ä»¥è¿è¡ŒEclipseä¸­çš„ç¨‹åºï¼Œåä¹‹åˆ™éš¾ï¼ä¸Šé¢è¿™ä¸ªé—®é¢˜çš„è§£å†³æ–¹æ³•æ˜¯å°†Tomcatä¸‹çš„servlet-api.jaråŠ å…¥build pathï¼ˆæ³¨ï¼šè‹¥æ˜¯å°†servlet-api.jaræ”¾å…¥é¡¹ç›®é‡Œï¼Œåœ¨pathä¸­æ·»åŠ jarå‰å…ˆåˆ·æ–°é¡¹ç›®ï¼Œä¸ç„¶æ²¡æ³•çœ‹åˆ°è¿™ä¸ªçš„jarï¼‰
 
-EclipseÖĞÈçºÎËÑË÷Õû¸ö¹¤³Ì:
-search²Ëµ¥ÏÂµÄsearch £¨ctrl + H£©
+Eclipseä¸­å¦‚ä½•æœç´¢æ•´ä¸ªå·¥ç¨‹:
+searchèœå•ä¸‹çš„search ï¼ˆctrl + Hï¼‰

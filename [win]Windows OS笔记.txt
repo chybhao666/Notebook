@@ -1,96 +1,96 @@
-CMDÃüÁî:
-cls   Çå³ýÆÁÄ»
-calc  Æô¶¯¼ÆËãÆ÷
-regedit  ×¢²á±í±à¼­Æ÷
-mstsc  Ô¶³ÌÁ¬½Ó(Microsoft terminal services client)
-osk    ÆÁÄ»¼üÅÌ
+CMDå‘½ä»¤:
+cls   æ¸…é™¤å±å¹•
+calc  å¯åŠ¨è®¡ç®—å™¨
+regedit  æ³¨å†Œè¡¨ç¼–è¾‘å™¨
+mstsc  è¿œç¨‹è¿žæŽ¥(Microsoft terminal services client)
+osk    å±å¹•é”®ç›˜
 
-ÈçºÎ±¸·ÝWindowsÏµÍ³»·¾³±äÁ¿
-ÔÚÃüÁîÐÐÏÂÖ´ÐÐ£ºset >> d:\environment.txt
-ÃüÁîÐÐÊäÈëset,ÏÔÊ¾µ±Ç°ËùÓÐµÄÏµÍ³»·¾³±äÁ¿
+å¦‚ä½•å¤‡ä»½Windowsç³»ç»ŸçŽ¯å¢ƒå˜é‡
+åœ¨å‘½ä»¤è¡Œä¸‹æ‰§è¡Œï¼šset >> d:\environment.txt
+å‘½ä»¤è¡Œè¾“å…¥set,æ˜¾ç¤ºå½“å‰æ‰€æœ‰çš„ç³»ç»ŸçŽ¯å¢ƒå˜é‡
 
-¿ª»úÌáÊ¾£º
-¡¾HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon¡¿
-LegalNoticeCaption   ¡°±¾»úÖ÷ÈË-ÓÑÇéÌáÊ¾£¡¡±
-LegalNoticeText       ¡°ÓÖÊÇÐÂµÄÒ»Ìì£¬..........¡±
+å¼€æœºæç¤ºï¼š
+ã€HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogonã€‘
+LegalNoticeCaption   â€œæœ¬æœºä¸»äºº-å‹æƒ…æç¤ºï¼â€
+LegalNoticeText       â€œåˆæ˜¯æ–°çš„ä¸€å¤©ï¼Œ..........â€
 
-É¾³ý¿ì½Ý·½Ê½Í¼±ê¼ýÍ·£º
-¡¾HEKY_CLASSES_ROOT\lnkfile¡¿
-É¾³ýIsShortcut
+åˆ é™¤å¿«æ·æ–¹å¼å›¾æ ‡ç®­å¤´ï¼š
+ã€HEKY_CLASSES_ROOT\lnkfileã€‘
+åˆ é™¤IsShortcut
 
-ÉèÖÃÏµÍ³Í¼±êµÄÌáÊ¾ÐÅÏ¢£º
-¡¾HEKY_CLASSES_ROOT\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}¡¿
-Ë«»÷¡°InfoTip¡±
-£¨ÉÏÀýÎª¡°»ØÊÕÕ¾¡±£©£¨windows xp£©
+è®¾ç½®ç³»ç»Ÿå›¾æ ‡çš„æç¤ºä¿¡æ¯ï¼š
+ã€HEKY_CLASSES_ROOT\CLSID\{645FF040-5081-101B-9F08-00AA002F954E}ã€‘
+åŒå‡»â€œInfoTipâ€
+ï¼ˆä¸Šä¾‹ä¸ºâ€œå›žæ”¶ç«™â€ï¼‰ï¼ˆwindows xpï¼‰
 
-¸ü¸ÄÄ¬ÈÏ°²×°Â·¾¶
-¡¾HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion¡¿
-Ë«»÷¡°ProgramFilesDir¡±
-
-
-
-ÔËÐÐmsconfigÆô¶¯ÏµÍ³ÅäÖÃÊµÓÃ³ÌÐò¿ÉÒÔ¿´µ½
+æ›´æ”¹é»˜è®¤å®‰è£…è·¯å¾„
+ã€HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersionã€‘
+åŒå‡»â€œProgramFilesDirâ€
 
 
-ÔÚWindows 7ÖÐÓÐÒ»¸ö¾«ÃÀµÄÆÁÄ»¼üÅÌµã»÷ÔËÐÐ£¬ÊäÈë"osk"»ò¡±ÆÁÄ»¼üÅÌ¡°¼´¿É´ò¿ª¡£
+
+è¿è¡Œmsconfigå¯åŠ¨ç³»ç»Ÿé…ç½®å®žç”¨ç¨‹åºå¯ä»¥çœ‹åˆ°
 
 
-win+R  Nslookup¡ª¡ª-IPµØÖ·Õì²âÆ÷
+åœ¨Windows 7ä¸­æœ‰ä¸€ä¸ªç²¾ç¾Žçš„å±å¹•é”®ç›˜ç‚¹å‡»è¿è¡Œï¼Œè¾“å…¥"osk"æˆ–â€å±å¹•é”®ç›˜â€œå³å¯æ‰“å¼€ã€‚
+
+
+win+R  Nslookupâ€”â€”-IPåœ°å€ä¾¦æµ‹å™¨
        ipconfig
 
 
 Ctrl + Shift + N 
-´´½¨Ò»¸öÐÂµÄÎÄ¼þ¼Ð 
-ÄãÐèÒªÔÚÎÄ¼þ¼Ð´°¿ÚÖÐ°´ Ctrl + Shift + N ²ÅÐÐ£¬µ±È»£¬ÔÚ×ÀÃæÉÏ£¬Ò²Ò»ÑùOK¡£
+åˆ›å»ºä¸€ä¸ªæ–°çš„æ–‡ä»¶å¤¹ 
+ä½ éœ€è¦åœ¨æ–‡ä»¶å¤¹çª—å£ä¸­æŒ‰ Ctrl + Shift + N æ‰è¡Œï¼Œå½“ç„¶ï¼Œåœ¨æ¡Œé¢ä¸Šï¼Œä¹Ÿä¸€æ ·OKã€‚
 
-Shift+ Êó±êÓÒ¼ü
-ÔöÇ¿°æÓÒ¼ü·¢ËÍµ½£¬Ôö¼ÓÁË Windows7 ¸öÈËÎÄ¼þ¼ÐÄÚµÄËùÓÐÄÚÈÝ£¬°üÀ¨£ºÎÒµÄÎÄµµ¡¢ÎÒµÄÕÕÆ¬¡¢ÎÒµÄÒôÀÖ¡¢×ÀÃæµÈµÈ 
+Shift+ é¼ æ ‡å³é”®
+å¢žå¼ºç‰ˆå³é”®å‘é€åˆ°ï¼Œå¢žåŠ äº† Windows7 ä¸ªäººæ–‡ä»¶å¤¹å†…çš„æ‰€æœ‰å†…å®¹ï¼ŒåŒ…æ‹¬ï¼šæˆ‘çš„æ–‡æ¡£ã€æˆ‘çš„ç…§ç‰‡ã€æˆ‘çš„éŸ³ä¹ã€æ¡Œé¢ç­‰ç­‰ 
 
-Shift + ÓÒ¼ü
-ÔÚµ±Ç°ÎÄ¼þ¼ÐÓÃÃüÁîÐÐ´ò¿ª¡£ ¿ªÊ¼ > ÔËÐÐ > cmd ¾ÍÊÇÃüÁîÐÐ½çÃæ¡£ Èçping(IP)£¬ ÐÞ¸ÄÎÄ¼þÀ©Õ¹Ãû(ren *)
+Shift + å³é”®
+åœ¨å½“å‰æ–‡ä»¶å¤¹ç”¨å‘½ä»¤è¡Œæ‰“å¼€ã€‚ å¼€å§‹ > è¿è¡Œ > cmd å°±æ˜¯å‘½ä»¤è¡Œç•Œé¢ã€‚ å¦‚ping(IP)ï¼Œ ä¿®æ”¹æ–‡ä»¶æ‰©å±•å(ren *)
 
-Win + ¿Õ¸ñ
-ÉÁÏÖ×ÀÃæ 
+Win + ç©ºæ ¼
+é—ªçŽ°æ¡Œé¢ 
  
-Win+ ÉÏ/ÏÂ/×ó/ÓÒ
-ÒÆ¶¯µ±Ç°¼¤»î´°¿Ú 
+Win+ ä¸Š/ä¸‹/å·¦/å³
+ç§»åŠ¨å½“å‰æ¿€æ´»çª—å£ 
 
 Win + T 
-ÏÔÊ¾ÈÎÎñÀ¸´°¿ÚÎ¢ËõÍ¼²¢»Ø³µÇÐ»» 
+æ˜¾ç¤ºä»»åŠ¡æ çª—å£å¾®ç¼©å›¾å¹¶å›žè½¦åˆ‡æ¢ 
 
-Shift + ×ó¼ü
-ÔÚÈÎÎñÀ¸¶ÔÒÑ´ò¿ªµÄ³ÌÐò/ÎÄ¼þ¼ÐÔÙ´ò¿ªÒ»´Î 
+Shift + å·¦é”®
+åœ¨ä»»åŠ¡æ å¯¹å·²æ‰“å¼€çš„ç¨‹åº/æ–‡ä»¶å¤¹å†æ‰“å¼€ä¸€æ¬¡ 
 
 Win + B
-ÒÆ¶¯¹â±êµ½ÏµÍ³ÍÐÅÌ¡£ 
+ç§»åŠ¨å…‰æ ‡åˆ°ç³»ç»Ÿæ‰˜ç›˜ã€‚ 
 
 Win + Pause
-´ò¿ªÏµÍ³ÊôÐÔ 
+æ‰“å¼€ç³»ç»Ÿå±žæ€§ 
 
-Ctrl + Shift + Esc ¨C ¿ìËÙ´ò¿ª Windows ÈÎÎñ¹ÜÀíÆ÷ 
-
-
-
-CreateObject("SAPI.SpVoice").Speak "I love YOU"   ±£´æÀ©Õ¹ÃûÎª .VBS ÎÄ¼þ Èç£ºÎÒ°®Äã.vbs
+Ctrl + Shift + Esc â€“ å¿«é€Ÿæ‰“å¼€ Windows ä»»åŠ¡ç®¡ç†å™¨ 
 
 
-¡¡ÈÃ¡°×î½üÊ¹ÓÃµÄÏîÄ¿¡±´Ó¡°¿ªÊ¼¡±²Ëµ¥ÖÐÏûÊ§£¬±ðÈË¿Ï¶¨¾ÍÎÞ·¨¿´µ½Äã×î½ü´ò¿ªµÄÎÄ¼þÁÐ±íÁË¡£µ«ÊÇÈç¹û×Ô¼ºÐèÒªÆµ·±´ò¿ª»òÕß±à¼­Ä³Ð©ÎÄ¼þµÄÊ±ºò¾ÍÏÔµÃ²»Ì«·½±ãÁË¡£Èç¹ûÄÜÔÚÍË³öÏµÍ³Ê±×Ô¶¯Çå³ý×î½ü´ò¿ªµÄÎÄ¼þÁÐ±í¶àºÃ°¡¡£¡¡¡¡
 
-¡¡¡¡Ê¹ÓÃ¡°Win+R¡±×éºÏ¼ü´ò¿ª¡°ÔËÐÐ¡±´°¿Ú£¬ÔÚ¡°ÔËÐÐ¡±´°¿ÚÖÐÊäÈë¡°gpedit.msc¡±´ò¿ª¡°×é²ßÂÔ¶ÔÏó±à¼­Æ÷¡±£¬ÒÀ´ÎÕ¹¿ª¡°ÓÃ»§ÅäÖÃ¡±¡ú¡°¹ÜÀíÄ£°å¡±¡ú¡°¡®¿ªÊ¼¡¯²Ëµ¥ºÍÈÎÎñÀ¸¡±£¬È»ºóË«»÷ÓÒ´°¸ñÖÐµÄ¡°ÍË³öÏµÍ³Ê±Çå³ý×î½ü´ò¿ªµÄÎÄµµµÄÀúÊ·¡±£¬ÔÚ¡°ÍË³öÏµÍ³Ê±Çå³ý×î½ü´ò¿ªµÄÎÄµµµÄÀúÊ·¡±ÊôÐÔ´°¿ÚÖÐÑ¡Ôñ¡°ÒÑÆôÓÃ¡±£¬È»ºóµ¥»÷¡°È·¶¨¡±°´Å¥¼´¿É¡£¡¡
-
-
-ÎÊÌâ²½Öè¼ÇÂ¼Æ÷( Problems Screen Recorder)
-
-ÔÚWindows7ÏµÍ³ÖÐ£¬ÎÊÌâ²½Öè¼ÇÂ¼Æ÷ÊÇÒ»¸öÒþ²ØµÄÐ¡¹¤¾ß£¬²»ÏñÆäËû³ÌÐò£¬¿ÉÒÔ´Ó×ÀÃæ¿ì½Ý·½Ê½»ò³ÌÐò²Ëµ¥ÔËÐÐ£¬ÎÒÃÇ¿ÉÒÔÊ¹ÓÃÒÔÏÂÁ½ÖÖ·½·¨ÔËÐÐÎÊÌâ²½Öè¼ÇÂ¼Æ÷¡£ 
-
-·½·¨Ò»£ºµ¥»÷¡°¿ªÊ¼¡±£¬µ¯³ö¡°¿ªÊ¼¡±²Ëµ¥£¬ÔÚËÑË÷¿òÖÐÊäÈë¡°PSR¡±£¬ÔÚËÑË÷½á¹ûÖÐµ¥»÷¡°¼ÇÂ¼²½ÖèÒÔÔÙÏÖÎÊÌâ¡± 
-·½·¨¶þ£º°´ÏÂ¡°WIN+R¡±×éºÏ¼ü(¡°WIN¡±ÊÇÎ¢Èí»Õ±ê¼ü)£¬µ¯³ö¡°ÔËÐÐ¡±¶Ô»°¿ò£¬ÊäÈë¡°PSR¡±
+CreateObject("SAPI.SpVoice").Speak "I love YOU"   ä¿å­˜æ‰©å±•åä¸º .VBS æ–‡ä»¶ å¦‚ï¼šæˆ‘çˆ±ä½ .vbs
 
 
-win7ÉÏµÛÄ£Ê½
-Windows 7ÏµÍ³ÖÐÒþ²ØÁËÒ»¸öÃØÃÜµÄ¡°God Mode¡±£¬×ÖÃæÉÏÒëÎª¡°ÉÏµÛÄ£Ê½¡±¡£God ModeÆäÊµ¾ÍÊÇÒ»¸ö¼òµ¥µÄÎÄ¼þ¼Ð´°¿Ú£¬µ«°üº¬ÁË¼¸ºõËùÓÐWindows 7ÏµÍ³µÄÉèÖÃ£¬Èç¿ØÖÆÃæ°åµÄ¹¦ÄÜ¡¢½çÃæ¸öÐÔ»¯¡¢¸¨Öú¹¦ÄÜÑ¡Ïî...·½·½ÃæÃæµÄ¿ØÖÆÉèÖÃ
-Ê×ÏÈÄã¿ÉÒÔÔÚÈÎºÎµØ·½´´½¨Ò»¸öÐÂÎÄ¼þ¼Ð£¬Õâ¸ö²Ù×÷¶ÔÓÚ¼¸ºõËùÓÐµçÄÔÓÃ»§À´Ëµ¶¼·Ç³£¼òµ¥£¬È»ºóÖØÒªµÄÊÇ£¬½«Õâ¸öÐÂÎÄ¼þ¼ÐÖØÃüÃûÎª¡°  GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}    ¡±¡£´ó¼Ò×îºÃÖ±½Ó¸´ÖÆ¹ýÈ¥£¬±ÜÃâÊÖ¶¯ÊäÈë³ö´í¡£½ÓÏÂÀ´Ò»»Ø³µ£¬¾ªÏ²Á¢¼´³öÏÖÔÚÄãÃæÇ°¡£
+ã€€è®©â€œæœ€è¿‘ä½¿ç”¨çš„é¡¹ç›®â€ä»Žâ€œå¼€å§‹â€èœå•ä¸­æ¶ˆå¤±ï¼Œåˆ«äººè‚¯å®šå°±æ— æ³•çœ‹åˆ°ä½ æœ€è¿‘æ‰“å¼€çš„æ–‡ä»¶åˆ—è¡¨äº†ã€‚ä½†æ˜¯å¦‚æžœè‡ªå·±éœ€è¦é¢‘ç¹æ‰“å¼€æˆ–è€…ç¼–è¾‘æŸäº›æ–‡ä»¶çš„æ—¶å€™å°±æ˜¾å¾—ä¸å¤ªæ–¹ä¾¿äº†ã€‚å¦‚æžœèƒ½åœ¨é€€å‡ºç³»ç»Ÿæ—¶è‡ªåŠ¨æ¸…é™¤æœ€è¿‘æ‰“å¼€çš„æ–‡ä»¶åˆ—è¡¨å¤šå¥½å•Šã€‚ã€€ã€€
+
+ã€€ã€€ä½¿ç”¨â€œWin+Râ€ç»„åˆé”®æ‰“å¼€â€œè¿è¡Œâ€çª—å£ï¼Œåœ¨â€œè¿è¡Œâ€çª—å£ä¸­è¾“å…¥â€œgpedit.mscâ€æ‰“å¼€â€œç»„ç­–ç•¥å¯¹è±¡ç¼–è¾‘å™¨â€ï¼Œä¾æ¬¡å±•å¼€â€œç”¨æˆ·é…ç½®â€â†’â€œç®¡ç†æ¨¡æ¿â€â†’â€œâ€˜å¼€å§‹â€™èœå•å’Œä»»åŠ¡æ â€ï¼Œç„¶åŽåŒå‡»å³çª—æ ¼ä¸­çš„â€œé€€å‡ºç³»ç»Ÿæ—¶æ¸…é™¤æœ€è¿‘æ‰“å¼€çš„æ–‡æ¡£çš„åŽ†å²â€ï¼Œåœ¨â€œé€€å‡ºç³»ç»Ÿæ—¶æ¸…é™¤æœ€è¿‘æ‰“å¼€çš„æ–‡æ¡£çš„åŽ†å²â€å±žæ€§çª—å£ä¸­é€‰æ‹©â€œå·²å¯ç”¨â€ï¼Œç„¶åŽå•å‡»â€œç¡®å®šâ€æŒ‰é’®å³å¯ã€‚ã€€
+
+
+é—®é¢˜æ­¥éª¤è®°å½•å™¨( Problems Screen Recorder)
+
+åœ¨Windows7ç³»ç»Ÿä¸­ï¼Œé—®é¢˜æ­¥éª¤è®°å½•å™¨æ˜¯ä¸€ä¸ªéšè—çš„å°å·¥å…·ï¼Œä¸åƒå…¶ä»–ç¨‹åºï¼Œå¯ä»¥ä»Žæ¡Œé¢å¿«æ·æ–¹å¼æˆ–ç¨‹åºèœå•è¿è¡Œï¼Œæˆ‘ä»¬å¯ä»¥ä½¿ç”¨ä»¥ä¸‹ä¸¤ç§æ–¹æ³•è¿è¡Œé—®é¢˜æ­¥éª¤è®°å½•å™¨ã€‚ 
+
+æ–¹æ³•ä¸€ï¼šå•å‡»â€œå¼€å§‹â€ï¼Œå¼¹å‡ºâ€œå¼€å§‹â€èœå•ï¼Œåœ¨æœç´¢æ¡†ä¸­è¾“å…¥â€œPSRâ€ï¼Œåœ¨æœç´¢ç»“æžœä¸­å•å‡»â€œè®°å½•æ­¥éª¤ä»¥å†çŽ°é—®é¢˜â€ 
+æ–¹æ³•äºŒï¼šæŒ‰ä¸‹â€œWIN+Râ€ç»„åˆé”®(â€œWINâ€æ˜¯å¾®è½¯å¾½æ ‡é”®)ï¼Œå¼¹å‡ºâ€œè¿è¡Œâ€å¯¹è¯æ¡†ï¼Œè¾“å…¥â€œPSRâ€
+
+
+win7ä¸Šå¸æ¨¡å¼
+Windows 7ç³»ç»Ÿä¸­éšè—äº†ä¸€ä¸ªç§˜å¯†çš„â€œGod Modeâ€ï¼Œå­—é¢ä¸Šè¯‘ä¸ºâ€œä¸Šå¸æ¨¡å¼â€ã€‚God Modeå…¶å®žå°±æ˜¯ä¸€ä¸ªç®€å•çš„æ–‡ä»¶å¤¹çª—å£ï¼Œä½†åŒ…å«äº†å‡ ä¹Žæ‰€æœ‰Windows 7ç³»ç»Ÿçš„è®¾ç½®ï¼Œå¦‚æŽ§åˆ¶é¢æ¿çš„åŠŸèƒ½ã€ç•Œé¢ä¸ªæ€§åŒ–ã€è¾…åŠ©åŠŸèƒ½é€‰é¡¹...æ–¹æ–¹é¢é¢çš„æŽ§åˆ¶è®¾ç½®
+é¦–å…ˆä½ å¯ä»¥åœ¨ä»»ä½•åœ°æ–¹åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶å¤¹ï¼Œè¿™ä¸ªæ“ä½œå¯¹äºŽå‡ ä¹Žæ‰€æœ‰ç”µè„‘ç”¨æˆ·æ¥è¯´éƒ½éžå¸¸ç®€å•ï¼Œç„¶åŽé‡è¦çš„æ˜¯ï¼Œå°†è¿™ä¸ªæ–°æ–‡ä»¶å¤¹é‡å‘½åä¸ºâ€œ  GodMode.{ED7BA470-8E54-465E-825C-99712043E01C}    â€ã€‚å¤§å®¶æœ€å¥½ç›´æŽ¥å¤åˆ¶è¿‡åŽ»ï¼Œé¿å…æ‰‹åŠ¨è¾“å…¥å‡ºé”™ã€‚æŽ¥ä¸‹æ¥ä¸€å›žè½¦ï¼ŒæƒŠå–œç«‹å³å‡ºçŽ°åœ¨ä½ é¢å‰ã€‚
 
 dir
-Àý£º dir *.txt ÁÐ³öµ±Ç°Ä¿Â¼ÖÐËùÓÐ¾ßÓÐÒÔ .txt ¿ªÍ·µÄÀ©Õ¹ÃûµÄÎÄ¼þ
+ä¾‹ï¼š dir *.txt åˆ—å‡ºå½“å‰ç›®å½•ä¸­æ‰€æœ‰å…·æœ‰ä»¥ .txt å¼€å¤´çš„æ‰©å±•åçš„æ–‡ä»¶
 
