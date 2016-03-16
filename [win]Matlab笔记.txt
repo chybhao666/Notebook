@@ -1,0 +1,34 @@
+./与/有什么区别:
+点运算是处理的元素之间的运算。例如对于矩阵A=[a b c d]，1./A=[1/a 1/b 1/c 1/d]，而1/A表示的是A的逆.
+
+for i = nBegin:nStep:nEnd  %不同于python
+
+zeros()创建的是double数组，要其他类型需在参数里指定
+
+删除workspace中值：
+clear allHogFea Horizontalangle Verticalangle;%中间用空格
+
+补全 Tab
+
+数字向字符转换
+a=num2str(3),得到a=‘3’
+字符向字符转换
+a=str2num('3'),得到a=3
+
+%{
+  需要注释不执行的若干命令行
+%}
+
+if LOGICAL(0)
+  若干语句
+end
+这个方法实际上是通过逻辑判断语句不执行相关的语句
+
+MATLAB删除矩阵的某行与某列
+a(i,:) = [];
+a(:,j) = [];
+
+自动对齐:ctrl+i
+
+不等于是 ~ =
+
