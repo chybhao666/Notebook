@@ -1,3 +1,5 @@
+linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装.
+
 查看文本：nano
 
 Gedit中文乱码
