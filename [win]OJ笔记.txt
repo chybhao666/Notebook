@@ -1,3 +1,63 @@
+!想好怎么做，再写代码
+!修改代码时注意前后相关的是否都已修改
+!要提交的别忘了最后提交
+
+我的头部：
+#include <iostream>
+using namespace std;
+#include <cstring>
+#include <string>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <set>
+#define REP(i,a,n) for(int i=a;i<n;i++)
+#define EACH(it,a) for(auto it=(a).begin();it!=(a).end();it++)
+#define LL long long
+int main()
+{
+    //ios_base::sync_with_stdio(0);
+#ifdef _DEBUG
+    //freopen("in.txt","r",stdin);
+#endif
+
+    return 0;
+}
+
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+#include <set>
+#include <cassert>
+using namespace std;
+#define rep(i,a,n) for (int i=a;i<n;i++)
+#define per(i,a,n) for (int i=n-1;i>=a;i--)
+#define foreach(it,a) for(typeof((a).begin()) it=(a).begin();it!=(a).end();it++) //vs10不支持typeof，可改为auto
+#define all(x) (x).begin(),(x).end()
+#define SZ(x) ((int)(x).size())
+#define pb push_back
+#define mp make_pair
+typedef vector<int> VI;
+typedef long long ll;
+typedef pair<int,int> PII;
+template<typename N>N gcd(N a,N b){return b?gcd(b,a%b):a;} //这边的typename也可以换为class
+const ll mod=1000000007;
+
+#include<bits/stdc++.h>包含C++的所有头文件(部分oj支持)
+
+cin，cout速度慢，是因为先把要输出的东西存入缓冲区，再输出，导致效率降低，而这段ios_base::sync_with_stdio(false)可以来打消iostream的输入输出缓存，可以节省许多时间，使效率与scanf与printf相差无几
+
+在vs和G++中已有的:
+xutility:min(),max()
+utility: swap()
+
+调试时反复输入用例麻烦，可以使用freopen(const char *filename, const char *mode, FILE *stream); //其中stream为stdin/stdout
+
 觉得代码没问题，结果却是Wrong Answer，原因可能是该用double或long long存储却用了int，也有可能是输出浮点数的格式问题。
 
 abs(float)会有多个匹配问题。
@@ -14,4 +74,15 @@ abs(float)会有多个匹配问题。
 上面两个问题的时间复杂度其实一样。
 在《王道》中，完全背包问题可以转为0-1背包问题，也就是让每件物品的数量为V/w_i，但当w_i较小时，时间复杂度太大。
 (多重背包)     解决方法是转为0-1背包问题，但有个技巧，将某物品按数量：1,2,4，...，k-2^c+1 来分。
+在空间上，背包问题需要一个二维数组存储。由于当前行数据只与上一行有关，所以可以优化为只使用两个一维数组。（比赛时没必要浪费时间去做这样的优化）
 
+交换两个等空间的数组时可以采用直接交换两个指针的方式。
+
+觉得要用k重循环（即复杂度为n^k）时，应该采用递归，而不是去k个for循环。
+
+自己想的解法有多次判断时，想想是否有其他方法减少判断次数。
+例如：判断当前数在左半部分还是右半部分
+      方法一：拿当前位置与中间位置比较，需要考虑总数为奇数偶数的情况，这样麻烦
+      方法二：比较当前位置减去最小位置 和 最大位置减去当前位置 那个大
+
+题目描述比较含糊，比如不知道数据范围是正整数还是自然数，这时看看输入部分的描述，也行会有启发。
