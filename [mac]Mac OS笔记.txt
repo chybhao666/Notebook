@@ -1,3 +1,21 @@
+设置环境变量:
+命令行 PATH="/Applications/CMake.app/Contents/bin":"$PATH"
+(一)全局设置
+1) /etc/paths （全局建议修改这个文件 ）
+2）/etc/profile （建议不修改这个文件 ）
+3）/etc/bashrc （一般在这个文件中添加系统级环境变量）
+4）
+1.创建一个文件：
+sudo touch /etc/paths.d/mysql
+2.用 vim 打开这个文件（如果是以 open -t 的方式打开，则不允许编辑）：
+sudo vim /etc/paths.d/mysql
+3.编辑该文件，键入路径并保存（关闭该 Terminal 窗口并重新打开一个，就能使用 mysql 命令了）
+/usr/local/mysql/bin
+(二)单个用户设置
+http://www.th7.cn/system/mac/201409/70274.shtml
+
+打开文件夹命令：open
+
 查看命令的详细帮助：man 命令名
 运行脚本命令：sh 脚本文件名
 文本编辑：nano 文件名
@@ -9,9 +27,6 @@ windows 命令行清屏命令: cls
 重启Finder：鼠标单击窗口左上角的苹果标志-->强制退出-->Finder-->重新启动；
 
 终端中打开文件夹：open 路径
-
-安装命令行工具Command Line Tools: xcode-select --install
-可以使用clang
 
 vi下退出insert模式可以用Ctrl＋C(先按cmd+esc,再按esc，也可以)
 
