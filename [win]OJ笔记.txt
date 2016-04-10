@@ -1,4 +1,4 @@
-!想好怎么做，再写代码
+﻿!想好怎么做，再写代码
 !修改代码时注意前后相关的是否都已修改
 !要提交的别忘了最后提交
 
@@ -12,15 +12,16 @@ using namespace std;
 #include <vector>
 #include <map>
 #include <set>
-#define REP(i,a,n) for(int i=a;i<n;i++)
-#define EACH(it,a) for(auto it=(a).begin();it!=(a).end();it++)
+#define EACH(it,a) for(auto it=begin(a);it!=end(a);it++)
 #define LL long long
+#define INF 0x3f3f3f3f
 int main()
 {
     //ios_base::sync_with_stdio(0);
-#ifdef _DEBUG
+#ifdef LJY
     //freopen("in.txt","r",stdin);
 #endif
+    int i,j,k;
 
     return 0;
 }
@@ -46,7 +47,13 @@ typedef vector<int> VI;
 typedef long long ll;
 typedef pair<int,int> PII;
 template<typename N>N gcd(N a,N b){return b?gcd(b,a%b):a;} //这边的typename也可以换为class
+#ifdef JCVB
+#define debug(...) fprintf(stderr, __VA_ARGS__)
+#else
+#define debug(...) 
+#endif
 const ll mod=1000000007;
+const int inf=0x3f3f3f3f;
 
 #include<bits/stdc++.h>包含C++的所有头文件(部分oj支持)
 
@@ -94,3 +101,5 @@ for(i=0;i<n && a>0;;i++){
     cost=min(a,m[i])*c[i]; //Good！
     a-=m[i];
 }
+
+while(cin>>a[i++]) ;  对于最后一次cin是什么也读不到的，但那次i自增了。把i++写在{}里比较好。
