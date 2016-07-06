@@ -1,4 +1,4 @@
-CMD命令:
+﻿CMD命令:
 cls   清除屏幕
 calc  启动计算器
 regedit  注册表编辑器
@@ -93,4 +93,7 @@ Windows 7系统中隐藏了一个秘密的“God Mode”，字面上译为“上
 
 dir
 例： dir *.txt 列出当前目录中所有具有以 .txt 开头的扩展名的文件
+
+
+Vista和windows7带有telnet，只是默认没有安装
 

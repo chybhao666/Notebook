@@ -15,6 +15,11 @@ a=num2str(3),得到a=‘3’
 字符向字符转换
 a=str2num('3'),得到a=3
 
+连接字符串:
+SC=[str1,str2]
+SB=strcat(str1,str2)
+STR=sprintf('%s%d',str1,number)
+
 %{
   需要注释不执行的若干命令行
 %}
@@ -31,4 +36,16 @@ a(:,j) = [];
 自动对齐:ctrl+i
 
 不等于是 ~ =
+
+矩阵运算:
+转置 a=b'
+A(i:i+m,:) 表示取A矩阵第i~i+m行的全部元素
+如果data数组中存在NaN，想转为0 data(isnan(data)) = 0
+
+matlab可以选中部分执行
+
+save('a.mat','A'); 第二个参数一定要加''
+
+load sx;  加载名为sx的文件
+load(sx); 加载变量sx指向的文件
 

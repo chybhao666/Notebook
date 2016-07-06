@@ -1,5 +1,6 @@
 # 在windows中一些不想提交的文件
 ~*.*
+~tmp/
 ＃ ubuntu中gedit自动保存的文件
 *.*~
 
