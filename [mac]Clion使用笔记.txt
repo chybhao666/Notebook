@@ -1,6 +1,9 @@
-﻿From:http://www.jianshu.com/p/cd190dbf0435
+From:http://www.jianshu.com/p/cd190dbf0435
 快捷键配置
 Setting—>Keymap 里修改成Visual Studio
+
+显示行号
+Settings->Editor->General->Appearance
 
 代码提示的匹配模式
 All, None, First Letter
@@ -13,5 +16,3 @@ Tools->CMake->Show
 
 自定义的代码块
 Setting—>Live Templates
-
-
