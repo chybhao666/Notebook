@@ -1,4 +1,7 @@
-linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装.
+显示以某字符串开头的命令，按两下tab即可。
+
+linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装。
+tree -L 2 显示到第二层目录。
 
 查看文本：nano
 
@@ -18,6 +21,15 @@ groups <user1> <user2> <user3>
 在终端中用命令打开文件夹：
 nautilus
 
+显示桌面
+ctrl + super + d
+
+检查ssh server是否启动：
+ps -e|grep ssh
+
+截图
+screenshot
+
 Ubuntu如何设置才能用命令行模式启动:
 启动之后按CTRL+ALT+(F1-F6),进入虚拟控制台比较方便.恢复图形界面是CTRL+ALT+F7.
 
@@ -31,19 +43,30 @@ chrome: 1)拷贝 libflashplayer.so，尝试失败
   sudo update-pepperflashplugin-nonfree --install
 成功
 
-显示桌面
-ctrl + super + d
-
-检查ssh server是否启动：
-ps -e|grep ssh
-
-截图
-screenshot
+安装cmake
+Ubuntu自带的apt-get install方式安装的CMake版本（2.8）有点老。
+1.卸载已经安装的旧版的CMakeapt-get autoremove cmake
+2.到cmake官网下载新版，可以下载压缩包格式Binary distributions，也可以下载.sh格式（这个是自解压的）。
+3.解压到比如/usr/local
+4.创建链接：ln -s /usr/local/cmake-2.8.9-Linux-i386/bin/* /usr/bin/ 即可。cmake和cmake-gui都可以使用。
 
 搜狗输入法安装：
 官网下载，ubuntu14.04直接双击安装即可
 发现ctrl+空格的快捷键切换输入法无效，是因为ibus和fcitx快捷键冲突。
 在dash面板找到 “系统设置”，进入”文本输入”，修改 “切换到下一个源的快捷方式”，不要设置成ctrl+空格或ctrl+shift，再次点击ctrl+space就可以切换搜狗输入法了。
+
+安装boost：
+下载，解压到任意目录
+安装以下库mpi-default-dev，libicu-dev，python-dev，libbz2-dev，看网上说可以之后需要时再安装。
+sudo ./bootstrap.sh
+(./b2  不确定是否需要这步 )
+sudo ./b2 install （注意，一定要sudo，否则无法将文件copy到/usr）
+如果运行使用到boost的程序有以下错误：error while loading shared libraries: libboost_system.so.1.45.0: cannot open shared object file: No such file or directory
+解决方法run "ldconfig" to rebuild your ld cache. That way you don't need to update LD_LIBRARY_PATH.(运行 sudo ldconfig)
+
+对于使用到eigen3的程序，cmake找不到它的路径，可以
+方法一：cmake .. -DEIGEN3_INCLUDE_DIR=./eigen
+方法二：cmakelists.txt中添加set(EIGEN3_INCLUDE_DIR ./eigen)
 
 #查看已安装软件包的方法
 在终端输入sudo dpkg -l 即可,然后在终端的界面里复制列出来的信息就可以了(终端查看时,一定要做如下步骤:点终端界面上的"编辑"-->配置文件首选项-->滚动-->回滚-->不限制"打上勾",这样输入到界面的信息就完整显示了)
