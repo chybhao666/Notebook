@@ -1,3 +1,6 @@
+安装命令行工具Command Line Tools: xcode-select --install
+可以使用clang
+
 clang完美兼容gcc，g++
 一般编译c时：
 clang/gcc -Wall -g xxx.c -o xxx

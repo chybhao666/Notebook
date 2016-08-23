@@ -1,0 +1,18 @@
+From:http://www.jianshu.com/p/cd190dbf0435
+快捷键配置
+Setting—>Keymap 里修改成Visual Studio
+
+显示行号
+Settings->Editor->General->Appearance
+
+代码提示的匹配模式
+All, None, First Letter
+
+智能提示
+点击左侧的小灯泡或者按 Alt + Enter（快捷键参考自己的配置）会显示这些提示
+
+查看编译生成文件
+Tools->CMake->Show
+
+自定义的代码块
+Setting—>Live Templates

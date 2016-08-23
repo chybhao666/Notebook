@@ -1,18 +1,18 @@
-#MyEclipse 下的  java文件乱码问题
-Window  -- Preferences…  -- General  --  Content Types  -- Text  -- Java Source File 中Default encoding 改写成UTF-8（你所需的编码类型）  然后Update
+﻿int 转String:
+1 String s = String.valueOf(i);
+2 String s = Integer.toString(i);
+3 String s = "" + i;
 
-#取消Eclipse format 自动换行
-打开Eclipse的Window菜单，然后Preferences->Java->Code Style->Formatter->Edit/Show(根据不同版本可用的按钮会不一样) ->Line Wrapping->Maximum line width:由80改成800就行了
+String 转 int:
+1 int i = Integer.parseInt([String]); 或 i = Integer.parseInt([String],[int radix]);
+2  int i = Integer.valueOf(my_str).intValue();
 
-#中文字体很小
-点击菜单栏上的“Windows”——点击“Preferences”——点击“Genneral”——点击“Appearance”——点击“Colors and Font”——在右侧框展开“Basic”文件夹--双击“Text Font”——在弹出窗选择“Courier New”（注：这里可能找不到“Courier New”，点击字体选择框左下角的“显示更多字体”链接来打开设置字体的控制面板，找到“Courier New”，右键选择“显示”即可激活该字体）——点击按钮“确定”——点击按钮“OK”，完成
+int 转 double：
+(double)i;
 
-背景颜色：
-菜单栏 windows-->preferences-->general-->editors-->text editors中
-在Appearance color options下修改 background color为（将system default前的勾点掉）
-red:204;green:232;blue:207即可
+输入：
+Scanner in = new Scanner(System.in);
+while(in.hasNext()) {
+    int a = in.nextInt();
+    ...
 
-一些由MyEclipse写的程序再Eclipse中打开时出现“The import javax.servlet.ServletContext cannot be resolved”这样的错误，是因为 MyEclipse是Eclipse的升级版，两个软件的不同之处就是MyEclipse中支持好多常见的框架，如struth，hibernate,spring等。而且他们的配置文件属性也不同，一般来说Myeclipse可以运行Eclipse中的程序，反之则难！上面这个问题的解决方法是将Tomcat下的servlet-api.jar加入build path（注：若是将servlet-api.jar放入项目里，在path中添加jar前先刷新项目，不然没法看到这个的jar）
-
-Eclipse中如何搜索整个工程:
-search菜单下的search （ctrl + H）

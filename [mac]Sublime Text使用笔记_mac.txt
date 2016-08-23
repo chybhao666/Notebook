@@ -17,4 +17,5 @@ Ctr+`           控制台
 5.关闭自动补全
 "auto_complete": false
 
-6.
+6.Vim 模式
+将user和default中对应处都注释掉
