@@ -21,8 +21,6 @@ sudo vim /etc/paths.d/mysql
 (二)单个用户设置
 http://www.th7.cn/system/mac/201409/70274.shtml
 
-打开文件夹命令：open
-
 查看命令的详细帮助：man 命令名
 运行脚本命令：sh 脚本文件名
 文本编辑：nano 文件名
