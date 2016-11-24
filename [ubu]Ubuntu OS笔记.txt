@@ -1,3 +1,13 @@
+使用多标签式窗口：
+终端下 Ctrl+Shift+t
+其他   Ctrl+t
+
+快捷键：
+打开Files默认没有快捷键，可以在 系统设置 - 键盘 中设置（Super+E）
+Screenshots: Print
+Screenshots of a window: Alt+Print
+Screenshots of an area:  Shift+Print
+
 显示以某字符串开头的命令，按两下tab即可。
 
 linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装。
@@ -23,12 +33,11 @@ nautilus
 
 显示桌面
 ctrl + super + d
-
+ps
 检查ssh server是否启动：
 ps -e|grep ssh
 
-截图
-screenshot
+截图应用：screenshot
 
 Ubuntu如何设置才能用命令行模式启动:
 启动之后按CTRL+ALT+(F1-F6),进入虚拟控制台比较方便.恢复图形界面是CTRL+ALT+F7.
@@ -45,7 +54,7 @@ chrome: 1)拷贝 libflashplayer.so，尝试失败
 
 安装cmake
 Ubuntu自带的apt-get install方式安装的CMake版本（2.8）有点老。
-1.卸载已经安装的旧版的CMakeapt-get autoremove cmake
+1.卸载已经安装的旧版的CMake apt-get autoremove cmake
 2.到cmake官网下载新版，可以下载压缩包格式Binary distributions，也可以下载.sh格式（这个是自解压的）。
 3.解压到比如/usr/local
 4.创建链接：ln -s /usr/local/cmake-2.8.9-Linux-i386/bin/* /usr/bin/ 即可。cmake和cmake-gui都可以使用。
@@ -105,3 +114,5 @@ sudo passwd root
 之后使用
 su root
 输入密码就可以了
+
+

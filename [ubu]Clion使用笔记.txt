@@ -1,0 +1,9 @@
+删除项目：
+Project窗口是无法删除项目的，要菜单栏File - Close(或Open) Project，退到welcome页面才行。
+
+当前文件搜索：ctrl+f
+当前项目搜索：ctrl+shift+f
+
+
+
+

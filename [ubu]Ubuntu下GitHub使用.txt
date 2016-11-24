@@ -50,7 +50,7 @@ $git remote add origin https://github.com/hritt/new.git
 $git push origin master
 
 ## 提交日志
-$git log
+$git log   (按q退出)
 ## 查看最近一次改变的內容
 $git diff
 ## 目前工作树的状态
