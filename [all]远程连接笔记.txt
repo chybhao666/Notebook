@@ -5,8 +5,8 @@
 ＃ Mac连接windows ＃
 使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
 远程桌面大小建议选全屏，此时眼睛看的舒服
-优点：在局域网内连接快，全屏时可以无黑边
-缺点：连接PC分享的Wi-Fi，尽然无法进行远程连接
+优点：在局域网内连接快，全屏时字体大小合适，可以无黑边
+缺点：连接PC分享的Wi-Fi，尽然无法进行远程连接。无法使win保持原始分辨率1920*1080。
 
 ＃ Mac连接Ubuntu ＃
 
