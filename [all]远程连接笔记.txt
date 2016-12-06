@@ -1,32 +1,38 @@
 使用teamviewer
+原始文件win下12.2M
+原始文件mac下32.2M
 优点：跨平台连接。使用Mac连接win时，win保持原始分辨率1920*1080，可以全屏但上方有黑边，也可以窗口，字体虽小显示清晰
 缺点：使用互联网，速度较慢。使用Mac连接win时双指滑动无反应，颜色有点失真
 
 ＃ Mac连接windows ＃
 使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
 远程桌面大小建议选全屏，此时眼睛看的舒服
+原始文件8.93M
 优点：在局域网内连接快，全屏时字体大小合适，可以无黑边
 缺点：连接PC分享的Wi-Fi，尽然无法进行远程连接。无法使win保持原始分辨率1920*1080。
 
 ＃ Mac连接Ubuntu ＃
-
-
+1）使用mac自带的X11，10.10版本中可以在程序中找到它，但提示不在附带，提示用XQuartz
+2）XQuartz
+  原始文件75.8M，安装需要190.6M
+  安装后会替换掉原先的X11。
+  在 Terminal 上敲（把 ubuntu 换成对应的服务器 IP 地址或域名）：$ Xnest -geometry 1280x800 :1 & DISPLAY=:1 ssh -X ubuntu  gnome-session
+3）FreeNX 没尝试过！ （http://justcoding.iteye.com/blog/1927891）
+4）VNC 没尝试过！
+  Ubuntu上装VNC Server
+  Mac上装VNC Viewer（推荐 Chicken of the VNC）
 
 ＃ Windows远程连接Ubuntu 14.04 ＃
-首先安装xfce：
+·首先安装xfce：
 sudo apt-get update
 sudo apt-get install xfce4
-
-安装xrdp
+·安装xrdp
 使用快捷键"Ctrl+Alt+T"打开一个终端窗口，输入"sudo apt-get install xrdp
-
-安装vnc4server
+·安装vnc4server
 输入"sudo apt-get install vnc4server"
-
-安装好后要自行新建配置文件，使得在远程登录时默认使用xfce作为界面登录，然后重启xrdp服务：
+·安装好后要自行新建配置文件，使得在远程登录时默认使用xfce作为界面登录，然后重启xrdp服务：
 echo "xfce4-session" >~/.xsession
 sudo service xrdp restart
 这个相当于在当前用户的home目录下新建一个名为.xsession的隐藏文件，并向文件中写入一行xfce4-session。
-
-至此安装和配置工作完成，即可在Windows中使用“远程桌面连接”程序连接Ubuntu主机。也可以通过任何其它支持RDP协议的终端连接，比如iOS平台上微软官方的远程桌面客户端RD Client。
+·至此安装和配置工作完成，即可在Windows中使用“远程桌面连接”程序连接Ubuntu主机。也可以通过任何其它支持RDP协议的终端连接，比如iOS平台上微软官方的远程桌面客户端RD Client。
 
