@@ -1,5 +1,32 @@
-Mac连接windows
-使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
->>>>>>> origin/master
+使用teamviewer
+优点：跨平台连接。使用Mac连接win时，win保持原始分辨率1920*1080，可以全屏但上方有黑边，也可以窗口，字体虽小显示清晰
+缺点：使用互联网，速度较慢。使用Mac连接win时双指滑动无反应，颜色有点失真
 
-Mac连接Ubuntu
+＃ Mac连接windows ＃
+使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
+远程桌面大小建议选全屏，此时眼睛看的舒服
+优点：在局域网内连接快，全屏时可以无黑边
+缺点：连接PC分享的Wi-Fi，尽然无法进行远程连接
+
+＃ Mac连接Ubuntu ＃
+
+
+
+＃ Windows远程连接Ubuntu 14.04 ＃
+首先安装xfce：
+sudo apt-get update
+sudo apt-get install xfce4
+
+安装xrdp
+使用快捷键"Ctrl+Alt+T"打开一个终端窗口，输入"sudo apt-get install xrdp
+
+安装vnc4server
+输入"sudo apt-get install vnc4server"
+
+安装好后要自行新建配置文件，使得在远程登录时默认使用xfce作为界面登录，然后重启xrdp服务：
+echo "xfce4-session" >~/.xsession
+sudo service xrdp restart
+这个相当于在当前用户的home目录下新建一个名为.xsession的隐藏文件，并向文件中写入一行xfce4-session。
+
+至此安装和配置工作完成，即可在Windows中使用“远程桌面连接”程序连接Ubuntu主机。也可以通过任何其它支持RDP协议的终端连接，比如iOS平台上微软官方的远程桌面客户端RD Client。
+
