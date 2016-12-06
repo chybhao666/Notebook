@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-﻿linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装.
-=======
-使用多标签式窗口：
+﻿使用多标签式窗口：
 终端下 Ctrl+Shift+t
 其他   Ctrl+t
 
@@ -15,7 +12,6 @@ Screenshots of an area:  Shift+Print
 
 linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装。
 tree -L 2 显示到第二层目录。
->>>>>>> origin/master
 
 查看文本：nano
 

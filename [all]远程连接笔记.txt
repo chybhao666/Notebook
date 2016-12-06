@@ -12,12 +12,13 @@
 缺点：连接PC分享的Wi-Fi，尽然无法进行远程连接。无法使win保持原始分辨率1920*1080。
 
 ＃ Mac连接Ubuntu ＃
+（http://justcoding.iteye.com/blog/1927891）
 1）使用mac自带的X11，10.10版本中可以在程序中找到它，但提示不在附带，提示用XQuartz
 2）XQuartz
   原始文件75.8M，安装需要190.6M
   安装后会替换掉原先的X11。
   在 Terminal 上敲（把 ubuntu 换成对应的服务器 IP 地址或域名）：$ Xnest -geometry 1280x800 :1 & DISPLAY=:1 ssh -X ubuntu  gnome-session
-3）FreeNX 没尝试过！ （http://justcoding.iteye.com/blog/1927891）
+3）FreeNX 没尝试过！
 4）VNC 没尝试过！
   Ubuntu上装VNC Server
   Mac上装VNC Viewer（推荐 Chicken of the VNC）

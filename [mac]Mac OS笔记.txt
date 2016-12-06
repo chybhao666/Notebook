@@ -36,7 +36,6 @@ windows 命令行清屏命令: cls
 vi下退出insert模式可以用Ctrl＋C(先按cmd+esc,再按esc，也可以)
 
 没有终端的快捷键，可以在spotlight里输入终端来快速开启终端
-cmd+w可以退出终端
 
 切换程序      command＋tab
 
