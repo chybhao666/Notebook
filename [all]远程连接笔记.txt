@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 Mac����windows
+ʹ��RDC
+=======
+Mac连接windows
+使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
+>>>>>>> origin/master
+=======
+Mac连接windows
+使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
+>>>>>>> origin/master
 
-Mac����Ubuntu
+Mac连接Ubuntu
