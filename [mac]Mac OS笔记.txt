@@ -1,3 +1,10 @@
+剪切 cmd+option+v
+
+显示隐藏文件方法
+一、打开Finder,使用 Command+F 组合键，打开Finder管理器的搜索功能，选择“其他”，找到——“文件是否可见”的选项（搜索“是否”）。
+二、显示：defaults write com.apple.finder AppleShowAllFiles -bool true
+　　隐藏：defaults write com.apple.finder AppleShowAllFiles -bool false
+
 设置环境变量:
 命令行 PATH="/Applications/CMake.app/Contents/bin":"$PATH"
 (一)全局设置
@@ -13,8 +20,6 @@ sudo vim /etc/paths.d/mysql
 /usr/local/mysql/bin
 (二)单个用户设置
 http://www.th7.cn/system/mac/201409/70274.shtml
-
-打开文件夹命令：open
 
 查看命令的详细帮助：man 命令名
 运行脚本命令：sh 脚本文件名

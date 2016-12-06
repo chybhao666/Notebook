@@ -6,3 +6,11 @@ hive 0.13.1
 http://localhost:50030/     - Hadoop 管理介面
 http://localhost:50060/     - Hadoop Task Tracker 状态
 http://localhost:50070/     - Hadoop DFS 状态
+
+dfs的路径在 conf/hdfs-site.xml 中配置，没有配置则默认在 tmp/dfs 文件夹下
+hdfs的操作命令见《深入理解大数据》p69
+
+运行jar出错Exception in thread "main" java.lang.ClassNotFoundException: WordCount
+1）WordCount.java是在某个包里的，要在运行命令中把包名也写出来，如：
+bin/hadoop jar Test.jar example.WordCount input output
+2）没把hadoop中相关的jar都添加到eclipse的build path中。
