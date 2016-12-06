@@ -1,4 +1,4 @@
-linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装.
+﻿linux tree命令以树形结构显示文件目录结构,在ubuntu系统中默认是没有tree这个命令的，需要安装.
 
 查看文本：nano
 
@@ -68,8 +68,8 @@ chmod +x hello.py
 解压：rar -x FileName.zip
 压缩：rar -a FileName.rar DirName
 .tar.gz或tgz
-解压：tar -zxvf FileName.tar.gz
-压缩：tar -zcvf FileName.tar.gz DirName
+解压：tar -zxvf FileName.tar.gz          //x 解开
+压缩：tar -zcvf FileName.tar.gz DirName  //c 建立 create
 
 压缩文件夹
 zip –q –r xahot.zip xahot

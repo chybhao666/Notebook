@@ -1,0 +1,21 @@
+﻿windows下安装scikit-learn
+
+官方说明：http://scikit-learn.org/dev/install.html
+
+注意：python和用到的工具一定要和操作系统是相同位的（32,64）
+
+方法一：使用pip安装 (http://subscribe.mail.10086.cn/w/itemDetail.do?columnId=563&itemId=3807669)
+1. 安装python-3.5.2-amd64，默认位置为C:\Users\JY\AppData\Local\Programs\Python\Python35
+2. 到 http://www.lfd.uci.edu/~gohlke/pythonlibs/ 下载对应版本的NumPy，SciPy ，Matplotlib，Scikit-Learn
+3. 到...\Python35\Scripts目录下依次安装下载的文件：pip install ...\numpy-1.10.2-cp27-none-win_amd64.whl
+4. 若使用pycharm，Settings-Project Interpreter选择C:\Users\JY\AppData\Local\Programs\Python\Python35\python.exe
+
+如果python安装在C:\Program Files (x86)目录下，会出现错误Fatal error in launcher: Unable to create process using '""C:\Program Files (x86)\Python34\python.exe"" "C:\Program Files (x86)\Python34\Scripts\pip.exe" '，解决方法：解决：http://stackoverflow.com/questions/24627525/fatal-error-in-launcher-unable-to-create-process-using-c-program-files-x86
+
+如果系统是64bit，安装的python是32bit的，可能出现错误numpy-1.11.1%2Bmkl-cp34-cp34m-win32.whl is not a supported wheel on this platform。numpy不论32位还是64位都会有这个问题。
+
+方法二：
+使用Anaconda套件
+
+测试：
+一个手写识别的例子：http://www.cnblogs.com/maybe2030/p/4583087.html
