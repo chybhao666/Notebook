@@ -18,6 +18,7 @@
   原始文件75.8M，安装需要190.6M
   安装后会替换掉原先的X11。
   在 Terminal 上敲（把 ubuntu 换成对应的服务器 IP 地址或域名）：$ Xnest -geometry 1280x800 :1 & DISPLAY=:1 ssh -X ubuntu  gnome-session
+  ssh 连接不上！！！！
 3）FreeNX 没尝试过！
 4）VNC 没尝试过！
   Ubuntu上装VNC Server
