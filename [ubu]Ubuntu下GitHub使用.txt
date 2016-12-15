@@ -26,7 +26,7 @@ $git add a.cpp 指定文件
 $git add -u 所有tracked文件中被修改过或已删除文件的信息添加到索引库,不处理untracted的文件
 $git add -A所有tracked文件中被修改过或已删除文件和所有untracted的文件信息添加到索引库
 
-## 提交暂存区里面的内容
+## 提交暂存区里面的内容到本地仓库
 $git commit   使用编辑器添加描述，可以使用 git config --global core.editor 命令更改为你喜欢的编辑器
 $git commit -m "comment msg"
 除了将暂存区里的文件提交外，还提交被修改但未添加到暂存区的文件

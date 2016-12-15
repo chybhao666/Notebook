@@ -4,6 +4,7 @@
 优点：跨平台连接。使用Mac连接win时，win保持原始分辨率1920*1080，可以全屏但上方有黑边，也可以窗口，字体虽小显示清晰
 缺点：使用互联网，速度较慢。使用Mac连接win时双指滑动无反应，颜色有点失真
 注意：ubuntu下没能安装teamviewer成功，但可以使用teamviewer QuickSupport被连接
+     ubuntu下安装teamviewer导致系统的软件包管理出现错误，根据提示解决问题后安装成功
 
 ＃ Mac连接windows ＃
 使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
