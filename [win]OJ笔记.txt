@@ -23,12 +23,12 @@ using namespace std;
 //#pragma comment(linker, "/STACK:102400000,102400000")
 #define EACH(it,a) for(auto it=begin(a);it!=end(a);it++)
 #define ALL(a) a.begin(),a.end()
-#define MEM0(a) memset(a,0,sizeof(a))
+#define MEMA0(a) memset(a,0,sizeof(a))
+#define SZ(x) ((int)(x).size())
 template<typename T>T GCD(T a,T b){ return b?GCD(b,a%b):a; }
-typedef vector<int> VI;
 #define LL long long
 typedef double DB;
-#define PB push_back
+typedef vector<int> VI;
 #define INF 0x3f3f3f3f
 const int    MOD=int(1e9)+7;
 const double EPS = 1e-9;
@@ -62,7 +62,6 @@ int main()
 
 		cout<<"Case #"<<t0<<": "<<ans<<endl;
 	}
-
 	return 0;
 }
 
@@ -101,6 +100,17 @@ xiaodao的头部：
 http://www.shuizilong.com/house/archives/asia-hong-kong-online-preliminary/
 
 #include<bits/stdc++.h>包含C++的所有头文件(部分oj支持)
+
+STL模板列表:
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef pair<int,int> ii;
+#define sz(a) int((a).size())
+#define pb push_back
+#defile all(c) (c).begin(),(c).end()
+#define tr(c,i) for(typeof((c).begin() i = (c).begin(); i != (c).end(); i++)
+#define present(c,x) ((c).find(x) != (c).end())
+#define cpresent(c,x) (find(all(c),x) != (c).end())
 
 快速幂取余：
 LL mod_pow(LL x,LL n,LL mod) { // x是底数，n是幂数，mod是取余数  
@@ -241,4 +251,5 @@ long long ago;
 
 不要把简单问题复杂化，如合并用vector存储的两个有序数组。用迭代器会遇到空间重新分配而导致的迭代器失效问题，不如1）从后往前合并，或2）另分配一个vector存储结果，之后和原有数组swap。
 
+OJ中，当n超过1e5时，通常时间复杂度要小于n^2
 

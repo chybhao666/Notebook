@@ -1,0 +1,110 @@
+（http://i.linuxtoy.org/docs/guide/ch02s02.html）
+最常见的缩写，取每个单词的首字母：
+cd	Change Directory
+dd	Disk Dump
+df	Disk Free （可用容量？）
+du	Disk Usage
+pwd	Print Working Directory
+ps	Processes Status
+PS	Prompt Strings
+cups	Common Unix Printing System
+bg	BackGround
+ping	Packet InterNet Grouper
+如果首字母后为“h”，通常保留：
+chmod	CHange MODe
+chown	CHange OWNer
+chgrp	CHange GRouP
+bash	Bourne Again SHell
+ssh	Secure SHell
+递归缩写:
+WINE	WINE Is Not an Emulator
+PNG	PNG's Not GIF
+nano	Nano's AN Other editor
+对于目录，通常使用前几个字母作为缩写：
+usr	Unix Shared Resources
+etc	ETCetera
+
+
+rc      run commands (像是 ".cshrc" 或 "/etc/rc" 中的 rc 这两个字母)
+Perl    Practical Extraction and Report Language
+
+(https://www.zhihu.com/question/49073893/answer/114986798)
+tty     teletypewriter
+tar     Tape Archive
+
+
+（https://www.zhihu.com/question/49073893/answer/114438355）
+目录
+/etc：  ETCetera
+/bin：  BINaries
+/dev：  DEVices
+/lib：  LIBraries
+/mnt：  MouNT
+/proc： PROCesses
+/tmp：  TeMPorary
+/var：  VARiable
+/srv：  SeRVices
+/opt：  OPTion
+/sbin： Super BINaries（又作Superuser BINaries）
+/sys：  SYStem
+/usr：  一鼓而作Unix System Resources，再而作Unix Software Resources,三而作Unix Shared Resources
+
+文件管理
+cat     CATenate
+sed     Stream EDitor
+diff    DIFFerence
+wc      Word Count
+awk     Aho Weinberger and Kernighan
+gawk    Gnu Aho Weinberger and Kernighan
+grep    General Regular Expression Print
+ln      LiNk
+
+软件及软件包管理
+man     MANual
+apt     Advanced Packaging Tool
+dpkg    Debian PacKaGe
+yum     Yellow dog Updater
+rpm     RPM Package Manager（又作Redhat Package Manager）
+
+系统管理（主要是内核模组）
+ps     Processes Status
+su     Switch User（Substitute User）
+bash   Bourne Again SHell
+init   INITialization
+ssh    Secure SHell
+wine   Wine Is Not an Emulator
+exec   EXECute
+passwd PASSWorD
+sudo   SuperUser DO
+grub   GRand Unified Bootloader
+
+最后是编辑器
+ed     EDitor
+nano   Nano's ANOther editor
+emacs  Editor MACroS
+vi     VIsual
+vim    Vi Improved
+
+编程
+cc     C Compiler
+yacc   Yet Another Compiler Compiler
+gdb    Gnu DeBug
+tcl    Tool Command Line
+
+图形界面
+gnome  GNu Object Model Environment
+gdm    Gnome Display Manager
+gtk    Graphic user interface ToolKit
+qt     .. Toolkit（用Q只是因为在开发者的Emacs中Q特别漂亮）
+kde    K Desktop Environment
+lxde   Lightweight X11 Desktop Environment
+xfce   XForms Common Environment
+
+许可证
+gnu gpl   Gnu General Public License
+gnu lgpl  Gnu General Lesser Public License
+gfdl      Gnu Free Documentation License
+agpl      Affero General Public License（或简写为Affero gpl)
+apsl      Apple Public Source License
+bsd       Berkeley Software Distribution license
+
