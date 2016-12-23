@@ -1,51 +1,51 @@
-./Óë/ÓÐÊ²Ã´Çø±ð:
-µãÔËËãÊÇ´¦ÀíµÄÔªËØÖ®¼äµÄÔËËã¡£ÀýÈç¶ÔÓÚ¾ØÕóA=[a b c d]£¬1./A=[1/a 1/b 1/c 1/d]£¬¶ø1/A±íÊ¾µÄÊÇAµÄÄæ.
+./ä¸Ž/æœ‰ä»€ä¹ˆåŒºåˆ«:
+ç‚¹è¿ç®—æ˜¯å¤„ç†çš„å…ƒç´ ä¹‹é—´çš„è¿ç®—ã€‚ä¾‹å¦‚å¯¹äºŽçŸ©é˜µA=[a b c d]ï¼Œ1./A=[1/a 1/b 1/c 1/d]ï¼Œè€Œ1/Aè¡¨ç¤ºçš„æ˜¯Açš„é€†.
 
-for i = nBegin:nStep:nEnd  %²»Í¬ÓÚpython
+for i = nBegin:nStep:nEnd  %ä¸åŒäºŽpython
 
-zeros()´´½¨µÄÊÇdoubleÊý×é£¬ÒªÆäËûÀàÐÍÐèÔÚ²ÎÊýÀïÖ¸¶¨
+zeros()åˆ›å»ºçš„æ˜¯doubleæ•°ç»„ï¼Œè¦å…¶ä»–ç±»åž‹éœ€åœ¨å‚æ•°é‡ŒæŒ‡å®š
 
-É¾³ýworkspaceÖÐÖµ£º
-clear allHogFea Horizontalangle Verticalangle;%ÖÐ¼äÓÃ¿Õ¸ñ
+åˆ é™¤workspaceä¸­å€¼ï¼š
+clear allHogFea Horizontalangle Verticalangle;%ä¸­é—´ç”¨ç©ºæ ¼
 
-²¹È« Tab
+è¡¥å…¨ Tab
 
-Êý×ÖÏò×Ö·û×ª»»
-a=num2str(3),µÃµ½a=¡®3¡¯
-×Ö·ûÏò×Ö·û×ª»»
-a=str2num('3'),µÃµ½a=3
+æ•°å­—å‘å­—ç¬¦è½¬æ¢
+a=num2str(3),å¾—åˆ°a=â€˜3â€™
+å­—ç¬¦å‘å­—ç¬¦è½¬æ¢
+a=str2num('3'),å¾—åˆ°a=3
 
-Á¬½Ó×Ö·û´®:
+è¿žæŽ¥å­—ç¬¦ä¸²:
 SC=[str1,str2]
 SB=strcat(str1,str2)
 STR=sprintf('%s%d',str1,number)
 
 %{
-  ÐèÒª×¢ÊÍ²»Ö´ÐÐµÄÈô¸ÉÃüÁîÐÐ
+  éœ€è¦æ³¨é‡Šä¸æ‰§è¡Œçš„è‹¥å¹²å‘½ä»¤è¡Œ
 %}
 
 if LOGICAL(0)
-  Èô¸ÉÓï¾ä
+  è‹¥å¹²è¯­å¥
 end
-Õâ¸ö·½·¨Êµ¼ÊÉÏÊÇÍ¨¹ýÂß¼­ÅÐ¶ÏÓï¾ä²»Ö´ÐÐÏà¹ØµÄÓï¾ä
+è¿™ä¸ªæ–¹æ³•å®žé™…ä¸Šæ˜¯é€šè¿‡é€»è¾‘åˆ¤æ–­è¯­å¥ä¸æ‰§è¡Œç›¸å…³çš„è¯­å¥
 
-MATLABÉ¾³ý¾ØÕóµÄÄ³ÐÐÓëÄ³ÁÐ
+MATLABåˆ é™¤çŸ©é˜µçš„æŸè¡Œä¸ŽæŸåˆ—
 a(i,:) = [];
 a(:,j) = [];
 
-×Ô¶¯¶ÔÆë:ctrl+i
+è‡ªåŠ¨å¯¹é½:ctrl+i
 
-²»µÈÓÚÊÇ ~ =
+ä¸ç­‰äºŽæ˜¯ ~ =
 
-¾ØÕóÔËËã:
-×ªÖÃ a=b'
-A(i:i+m,:) ±íÊ¾È¡A¾ØÕóµÚi~i+mÐÐµÄÈ«²¿ÔªËØ
-Èç¹ûdataÊý×éÖÐ´æÔÚNaN£¬Ïë×ªÎª0 data(isnan(data)) = 0
+çŸ©é˜µè¿ç®—:
+è½¬ç½® a=b'
+A(i:i+m,:) è¡¨ç¤ºå–AçŸ©é˜µç¬¬i~i+mè¡Œçš„å…¨éƒ¨å…ƒç´ 
+å¦‚æžœdataæ•°ç»„ä¸­å­˜åœ¨NaNï¼Œæƒ³è½¬ä¸º0 data(isnan(data)) = 0
 
-matlab¿ÉÒÔÑ¡ÖÐ²¿·ÖÖ´ÐÐ
+matlabå¯ä»¥é€‰ä¸­éƒ¨åˆ†æ‰§è¡Œ
 
-save('a.mat','A'); µÚ¶þ¸ö²ÎÊýÒ»¶¨Òª¼Ó''
+save('a.mat','A'); ç¬¬äºŒä¸ªå‚æ•°ä¸€å®šè¦åŠ ''
 
-load sx;  ¼ÓÔØÃûÎªsxµÄÎÄ¼þ
-load(sx); ¼ÓÔØ±äÁ¿sxÖ¸ÏòµÄÎÄ¼þ
+load sx;  åŠ è½½åä¸ºsxçš„æ–‡ä»¶
+load(sx); åŠ è½½å˜é‡sxæŒ‡å‘çš„æ–‡ä»¶
 
