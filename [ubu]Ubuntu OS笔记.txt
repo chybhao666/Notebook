@@ -1,3 +1,8 @@
+查看环境变量:
+echo $PATH
+添加路径：
+export PATH="$PATH:/my_new_path" 
+
 #﻿# 快捷键 #########################################################
 使用多标签式窗口：
 终端下 Ctrl+Shift+t
@@ -13,6 +18,7 @@ Screenshots of an area:  Shift+Print
 截图应用：screenshot
 
 #﻿# 命令 #########################################################
+
 查看文本：nano
 
 在终端中用命令打开文件夹：nautilus
@@ -30,9 +36,11 @@ groups <user1> <user2> <user3>
 ps
 检查ssh server是否启动：
 ps -e|grep ssh
+
 修改权限
 chmod 755 hello.py
 chmod +x hello.py
+-R 递归遍历子目录
 
 单独查看内存使用情况的命令：free -m
 查看内存及cpu使用情况的命令：top
@@ -53,7 +61,7 @@ zip –q –r xahot.zip xahot
 比如现在我的xahot目录下,我操作的zip压缩命令是
 zip –q –r xahot.zip *
 
-> 写入文件并覆盖旧文件
+>  写入文件并覆盖旧文件
 >> 加到文件的尾部，保留旧文件内容
 
 #﻿# 应用安装&设置 #########################################################
@@ -65,14 +73,20 @@ apt命令：
 apt-cache search foo  搜索和"foo"匹配的包。
 apt-cache show foo    顯示"foo"包的相關信息，例如描述、版本、大小、依賴以及衝突。
 dpkg -l *foo*         查找包含有"foo"字樣的包。與apt-cache show foo類似，但是還會顯示每個包是安裝了還是沒安裝。
+apt-get remove package --purge 删除包，包括删除配置文件等
+apt-get update 更新源
+apt-get upgrade 更新已安装的包
 
-Gedit中文乱码
+Gedit
+对于中文乱码：
 Gedit 3.x 版本设置
 方法一.命令方式
 gsettings set org.gnome.gedit.preferences.encodings auto-detected "['GB18030', 'UTF-8', 'CURRENT', 'ISO-8859-15', 'UTF-16']"
 方法二.图形方式
 安装并运行dconf-editor
 展开/org/gnome/gedit/preferences/encodings auto-detected的Value中加入 'GB18030' ，加在UTF-8前面；
+对于显是行号：
+在preferences的View中选择，再在Font&Colors中选择Color Scheme为Kate，否则行号为文本没区分度。
 
 安装flash插件
 firefox:software center直接搜flash
@@ -80,17 +94,47 @@ chrome: 1)拷贝 libflashplayer.so，尝试失败
 2)sudo apt-get install pepperflashplugin-nonfree
   sudo update-pepperflashplugin-nonfree --install
 
+搜狗输入法安装：
+官网下载，ubuntu14.04直接双击安装即可
+发现ctrl+空格的快捷键切换输入法无效，是因为ibus和fcitx快捷键冲突。
+在dash面板找到 “系统设置”，进入”文本输入”，修改 “切换到下一个源的快捷方式”，不要设置成ctrl+空格或ctrl+shift，再次点击ctrl+space就可以切换搜狗输入法了。
+
+chrome：
+Software Center可以直接安装Chromium，但这个版本的Chromium无法登录google账户进行同步，所以建议下载最新版chrome：
+1.下载deb文件 2.sudo dpkg -i <package.deb> 3.若提示“在处理时有错误发生： google-chrome-stable”，先执行一条额外的命令：apt-get -f install，安装几个需要的包后，再次安装chrome即可。4.安装完成即可在应用中找到chrome。
+如果系统里同时有chrome和Chromium，它们会共享书签。
+
+shadowsocks:
+1.安装shadowsocks
+这样安装失败，找不到shadowsocks包：sudo apt-get install shadowsocks
+改用pip安装 shadowsocks 后端：
+sudo apt-get install python-pip
+sudo pip install shadowsocks
+2.配置shadowsocks配置文件
+随便找一个路径创建一个文本文件（.json）,如/etc/shadowsocks.json，并将配置信息填好
+{
+    "server":"xx.xx.xx.xx",
+    "server_port":xxxx,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"xxxxxxxx",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": true,
+    "workers": 1
+}
+3.使用sslocal -c /etc/shadowsocks.json 开启代理
+待会的访问网址会在终端中显示。
+4.设置火狐或chrome浏览器代理
+chrome可使用switchysharp插件，填写SOCKS代理和端口，选择SOCK v5，保存并选择这个代理即可。
+5.关闭终端即退出代理。别忘了把switchysharp改为直接链接。
+
 安装cmake
 Ubuntu自带的apt-get install方式安装的CMake版本（2.8）有点老。
 1.卸载已经安装的旧版的CMake apt-get autoremove cmake
 2.到cmake官网下载新版，可以下载压缩包格式Binary distributions，也可以下载.sh格式（这个是自解压的）。
 3.解压到比如/usr/local
 4.创建链接：ln -s /usr/local/cmake-2.8.9-Linux-i386/bin/* /usr/bin/ 即可。cmake和cmake-gui都可以使用。
-
-搜狗输入法安装：
-官网下载，ubuntu14.04直接双击安装即可
-发现ctrl+空格的快捷键切换输入法无效，是因为ibus和fcitx快捷键冲突。
-在dash面板找到 “系统设置”，进入”文本输入”，修改 “切换到下一个源的快捷方式”，不要设置成ctrl+空格或ctrl+shift，再次点击ctrl+space就可以切换搜狗输入法了。
 
 安装boost：
 下载，解压到任意目录
@@ -101,6 +145,10 @@ sudo ./b2 install （注意，一定要sudo，否则无法将文件copy到/usr�
 如果运行使用到boost的程序有以下错误：error while loading shared libraries: libboost_system.so.1.45.0: cannot open shared object file: No such file or directory
 解决方法run "ldconfig" to rebuild your ld cache. That way you don't need to update LD_LIBRARY_PATH.(运行 sudo ldconfig)
 
+右键打开当前目录下的终端:
+$sudo apt-get install nautilus-open-terminal
+重启系统 或 重新加载文件夹$nautilus -q
+将地址栏拖到终端也可以快速得到地址
 
 ## 其他 #########################################################
 
@@ -116,8 +164,4 @@ Ubuntu如何设置才能用命令行模式启动:
 
 SSH连接的时候Host key verification failed.
 选择最低的安全级别。在.ssh/config（或者/etc/ssh/ssh_config）中配置：StrictHostKeyChecking no
-
-对于使用到eigen3的程序，cmake找不到它的路径，可以
-方法一：cmake .. -DEIGEN3_INCLUDE_DIR=./eigen
-方法二：cmakelists.txt中添加set(EIGEN3_INCLUDE_DIR ./eigen)
 
