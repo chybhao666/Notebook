@@ -20,3 +20,8 @@ content = f.readlines()      # 读取所有行，储存在 列表 中
 python urllib2模块:
 urllib2是python自带的模块，不需要下载。
 urllib2在python3.x中被改为urllib.request
+
+
+
+-------------------------------------------------
+查看python中已安装的包:pip list
