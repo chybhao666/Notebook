@@ -1,0 +1,52 @@
+-o <file>	Place the output into <file>
+
+a.out是“assembler output”的缩写，但有个问题，实际是连接器输出。 （《C专家编程》p116）
+
+编译器（ccl）
+汇编器（as）
+连接器工具（ld）
+GCC编译C源码有四个步骤：
+预处理-----> 编译 ----> 汇编 ----> 链接
+1）预处理(Pre-processing) gcc的选项”-E” 或是cpp命令
+用法：#gcc -E hello.c -o hello.i
+2)编译阶段(Compiling)     只进行编译而不进行汇编，生成汇编代码
+用法：#gcc –S hello.i –o hello.s
+3)汇编阶段(Assembling)    转成二进制目标代码.
+用法：#gcc –c hello.s –o hello.o
+4）链接阶段(Link)         无选项链接
+用法：[root]# gcc hello.o –o hello.exe
+
+静态库 “.a”  表示archive
+动态库 “.so” 表示shared object
+（http://www.cnblogs.com/dyllove98/archive/2013/06/25/3155599.html）
+静态库：
+hello.c中有函数hello()，main.c调用这个函数
+1）#gcc -c hello.c  生成hello.o
+若要指定头文件搜索目录：gcc -c -I../include hello.c，参数-I添加头文件搜索目录
+2）#ar rc libhello.a hello.o  生成libhello.a
+参数r表示在库中插入或者替换模块，c表示创建一个库
+3）#gcc main.c -L. -lhello -o main
+数-L添加库文件搜索目录，需要指定该目录（这边当前目录，写为“.”）；参数-l指定链接的库文件名称，名称不用写全名
+动态库：
+1）#gcc hello.c -fPIC -shared -o libhello.so  
+参数-fPIC -shared固定格式，不用纠结他们什么意思
+-shared 该选项指定生成动态连接库
+-fPIC：表示编译为位置独立的代码，不用此选项的话编译后的代码是位置相关的所以动态载入时是通过代码拷贝的方式来满足不同进程的需要，而不能达到真正代码段共享的目的
+2）#gcc main.c -L. -lhello -o main
+3）#export LD_LIBRARY_PATH=”.”  指示装载动态库的路径，这种方式是临时生效的
+   #./main
+
+ldd命令可以查看一个可执行程序依赖的共享库
+
+size命令，查看可执行文件各段（文本，数据，bss）大小：$ size a.out （《C专家编程》p117）
+
+
+################### CMakeLists.txt #####################
+
+find_package( OpenCV REQUIRED )
+cmake 自动找到 /usr/local/share/OpenCV/OpenCVConfig.cmake
+
+对于使用到eigen3的程序，cmake找不到它的路径，可以
+方法一：cmake .. -DEIGEN3_INCLUDE_DIR=./eigen
+方法二：cmakelists.txt中添加set(EIGEN3_INCLUDE_DIR ./eigen)
+

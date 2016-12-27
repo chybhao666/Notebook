@@ -1,0 +1,160 @@
+/**************************** 安装 ****************************/
+参考http://caffe.berkeleyvision.org/installation.html，就是这个页面，同时可以参考Ubuntu installation链接页面
+系统ubuntu 14.04
+GCC 4.8.2
+Python 2.7.6
+如果要用matlab，安装matlab R2015b （官方文档说支持到2015a，但我2015b使用暂时还没遇到问题，且“GCC版本过高”的问题有提醒但可忽略）
+
+安装依赖项
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+其中libopencv-dev无法安装，解决一些版本过高问题后可以安装了，但想自己编译opencv，所以没安装这个。
+
+不安装CUDA
+caffe的安装不一定要装cuda, 可以禁用gpu,这样caffe可以在cpu下运行把Makefile.config, Makefile.config.example配置文件中 CPU_ONLY ：=1前的#去掉
+
+BLAS: install ATLAS by sudo apt-get install libatlas-base-dev or install OpenBLAS or MKL for better CPU performance.
+使用MKL，因为它最快。
+后面调试matlab接口时候还是需要用到mkl库
+首先下载并安装英特尔® 数学内核库 Linux* 版MKL(Intel(R) Parallel Studio XE Cluster Edition for Linux 2016)，下载链接是：https://software.intel.com/en-us/qualify-for-free-software/student， 使用学生身份（邮件 + 学校）下载Student版，填好各种信息，可以直接下载，同时会给你一个邮件告知序列号。下载完之后，要把文件解压到home文件夹(注意任何一级文件夹不能包含空格，否则安装会失败)
+$ tar zxvf parallel_studio_xe_2016.tar.gz （如果你是直接拷贝压缩文件过来的）
+$ chmod a+x parallel_studio_xe_2016 -R
+$ sh install_GUI.sh
+
+先不安装MKL了，采用ATLAS： sudo apt-get install libatlas-base-dev
+
+编译安装opencv 3.0.0，见opencv安装笔记
+
+Remaining dependencies, 14.04：
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+
+定制config：
+cp Makefile.config.example Makefile.config
+CPU_ONLY := 1
+BLAS := atlas
+OPENCV_VERSION := 3
+#CUDA_DIR := /usr/local/cuda
+MATLAB_DIR := /usr/local/MATLAB/R2015b
+WITH_PYTHON_LAYER := 1
+然后就可以编译了：(在caffe目录下就行)
+sudo make all -j4（因为我是4核）
+sudo make test -j4
+sudo make runtest -j4
+
+Python接口支持：
+安装依赖项 sudo pip install -r ./python/requirements.txt 或官方文档方法for req in $(cat requirements.txt); do pip install $req; done
+add the module directory to your $PYTHONPATH by export PYTHONPATH=/path/to/caffe/python:$PYTHONPATH
+sudo make pycaffe
+
+Matlab接口支持
+sudo make matcaffe  （Warning: You are using gcc version '4.8.2'. MEX completed successfully.）
+
+使用MNIST数据集进行测试（命令行方法）：
+1. 数据预处理
+sh data/mnist/get_mnist.sh
+切换到CPU模式：
+在lenet_solver.prototxt最后一行修改solver_mode=CPU
+2. 重建lmdb文件。Caffe支持三种数据格式输入网络，包括Image(.jpg, .png等)，leveldb，lmdb，根据自己需要选择不同输入吧。
+sh examples/mnist/create_mnist.sh
+生成mnist-train-lmdb 和 mnist-train-lmdb文件夹，这里包含了lmdb格式的数据集
+3. 训练mnist
+sh examples/mnist/train_lenet.sh
+/**************************** end ****************************/
+
+matlab接口测试：
+matlab打开目录caffe/matlab/demo，运行classification_demo.m
+使用的是默认图片，也可指定输入参数：
+	im = imread('peppers.png');
+	[scores, maxlabel] = classification_demo(im,0);
+提示“Please download CaffeNet from Model Zoo before you run this demo”，可以看到../../models/bvlc_reference_caffenet/目录下没有../../models/bvlc_reference_caffenet/文件，文件下载说明见http://caffe.berkeleyvision.org/model_zoo.html
+caffe目录下运行$ scripts/download_model_binary.py models/bvlc_reference_caffenet 文件大小232M。
+
+/************************** RCNN(matlab) *******************************/
+注意！最新版本的caffe与RCNN代码不兼容！解决方法见下面。
+
+R-CNN: Region-based Convolutional Neural Networks
+Created by Ross Girshick, Jeff Donahue, Trevor Darrell and Jitendra Malik at UC Berkeley EECS.
+https://github.com/rbgirshick/rcnn 代码和介绍
+
+readme说明中，Install R-CNN
+iv. Start MATLAB，要是在命令行中启动，会自动运行startup.m。提示“Warning: Please install Caffe in ./external/caffe”，是因为新版caffe中文件夹名字为+caffe，在caffe/matlab/目录$ln -sf +caffe caffe解决这个问题。（https://github.com/rbgirshick/rcnn/issues/56）
+v. 的“ Selective Search code”不用自己点链接下载，运行rcnn_build()会发现缺少这个文件，在selective_search文件夹下会发现fetch_selective_search.sh，运行这个脚本即可。
+
+g++版本过高的Warning，忽略。
+
+找不到external/liblinear-1.94/blas/*.c的问题，把daxpy.c，ddot.c,dnrm2.c,dscal.c添过来
+
+运行key = caffe('get_init_key');
+出错Undefined function or variable 'caffe'. 
+提示用caffe_，仍然出错Undefined function 'caffe_' for input arguments of type 'char'.
+最新版本的caffe与RCNN间的问题，https://github.com/BVLC/caffe/releases下载caffe-rc2版本（https://github.com/rbgirshick/rcnn/issues/19）
+
+接下来使用caffe-rc2！！！上面出现的这些问题都不出现了。
+
+sudo make all时出错：build_release/lib/libcaffe.so: undefined reference to cv::imread(cv::String const&, int)' 
+取消 makefile.config中USE_PKG_CONFIG := 1的注释
+
+出现问题 Error in rcnn_load_model (line 28)
+    caffe('init', rcnn_model.cnn.definition_file, rcnn_model.cnn.binary_file);
+
+接下来使用caffe-0.9999！！！
+出现问题：tools/caffe.cpp:219:3: error: ‘gflags’ has not been declared
+   gflags::SetUsageMessage("command line brew\n"
+（http://stackoverflow.com/questions/30426734/caffe-recompile-libgflags-a-with-fpic-error）
+在tools/caffe.cpp中添加：
+namespace gflags = google;
+
+出现问题：
+makefile中 LIBRARIES += opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs
+（http://www.cnblogs.com/wangxiaocvpr/p/5200837.html）
+
+rcnn_demo('PASCAL',0)耗时
+found 2104 candidates (in 3.321s)
+Extracting CNN features from regions...Starting parallel pool (parpool) using the 'local' profile ... connected to 4 workers.
+done (in 337.459s).
+Scoring regions with detectors...done (in 0.023s)
+Applying NMS...done (in 0.034s)
+Total 20-class detection time: 340.856s
+
+VOC2007
+http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2007/  annotated test data (430MB tar file)
+
+http://caffe.berkeleyvision.org/的R-CNN detection
+
+/**************************  end  **************************************/
+
+/************************** fast-rcnn(python) *******************************/
+https://github.com/rbgirshick/fast-rcnn
+/**************************  end  *******************************************/
+
+/************************** faster-rcnn(python) *******************************/
+https://github.com/rbgirshick/py-faster-rcnn
+official MATLAB version: https://github.com/ShaoqingRen/faster_rcnn
+/**************************  end  *********************************************/
+
+/************************** begin *******************************/
+https://www.zhihu.com/question/35887527  如何评价rcnn、fast-rcnn和faster-rcnn这一系列方法？
+RCNN -> SPPNET（MSRA的kaiming组） -> Fast-RCNN -> Faster-RCNN
+
+RCNN 解决的是，“为什么不用CNN做classification呢？”
+（但是这个方法相当于过一遍network出bounding box，再过另一个出label，原文写的很不“elegant”
+Fast-RCNN 解决的是，“为什么不一起输出bounding box和label呢？”
+（但是这个时候用selective search generate regional proposal的时间实在太长了
+Faster-RCNN 解决的是，“为什么还要用selective search呢？”
+/**************************  end  *******************************/
+
+/************************** begin *******************************/
+https://www.zhihu.com/question/24904450  如何评价今年的 ILSVRC 2014 结果？
+R-CNN的具体想法是，将detection分为寻找object（不管具体类别，只管“那儿好像有个东西”）和识别object（识别每个“东西”到底是狗还是猫）两个过程。在第一步，我们可以用很多底层特征，比如说图像中的色块，图像中的边界信息，等等。第二步就可以祭出CNN来做识别，网络越好，识别率也就越高。
+/**************************  end  *******************************/
+
+Alex提出的alexnet网络结构模型赢得了2012届的冠军
+
+去看DPM
+
+ImageNet Large Scale Visual Recognition Competition (ILSVRC)
+The PASCAL Visual Object Classes Challenge 2007 (VOC2007)
+
+Cifar-10由60000张32*32的RGB彩色图片构成，共10个分类。50000张训练，10000张测试（交叉验证）。这个数据集最大的特点在于将识别迁移到了普适物体，而且应用于多分类（姊妹数据集Cifar-100达到100类，ILSVRC比赛则是1000类）。
+
+
+

@@ -1,0 +1,26 @@
+## Ubuntu Linux创建和增加Swap分区
+
+1. 创建8GB swap分区
+#sudo dd if=/dev/zero of=/swapfile bs=1G count=8
+稍等一会返回结果：
+8+0 records in
+8+0 records out
+8589934592 bytes (8.6 GB) copied, 73.0044 s, 118 MB/s
+
+验证在服务器上以创建的分区
+# ls -lh /swapfile
+返回结果：
+-rw-r--r-- 1 root root 8.0G Nov 25 11:25 /swapfile
+
+2. 设置并开启交换文件：
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+3. 设置开机自动装载swap文件：
+编辑 /etc/fstab ，加入如下一行：
+/swapfile       none    swap    defaults      0       0
+/etc/fstab 是存放文件系统信息的地方，系统启动的时候会自动从这里面读取并装载文件系统。其中前三个参数并别表示：
+要装载的文件系统物理位置（就是我们上一步创建的那个swap文件），挂载点（对于swap设置为none就行了），文件格式（swap格式）
+
+可以用free命令查看下内存使用情况
+

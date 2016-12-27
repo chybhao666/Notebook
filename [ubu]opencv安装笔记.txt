@@ -1,0 +1,57 @@
+据说手动装不太好？有个大神写好了脚本，地址：
+https://github.com/jayrambhia/Install-OpenCV.git
+进入Ubuntu/2.4目录：
+sudo chmod +x *.sh
+先安装依赖项:
+sudo ./dependencies.sh
+然后再安装opencv2.4.9版本：
+sudo ./opencv2_4_9.sh
+
+上面这个别人的脚本自己用是有问题的，只能作为安装参考！
+以下安装参考： http://www.tuicool.com/articles/nYJrYra
+
+安装依赖项：
+1) build-essential 软件包，为编译程序提供必需软件包的列表信息，这样软件包才知道头文件、库函数在哪里：
+sudo apt-get install build-essential
+2) 安装pkg-config，它是一个提供从源代码中编译软件时查询已安装的库时使用的统一接口的计算机软件：（已安装）
+sudo apt-get install pkg-config
+3) 必须要有libgtk2.0-dev ！否则之后运行使用opencv的程序会出错。
+4) 安装ffmpeg or libav development packages: libavcodec-dev, libavformat-dev, libswscale-dev
+安装libavcodec-dev出现一下错误：
+The following packages have unmet dependencies:
+libavcodec-dev : Depends: libavutil-dev (= 6:9.11-2ubuntu2) but it is not going to be installed
+是因为libavutil-dev的版本太高，卸载相关包即可。
+
+之后编译opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..
+make
+sudo make install
+
+编译C++程序出错：test_opencv.c:(.text+0x1b): undefined reference to `cvLoadImage'
+改用 gcc test.c  -o  test `pkg-config --libs --cflags opencv`  编译成功
+运行./test成功
+出错原因在于没找到库文件，要指定：-lopencv_shape -lopencv_stitching -lopencv_objdetect -lopencv_superres -lopencv_videostab -lopencv_calib3d -lopencv_features2d -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lopencv_photo -lopencv_ml -lopencv_imgproc -lopencv_flann -lopencv_core -lopencv_hal
+
+每次输pkg-config麻烦？那就写CMakeLists.txt吧
+cmake_minimum_required(VERSION 2.8)
+project( DisplayImage )
+find_package( OpenCV REQUIRED )
+add_executable( DisplayImage DisplayImage.cpp )
+target_link_libraries( DisplayImage ${OpenCV_LIBS} )
+
+
+
+----------------以下供参考，正常安装成功后不需要---------------------
+
+在文件/etc/ld.so.conf中添加 /usr/local/lib（这个跟安装目录有关， {CMAKE_INSTALL_PREFIX}/lib），也可以在/etc/ld.so.conf.d 目录下增加一个conf文件（可以命名为 opencv.conf），同样添加 /usr/local/lib
+使用下面的动态库管理命令ldconfig，让opencv的相关链接库被系统共享：sudo ldconfig -v  
+
+需要为程序指定openvc的头文件位置。这里使用pkg-config命令来完成。首先在 /etc/profile 中添加
+export  PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+
+
+
+
+

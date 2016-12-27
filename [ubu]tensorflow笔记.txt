@@ -1,0 +1,51 @@
+参考： 
+https://www.tensorflow.org/  官方文档
+http://wiki.jikexueyuan.com/project/tensorflow-zh/  官方文档中文版
+
+/*
+	系统为ubuntu14.04
+	2016.12
+*/
+
+使用Pip安装方法：
+首先安装 pip
+$ sudo apt-get install python-pip python-dev
+安装 TensorFlow :
+$ sudo pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.8.0-cp27-none-linux_x86_64.whl
+如果之前安装过 TensorFlow < 0.7.1 的版本,应该先使用 pip uninstall 卸载 TensorFlow 和 protobuf ,保证获取的是一个最新 protobuf 依赖下的安装包.
+这种方法将tensorflow安装到“/usr/local/lib/python2.7/dist-packages/tensorflow”里。
+找不到的话可以运行：
+$ python -c 'import os; import inspect; import tensorflow; print(os.path.dirname(inspect.getfile(tensorflow)))'
+
+卸载pip安装的tensorflow，出现以下问题
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/pip/basecommand.py", line 122, in main
+    status = self.run(options, args)
+使用sudo卸载即可。
+建议再更新pip：sudo pip install --upgrade pip，不然使用pip list命令也是会出现这个问题。好吧，这个问题依然存在！
+
+运行示例mnist_softmax.py，出现错误：
+TypeError: run() got an unexpected keyword argument 'argv'
+是因为使用了新版(r0.12)的示例代码，而tensorflow是旧版的。使用早期分支中的示例代码。
+(https://github.com/tensorflow/tensorflow/issues/5643)
+
+使用源码安装，方法见github主页（https://github.com/tensorflow/tensorflow）
+1.安装Bazel，使用Bazel推荐的方法Using Bazel custom APT repository,不需要自己配置环境变量（tensorflow上写的安装方法不是这样）。
+2.其他依赖项
+3.sudo apt-get install python-numpy python-dev python-wheel python-mock
+  python-wheel无法找到？ ...电脑里已经有了，不管这个问题
+  sudo apt-get install libcupti-dev
+4.查看java版本（$java -version），若之前设置过jdk6的环境变量，取消jdk6的设置 （还是jdk6的话./configure时会提醒的）
+5.tensorflow目录下运行./configure，运行时选择：
+  Google Platform support. n
+  Hadoop File System support. y
+  OpenCL support. n
+  CUDA support. n
+6.Create the pip package and install：
+  $ bazel build -c opt //tensorflow/tools/pip_package:build_pip_package  内存消耗会很大，花费时间较久
+  $ bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+  $ sudo pip install '/tmp/tensorflow_pkg/tensorflow-0.12.0rc1-cp27-cp27mu-linux_x86_64.whl' 这个文件名根据自己电脑/tmp/tensorflow_pkg文件夹下的名字来
+7.测试一下是否安装成功。如果是在命令行python中测试（如import tensorflow），注意当前目录不能是tensorflow目录，否则会提示。
+8.Optimizing CPU performance. 由于只在自己电脑上使用，没有进行这步。
+
+
