@@ -1,9 +1,28 @@
-查看环境变量:
+查看DNS：
+1)网络管理器 nm-tool
+2)less /etc/resolv.conf
+
+查看环境变量PATH:
 echo $PATH
-添加路径：
-export PATH="$PATH:/my_new_path" 
+通常设置环境变量有三种方法：
+一、临时设置
+export PATH=/home/yan/share/usr/local/arm/3.4.1/bin:$PATH
+二、当前用户的全局设置
+打开~/.bashrc，添加行：export PATH=/home/yan/share/usr/local/arm/3.4.1/bin:$PATH
+使生效：source ～/.bashrc
+三、所有用户的全局设置
+在/etc/profile 添加行：export PATH=/home/yan/share/usr/local/arm/3.4.1/bin:$PATH
+使生效：source /etc/profile
+用户登录后加载profile和bashrc的流程如下:
+1)/etc/profile-------->/etc/profile.d/*.sh
+2)$HOME/.bash_profile-------->$HOME/.bashrc---------->/etc/bashrc
 
 #﻿# 快捷键 #########################################################
+在终端下：
+复制命令：Ctrl + Shift + C
+粘贴命令：Ctrl + Shift + V
+清除一行：Ctrl + U
+
 使用多标签式窗口：
 终端下 Ctrl+Shift+t
 其他   Ctrl+t
@@ -18,6 +37,12 @@ Screenshots of an area:  Shift+Print
 截图应用：screenshot
 
 #﻿# 命令 #########################################################
+rm:
+  -v, --verbose         explain what is being done
+
+一次执行多条命令: 命令中间加&&符号 例如 make && make install
+
+whereis:用于程序名的搜索
 
 查看文本：nano
 
@@ -65,17 +90,21 @@ zip –q –r xahot.zip *
 >> 加到文件的尾部，保留旧文件内容
 
 #﻿# 应用安装&设置 #########################################################
-
-查看已安装软件包的方法：
-在终端输入sudo dpkg -l 即可,然后在终端的界面里复制列出来的信息就可以了(终端查看时,一定要做如下步骤:点终端界面上的"编辑"-->配置文件首选项-->滚动-->回滚-->不限制"打上勾",这样输入到界面的信息就完整显示了)
-
 apt命令：
 apt-cache search foo  搜索和"foo"匹配的包。
 apt-cache show foo    顯示"foo"包的相關信息，例如描述、版本、大小、依賴以及衝突。
-dpkg -l *foo*         查找包含有"foo"字樣的包。與apt-cache show foo類似，但是還會顯示每個包是安裝了還是沒安裝。
 apt-get remove package --purge 删除包，包括删除配置文件等
-apt-get update 更新源
-apt-get upgrade 更新已安装的包
+apt-get update        更新源
+apt-get upgrade       更新已安装的包
+apt-get remove package --purge 删除包，包括配置文件等
+
+dpkg -l         查看已安装软件包，其中 rc 状态的包即卸载了包却保留了配置文件。
+dpkg -l *foo*   查找包含有"foo"字樣的包。與apt-cache show foo類似，但是還會顯示每個包是安裝了還是沒安裝。
+dpkg -L 软件名   查看安装路径
+dpkg -l | grep ^rc | cut -d' ' -f3 | sudo xargs dpkg --purge  完整删除所有 rc 状态的包
+
+#个人喜好设置#
+窗口always on top，窗口标题栏右击
 
 Gedit
 对于中文乱码：
@@ -126,10 +155,10 @@ sudo pip install shadowsocks
 3.使用sslocal -c /etc/shadowsocks.json 开启代理
 待会的访问网址会在终端中显示。
 4.设置火狐或chrome浏览器代理
-chrome可使用switchysharp插件，填写SOCKS代理和端口，选择SOCK v5，保存并选择这个代理即可。
+chrome可使用switchysharp插件，填写SOCKS代理和端口，选择SOCK v5！保存并选择这个代理即可。
 5.关闭终端即退出代理。别忘了把switchysharp改为直接链接。
 
-安装cmake
+安装cmake:
 Ubuntu自带的apt-get install方式安装的CMake版本（2.8）有点老。
 1.卸载已经安装的旧版的CMake apt-get autoremove cmake
 2.到cmake官网下载新版，可以下载压缩包格式Binary distributions，也可以下载.sh格式（这个是自解压的）。
@@ -150,6 +179,9 @@ $sudo apt-get install nautilus-open-terminal
 重启系统 或 重新加载文件夹$nautilus -q
 将地址栏拖到终端也可以快速得到地址
 
+修改matlab默认快捷键为windows习惯：
+HOME > ENVIRONMENT > Preferences > Keyboard > Shortcuts
+
 ## 其他 #########################################################
 
 管理员登录
@@ -164,4 +196,6 @@ Ubuntu如何设置才能用命令行模式启动:
 
 SSH连接的时候Host key verification failed.
 选择最低的安全级别。在.ssh/config（或者/etc/ssh/ssh_config）中配置：StrictHostKeyChecking no
+
+终端查看时，点终端界面上的"编辑"-->配置文件首选项-->滚动-->回滚-->不限制"打上勾",这样输入到界面的信息就完整显示了
 
