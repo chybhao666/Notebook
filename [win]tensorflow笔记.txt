@@ -1,0 +1,11 @@
+参考：http://www.jiqizhixin.com/article/1912
+
+安装：
+C:\Users\JY> pip install tensorflow
+结果：Successfully installed protobuf-3.1.0 tensorflow-0.12.0rc0 wheel-0.29.0
+
+出错：“找不到指定模块”
+
+
+TensorFlow supports only 64-bit Python 3.5 on Windows.
+(https://github.com/tensorflow/tensorflow/blob/master/tensorflow/g3doc/get_started/os_setup.md)

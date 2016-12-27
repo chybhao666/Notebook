@@ -1,8 +1,8 @@
-£¨http://i.linuxtoy.org/docs/guide/ch02s02.html£©
-×î³£¼ûµÄËõĞ´£¬È¡Ã¿¸öµ¥´ÊµÄÊ××ÖÄ¸£º
+ï¼ˆhttp://i.linuxtoy.org/docs/guide/ch02s02.htmlï¼‰
+æœ€å¸¸è§çš„ç¼©å†™ï¼Œå–æ¯ä¸ªå•è¯çš„é¦–å­—æ¯ï¼š
 cd	Change Directory
 dd	Disk Dump
-df	Disk Free £¨¿ÉÓÃÈİÁ¿£¿£©
+df	Disk Free ï¼ˆå¯ç”¨å®¹é‡ï¼Ÿï¼‰
 du	Disk Usage
 pwd	Print Working Directory
 ps	Processes Status
@@ -10,22 +10,22 @@ PS	Prompt Strings
 cups	Common Unix Printing System
 bg	BackGround
 ping	Packet InterNet Grouper
-Èç¹ûÊ××ÖÄ¸ºóÎª¡°h¡±£¬Í¨³£±£Áô£º
+å¦‚æœé¦–å­—æ¯åä¸ºâ€œhâ€ï¼Œé€šå¸¸ä¿ç•™ï¼š
 chmod	CHange MODe
 chown	CHange OWNer
 chgrp	CHange GRouP
 bash	Bourne Again SHell
 ssh	Secure SHell
-µİ¹éËõĞ´:
+é€’å½’ç¼©å†™:
 WINE	WINE Is Not an Emulator
 PNG	PNG's Not GIF
 nano	Nano's AN Other editor
-¶ÔÓÚÄ¿Â¼£¬Í¨³£Ê¹ÓÃÇ°¼¸¸ö×ÖÄ¸×÷ÎªËõĞ´£º
+å¯¹äºç›®å½•ï¼Œé€šå¸¸ä½¿ç”¨å‰å‡ ä¸ªå­—æ¯ä½œä¸ºç¼©å†™ï¼š
 usr	Unix Shared Resources
 etc	ETCetera
 
 
-rc      run commands (ÏñÊÇ ".cshrc" »ò "/etc/rc" ÖĞµÄ rc ÕâÁ½¸ö×ÖÄ¸)
+rc      run commands (åƒæ˜¯ ".cshrc" æˆ– "/etc/rc" ä¸­çš„ rc è¿™ä¸¤ä¸ªå­—æ¯)
 Perl    Practical Extraction and Report Language
 
 (https://www.zhihu.com/question/49073893/answer/114986798)
@@ -33,23 +33,23 @@ tty     teletypewriter
 tar     Tape Archive
 
 
-£¨https://www.zhihu.com/question/49073893/answer/114438355£©
-Ä¿Â¼
-/etc£º  ETCetera
-/bin£º  BINaries
-/dev£º  DEVices
-/lib£º  LIBraries
-/mnt£º  MouNT
-/proc£º PROCesses
-/tmp£º  TeMPorary
-/var£º  VARiable
-/srv£º  SeRVices
-/opt£º  OPTion
-/sbin£º Super BINaries£¨ÓÖ×÷Superuser BINaries£©
-/sys£º  SYStem
-/usr£º  Ò»¹Ä¶ø×÷Unix System Resources£¬ÔÙ¶ø×÷Unix Software Resources,Èı¶ø×÷Unix Shared Resources
+ï¼ˆhttps://www.zhihu.com/question/49073893/answer/114438355ï¼‰
+ç›®å½•
+/etcï¼š  ETCetera
+/binï¼š  BINaries
+/devï¼š  DEVices
+/libï¼š  LIBraries
+/mntï¼š  MouNT
+/procï¼š PROCesses
+/tmpï¼š  TeMPorary
+/varï¼š  VARiable
+/srvï¼š  SeRVices
+/optï¼š  OPTion
+/sbinï¼š Super BINariesï¼ˆåˆä½œSuperuser BINariesï¼‰
+/sysï¼š  SYStem
+/usrï¼š  ä¸€é¼“è€Œä½œUnix System Resourcesï¼Œå†è€Œä½œUnix Software Resources,ä¸‰è€Œä½œUnix Shared Resources
 
-ÎÄ¼ş¹ÜÀí
+æ–‡ä»¶ç®¡ç†
 cat     CATenate
 sed     Stream EDitor
 diff    DIFFerence
@@ -59,16 +59,16 @@ gawk    Gnu Aho Weinberger and Kernighan
 grep    General Regular Expression Print
 ln      LiNk
 
-Èí¼ş¼°Èí¼ş°ü¹ÜÀí
+è½¯ä»¶åŠè½¯ä»¶åŒ…ç®¡ç†
 man     MANual
 apt     Advanced Packaging Tool
 dpkg    Debian PacKaGe
 yum     Yellow dog Updater
-rpm     RPM Package Manager£¨ÓÖ×÷Redhat Package Manager£©
+rpm     RPM Package Managerï¼ˆåˆä½œRedhat Package Managerï¼‰
 
-ÏµÍ³¹ÜÀí£¨Ö÷ÒªÊÇÄÚºËÄ£×é£©
+ç³»ç»Ÿç®¡ç†ï¼ˆä¸»è¦æ˜¯å†…æ ¸æ¨¡ç»„ï¼‰
 ps     Processes Status
-su     Switch User£¨Substitute User£©
+su     Switch Userï¼ˆSubstitute Userï¼‰
 bash   Bourne Again SHell
 init   INITialization
 ssh    Secure SHell
@@ -78,33 +78,33 @@ passwd PASSWorD
 sudo   SuperUser DO
 grub   GRand Unified Bootloader
 
-×îºóÊÇ±à¼­Æ÷
+æœ€åæ˜¯ç¼–è¾‘å™¨
 ed     EDitor
 nano   Nano's ANOther editor
 emacs  Editor MACroS
 vi     VIsual
 vim    Vi Improved
 
-±à³Ì
+ç¼–ç¨‹
 cc     C Compiler
 yacc   Yet Another Compiler Compiler
 gdb    Gnu DeBug
 tcl    Tool Command Line
 
-Í¼ĞÎ½çÃæ
+å›¾å½¢ç•Œé¢
 gnome  GNu Object Model Environment
 gdm    Gnome Display Manager
 gtk    Graphic user interface ToolKit
-qt     .. Toolkit£¨ÓÃQÖ»ÊÇÒòÎªÔÚ¿ª·¢ÕßµÄEmacsÖĞQÌØ±ğÆ¯ÁÁ£©
+qt     .. Toolkitï¼ˆç”¨Qåªæ˜¯å› ä¸ºåœ¨å¼€å‘è€…çš„Emacsä¸­Qç‰¹åˆ«æ¼‚äº®ï¼‰
 kde    K Desktop Environment
 lxde   Lightweight X11 Desktop Environment
 xfce   XForms Common Environment
 
-Ğí¿ÉÖ¤
+è®¸å¯è¯
 gnu gpl   Gnu General Public License
 gnu lgpl  Gnu General Lesser Public License
 gfdl      Gnu Free Documentation License
-agpl      Affero General Public License£¨»ò¼òĞ´ÎªAffero gpl)
+agpl      Affero General Public Licenseï¼ˆæˆ–ç®€å†™ä¸ºAffero gpl)
 apsl      Apple Public Source License
 bsd       Berkeley Software Distribution license
 
