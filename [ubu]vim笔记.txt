@@ -1,0 +1,101 @@
+参考：
+[1]http://blog.csdn.net/wooin/article/details/1858917  手把手教你把Vim改装成一个IDE编程环境
+[2]http://blog.csdn.net/vaqeteart/article/details/4146618  vim中taglist使用
+[3]http://blog.chinaunix.net/uid-23089249-id-2855999.html  一步步将vim改造成C/C++开发环境
+
+Vi IMproved - Vim
+
+命令简写：
+set - se
+help - h
+mksession - mks
+colorscheme -colo
+
+缺省，即系统默认状态，意思与“默认”相同。词典英文:default。
+
+安装：
+可以先删除vim-tiny，再安装vim
+
+配置：
+所有用户都使用，修改 /etc/vim/vimrc；如果只想当前用户使用，则修改 ~/.vimrc
+
+报错：
+E492: Not an editor command: <a1><b1>
+看看是不是用了中文字符
+
+在Normal模式下，按下键盘上的v进入Visual模式
+在Visual模式下，按下键盘上的Esc键回到Normal模式(也可以再次按下v键)
+
+（1）选定文本块，使用v进入可视模式；移动光标键选定内容
+（2）复制选定块到缓冲区，用y；复制整行，用yy
+（3）剪切选定块到缓冲区，用d；剪切整行用dd
+（4）粘贴缓冲区中的内容，用p
+yw：从光标处复制至一个单子/单词的末尾，包括空格
+ye：从光标处复制至一个单子/单词的末尾，不包括空格
+y$：从当前光标复制到行末
+y0：从当前光标位置（不包括光标位置）复制之行首
+
+在vim的normal模式使用shell命令，添加!，如 :!ls
+
+:options     查看可以用的命令
+:scriptnames 查看有那些配置文件
+:helptags ~/.vim/doc 每次在~/.vim/doc添加新的帮助文档后都有运行一遍这个才添加新文档？
+:mksession   创建当前session状态文件
+
+查看是否设置:set 命令名
+:set rtp     查看runtimepath
+
+键盘映射 (Map) http://blog.csdn.net/daofengdeba/article/details/7605124
+
+vim中文帮助文档下载地址:
+http://sourceforge.net/projects/vimcdoc/files/vimcdoc/
+解压后将其中的doc文件夹复制到~/.vim/doc
+关于keycodes :help keycodes
+关于vim-modes :help vim-modes
+开启set mouse=h 后，双击带链接的字即可跳转
+
+插件：
+1. ctags，安装sudo apt-get install ctags，才能使用 Ctrl+] （参考[1]）,使用这个功能前要先运行命令:ctags -R
+2. TagList，进入vim后用命令打开taglist窗口 :Tlist （参考[1]）（参考[2]）.查看帮助文档 :help taglist.txt 因为vim的帮助文档中含有taglist，所以这边必须含有.txt后缀
+3. netrw.vim，显示当前目录所有文件名，标准插件,已经随vim一起安装，运行命令:e PATH （参考[1]）
+4. WinManager （参考[1]）管理文件浏览器netrw和标签浏览器Taglist
+5. Cscope，加强版ctags （参考[1]）
+6. QuickFix窗口，标准插件,调出 :cw （参考[1]）
+7. MiniBufExplorer，快速浏览和操作Buffer （参考[1]）
+8. A，c/h文件间相互切换 （参考[1]）
+9. Grep，在工程中查找（参考[1]）
+10. echofunc提示函数原型（参考[3]）
+11. vim-addons，插件管理，$sudo apt-get install vim vim-scripts vim-doc时，一般会自动安装上vim-addons。若未安装可通过$sudo apt-get install vim-addon-manager手动安装, 查看系统中已有的vim-scripts中包含的插件及其状态$ vim-addons status
+
+自动补全（参考[1]），:help new-omni-completion, :help compl-omni，要想对c++自动补全，需先对所有头文件生成ctags（参考[3]）
+
+Vundle，基于Git仓库的插件管理软件，地址https://github.com/VundleVim/Vundle.vim
+
+
+快捷键：
+撤销  u
+重做  ctrl+r
+
+关于:set mouse=a后无法使用ctrl+shift+c复制，可以临时设置:set mouse=""
+
+"增强版状态栏
+set laststatus=2 "显示状态栏(默认值为1, 无法显示状态栏)
+set statusline =%2*%-3.3n%0*\      " buffer number
+set statusline+=%f\                " file name
+set statusline+=%h%1*%m%r%w%0*     " flag
+set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+set statusline+=%{&fileencoding},  " encoding
+set statusline+=%{&fileformat}]    " file format
+set statusline+=%=                 " right align
+set statusline+=0x%-8B\            " current char
+set statusline+=%-14.(%l,%c%V%)\ %<%P   " offset
+if filereadable(expand("$VIM/vimfiles/plugin/vimbuddy.vim"))
+  set statusline+=\ %{VimBuddy()}  " vim buddy
+endif
+
+主题 /usr/share/vim/vim74/colors
+自己设计主题 http://bytefluent.com/vivify/
+
+session信息中保存了所有窗口的视图，外加全局设置。 
+viminfo信息（在用户目录下）中保存了命令行历史(history)、搜索字符串历史(search)、输入行历史、非空的寄存器内容(register)、文件的位置标记(mark)、最近搜索/替换的模式、缓冲区列表、全局变量等信息。 
+

@@ -21,7 +21,8 @@ export PATH=/home/yan/share/usr/local/arm/3.4.1/bin:$PATH
 在终端下：
 复制命令：Ctrl + Shift + C
 粘贴命令：Ctrl + Shift + V
-清除一行：Ctrl + U
+剪切光标前内容：Ctrl + U
+剪切光标后内容：Ctrl + K
 
 使用多标签式窗口：
 终端下 Ctrl+Shift+t
@@ -39,10 +40,11 @@ Screenshots of an area:  Shift+Print
 #﻿# 命令 #########################################################
 rm:
   -v, --verbose         explain what is being done
+  -i                    prompt before every removal
 
 一次执行多条命令: 命令中间加&&符号 例如 make && make install
 
-whereis:用于程序名的搜索
+whereis:用于程序所在位置的搜索
 
 查看文本：nano
 

@@ -56,4 +56,11 @@ $git diff
 ## 目前工作树的状态
 $git status
 
+1. git log filename
+可以看到fileName相关的commit记录
+2. git log -p filename
+可以显示每次提交的diff
+3. git show commit-id filename
+只看某次提交中的某个文件变化
+
 
