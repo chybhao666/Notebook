@@ -19,3 +19,7 @@ Ctr+`           控制台
 
 6.Vim 模式
 将user和default中对应处都注释掉
+
+使用命令行打开sublime text：
+sudo ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/bin/sl
+或是用alias

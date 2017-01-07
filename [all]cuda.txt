@@ -1,0 +1,20 @@
+独立显卡（GTX 745为例）安装：
+将显卡插到主办上，插显卡会发现需要拆除机箱上的一个卡条
+
+windows：
+若是将显示器插到集显口，用的是集显，插到独显口用的是独显
+可以使用驱动精灵安装驱动
+
+ubuntu：
+查看系统中PCI总线设备 $lspci
+查看显卡情况，$lspci|grep VGA，rev ff为显卡被关闭
+安装显卡驱动网上有两种方法，一种是使用apt－get install，需要添加ppa源，但是添加过程提示不建议添加这个源并且停止了添加。所以我使用了另一只方法，如下：
+1. 官网下载对应驱动，cuda7.5需要显卡驱动最低版本是nvidia-352，我安装了361版本
+2. Ctrl + Alt + F1进入控制台
+3. 关闭图像环境，命令：$sudo service lightdm stop，若有其他界面，同样关闭：sudo service gdm stop，sudo service mdm stop
+4. 安装显卡驱动，找到对应的驱动程序，$chmod +x NVIDIA-Linux-*-3**.run，$sudo ./NVIDIA-Linux-*-3**.run
+5. 登陆界面输入密码后无法进入桌面！将显示器接口插到独显上就OK了。尝试插在集显口上并开机禁止nouveau，照样还是进入不了桌面。所以现在是只用独显？如何即用独显又用集显？
+6. 安装完成后，在应用中搜索可疑找到NVIDIA X Server Settings，可以查看memory使用情况
+7. 显示器插集显口，$lspci|grep VGA显示集显和独显；插独显口，只显示独显
+我并未这样操作：
+在/etc/modprobe.d/blacklist.conf添加开机禁止加载项，在文件末尾加上blacklist nouveau  ，这时一个开源的驱动

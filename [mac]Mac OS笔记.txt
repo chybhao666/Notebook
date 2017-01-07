@@ -1,3 +1,6 @@
+自带输入法无法用shift来切换中英文输入，无法设置shift为快捷键
+中文输入法中打开caps lock就是默认小写英文输入，要大写的话按着shift 键输入就行
+
 剪切 cmd+option+v
 
 显示隐藏文件方法
@@ -91,4 +94,8 @@ Quick Time可用于录制音频／视频／屏幕录像
 桌面与屏幕保护程序中有个触发角功能，能够设置鼠标移到屏幕左上 左下 右上 右下时的功能
 
 全屏应用软件将出现在Mission Control中
+
+#### 系统设置 ####
+在当前文件夹打开terminal：System Preferences -> Keyboard -> Shortcuts -> Services -> New Terminal at Folders/New Terminal Tab at Folder 一个打开的是窗口，一个是标签
+
 
