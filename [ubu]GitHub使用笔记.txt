@@ -55,6 +55,8 @@ $git log   (按q退出)
 $git diff
 ## 目前工作树的状态
 $git status
+列出所有文件
+$git ls-files
 
 1. git log filename
 可以看到fileName相关的commit记录
@@ -62,5 +64,13 @@ $git status
 可以显示每次提交的diff
 3. git show commit-id filename
 只看某次提交中的某个文件变化
+
+被.gitignore忽略过的文件就算不再被忽略，仍可能是处于被忽略...具体还不清楚
+
+The current branch master has no upstream branch解决方法：
+$git push -u origin master
+
+下载项目中某个文件，类似下面这样：
+wget https://raw.githubusercontent.com/hritt/vim-config/master/vimrc
 
 

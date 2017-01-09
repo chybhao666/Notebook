@@ -58,6 +58,14 @@ sh examples/mnist/create_mnist.sh
 生成mnist-train-lmdb 和 mnist-train-lmdb文件夹，这里包含了lmdb格式的数据集
 3. 训练mnist
 sh examples/mnist/train_lenet.sh
+
+添加GPU：
+安装了GTX 745，安装了驱动
+
+安装CUDA
+安装官方教程 http://developer.download.nvidia.com/compute/cuda/7_0/Prod/doc/CUDA_Getting_Started_Linux.pdf
+
+
 /**************************** end ****************************/
 
 matlab接口测试：
@@ -104,7 +112,8 @@ sudo make all时出错：build_release/lib/libcaffe.so: undefined reference to c
 namespace gflags = google;
 
 出现问题：
-makefile中 LIBRARIES += opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs
+makefile中 LIBRARIES += opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs，即找到LIBRARIES，实际只需添加缺少的opencv_imgcodecs
+还是同样问题，可能需要 $make clean
 （http://www.cnblogs.com/wangxiaocvpr/p/5200837.html）
 
 rcnn_demo('PASCAL',0)耗时
@@ -124,11 +133,27 @@ http://caffe.berkeleyvision.org/的R-CNN detection
 
 /************************** fast-rcnn(python) *******************************/
 https://github.com/rbgirshick/fast-rcnn
+Created by Ross Girshick at Microsoft Research, Redmond.
+
+自带caffe，注意git clone时使用“--recursive”
+提供Python和matlab两种方式
+修改$FRCN_ROOT/caffe-fast-rcnn下的
+
+按照github上教程，运行demo（./tools/demo.py）时出现以下错误，看来必须要GPU了。
+Cannot use GPU in CPU-only Caffe: check mode.
+
+
 /**************************  end  *******************************************/
 
 /************************** faster-rcnn(python) *******************************/
 https://github.com/rbgirshick/py-faster-rcnn
 official MATLAB version: https://github.com/ShaoqingRen/faster_rcnn
+Shaoqing Ren and Kaiming He and Ross Girshick and Jian Sun
+
+和fast-rcnn使用的caffe属于不同分支
+
+我自己已经Download pre-computed Faster R-CNN detectors
+
 /**************************  end  *********************************************/
 
 /************************** begin *******************************/

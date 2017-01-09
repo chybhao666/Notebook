@@ -15,6 +15,7 @@ colorscheme -colo
 
 安装：
 可以先删除vim-tiny，再安装vim
+我安装vim-scripts，但是vim的runtimepath里并不包含它，不知出了什么问题。反正里面有用的插件我放在了~/.vim/plugin里，所以也没必要安装vim-scripts
 
 配置：
 所有用户都使用，修改 /etc/vim/vimrc；如果只想当前用户使用，则修改 ~/.vimrc
@@ -37,15 +38,30 @@ y0：从当前光标位置（不包括光标位置）复制之行首
 
 在vim的normal模式使用shell命令，添加!，如 :!ls
 
+<Leader>符默认为 \  
+
 :options     查看可以用的命令
 :scriptnames 查看有那些配置文件
 :helptags ~/.vim/doc 每次在~/.vim/doc添加新的帮助文档后都有运行一遍这个才添加新文档？
 :mksession   创建当前session状态文件
+:map         列出所有键盘映射
+:version     得到配置文件的详细信息
 
 查看是否设置:set 命令名
 :set rtp     查看runtimepath
 
 键盘映射 (Map) http://blog.csdn.net/daofengdeba/article/details/7605124
+
+一组映射：
+inoremap () ()<Left>
+inoremap ()<Enter> (<Enter>)<Up><End><Enter>
+inoremap {} {}<Left>
+inoremap {}<Enter> {<Enter>}<Up><End><Enter>
+inoremap [] []<Left>
+inoremap []<Enter> [<Enter>]<Up><End><Enter>
+inoremap <> <><Left>
+inoremap '' ''<Left>
+inoremap "" ""<Left>
 
 vim中文帮助文档下载地址:
 http://sourceforge.net/projects/vimcdoc/files/vimcdoc/
@@ -55,22 +71,43 @@ http://sourceforge.net/projects/vimcdoc/files/vimcdoc/
 开启set mouse=h 后，双击带链接的字即可跳转
 
 插件：
-1. ctags，安装sudo apt-get install ctags，才能使用 Ctrl+] （参考[1]）,使用这个功能前要先运行命令:ctags -R
+1. ctags，安装$sudo apt-get install ctags，才能使用 Ctrl+] （参考[1]）,使用这个功能前要先运行命令:ctags -R
 2. TagList，进入vim后用命令打开taglist窗口 :Tlist （参考[1]）（参考[2]）.查看帮助文档 :help taglist.txt 因为vim的帮助文档中含有taglist，所以这边必须含有.txt后缀
 3. netrw.vim，显示当前目录所有文件名，标准插件,已经随vim一起安装，运行命令:e PATH （参考[1]）
-4. WinManager （参考[1]）管理文件浏览器netrw和标签浏览器Taglist
+4. WinManager （参考[1]）管理文件浏览器netrw，标签浏览器Taglist和BufExplorer，winManagerWindowLayout中逗号分隔开的窗口用ctrl+n切换
 5. Cscope，加强版ctags （参考[1]）
-6. QuickFix窗口，标准插件,调出 :cw （参考[1]）
+6. QuickFix窗口，标准插件，已经随vim一起安装，调出 :cw （参考[1]）
 7. MiniBufExplorer，快速浏览和操作Buffer （参考[1]）
-8. A，c/h文件间相互切换 （参考[1]）
+8. a，c/h文件间相互切换，vim-scripts中有 （参考[1]）
 9. Grep，在工程中查找（参考[1]）
 10. echofunc提示函数原型（参考[3]）
 11. vim-addons，插件管理，$sudo apt-get install vim vim-scripts vim-doc时，一般会自动安装上vim-addons。若未安装可通过$sudo apt-get install vim-addon-manager手动安装, 查看系统中已有的vim-scripts中包含的插件及其状态$ vim-addons status
+12. calendar，除了最基本的日历查看功能，还支持日程管理等功能
+13. DoxygenToolkit，自动文档注释
+14. tetris，俄罗斯方块游戏，开启命令 \te
+15. bufexplorer，可以配合WinManager使用
+
+1. Vundle.vim，基于Git仓库的插件管理软件，地址 https://github.com/VundleVim/Vundle.vim
+2. ctrlp.vim，Full path fuzzy file, buffer, mru, tag, ... finder for Vim，使用介绍视频http://haoduoshipin.com/v/64.html
+3. nerdtree，树形目录，https://github.com/scrooloose/nerdtree，如果想用nerdtree取代WinManager中文件浏览器，参考http://www.cnblogs.com/ifys/archive/2010/10/24/1860610.html，要改几个文件
+4. markdown-preview.vim，markdown实时预览，https://github.com/iamcco/markdown-preview.vim
+5. nerdcommenter，快速给代码加注释插件
+6. YouCompleteMe，支持模糊匹配的vim代码补全引擎
+7. Syntastic，语法检查，https://github.com/vim-syntastic/syntastic
+8. snipmate，类似于TextMate的代码块自动补全定制，https://github.com/garbas/vim-snipmate，使用介绍视频http://haoduoshipin.com/v/61.html
+   这里面并不包含snippets，可以自己创建snippets文件夹（在runtimepath下，~/.vim或vim-snipmate目录下皆可），到https://github.com/honza/vim-snippets下载snippets，不建议将vim-snippets添加到vundle中，若是这样更新时会与自己写的冲突。
+   _.snippets是全局的，snippets.snippets是用来写*.snippets文件的。
+9. Powerline，酷炫的状态栏，现在建议改用vim-airline
+10. vim-airline，status/tabline for vim，https://github.com/vim-airline/vim-airline
+    需要安装字体 https://github.com/powerline/fonts
+    设置终端字体，Profile->Genaral->Font，设为powerline的字体；对于gvim，使用 :set guifont=...
+	这个插件并不能带来什么好处，所以还是别用了，自己设计statusline就行
+
+1. vim-plug，目前最快插件管理器，无论是更新，安装，全都是并发的，https://github.com/junegunn/vim-plug
+2. incsearch.vim，增强vim 中自带的 ? 和 ／ 搜索功能， 并且支持更加高级的正则表达式匹配，输入过程即刻同时高亮所有匹配的字符，https://github.com/haya14busa/incsearch.vim
+3. incsearch-fuzzy.vim 扩展incsearch.vim 支持模糊匹配
 
 自动补全（参考[1]），:help new-omni-completion, :help compl-omni，要想对c++自动补全，需先对所有头文件生成ctags（参考[3]）
-
-Vundle，基于Git仓库的插件管理软件，地址https://github.com/VundleVim/Vundle.vim
-
 
 快捷键：
 撤销  u
@@ -78,9 +115,9 @@ Vundle，基于Git仓库的插件管理软件，地址https://github.com/VundleV
 
 关于:set mouse=a后无法使用ctrl+shift+c复制，可以临时设置:set mouse=""
 
-"增强版状态栏
+增强版状态栏：
 set laststatus=2 "显示状态栏(默认值为1, 无法显示状态栏)
-set statusline =%2*%-3.3n%0*\      " buffer number
+set statusline =%2*%-3.3n%0*\      " buffer number   "见下面说明
 set statusline+=%f\                " file name
 set statusline+=%h%1*%m%r%w%0*     " flag
 set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
@@ -92,10 +129,36 @@ set statusline+=%-14.(%l,%c%V%)\ %<%P   " offset
 if filereadable(expand("$VIM/vimfiles/plugin/vimbuddy.vim"))
   set statusline+=\ %{VimBuddy()}  " vim buddy
 endif
+另一种：
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
+说明：（http://www.tuicool.com/articles/JZVZVf）
+%1*\|%* ( 以 | 间隔，且 | 的颜色修改为 %1*，| 后状态栏颜色恢复成 %* ) ，其中1是指User1，见 ：h highlight
+另一种，强：
+https://zhuanlan.zhihu.com/p/24642631
+256色表：
+http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
-主题 /usr/share/vim/vim74/colors
+主题存储位置 /usr/share/vim/vim74/colors
 自己设计主题 http://bytefluent.com/vivify/
 
 session信息中保存了所有窗口的视图，外加全局设置。 
 viminfo信息（在用户目录下）中保存了命令行历史(history)、搜索字符串历史(search)、输入行历史、非空的寄存器内容(register)、文件的位置标记(mark)、最近搜索/替换的模式、缓冲区列表、全局变量等信息。 
+
+因为VIM所有的操作都是原子化的，所以把这些操作程序化就非常简单了：
+6j 下移6行，相当于按六次j
+
+通用的搜索命令是左斜杠/和问号?，分别表示从光标所在位置向文件尾搜索和向文件头搜索
+按下<Enter>键后光标会自动跳转到该字符串在当前搜索方向的第一次出现的位置(当然前提是能搜索到)，按n键可以跳到下一个出现位置，而大写N键则跳到上一个出现位置，这里的上一个与下一个是就搜索的方向而言的
+
+
+命令 ls 可查看当前已打开的buffer
+　　命令 b num 可切换buffer (num为buffer list中的编号)
+其它命令:
+　　:bn -- buffer列表中下一个 buffer
+　　:bp -- buffer列表中前一个 buffer
+　　:b# -- 你之前所在的前一个 buffer
+　　:bdelete num -- 删除第num编号buffer，简写为bd，默认关闭当前
+
+清楚当前命令行输入，按两下<Esc>
+
 

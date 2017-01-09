@@ -1,3 +1,5 @@
+进入目录，按ctrl+h.就能看见以点号开头的隐藏文件
+
 查看DNS：
 1)网络管理器 nm-tool
 2)less /etc/resolv.conf
@@ -99,6 +101,7 @@ apt-get remove package --purge 删除包，包括删除配置文件等
 apt-get update        更新源
 apt-get upgrade       更新已安装的包
 apt-get remove package --purge 删除包，包括配置文件等
+apt-get autoremove    删除不需要的包
 
 dpkg -l         查看已安装软件包，其中 rc 状态的包即卸载了包却保留了配置文件。
 dpkg -l *foo*   查找包含有"foo"字樣的包。與apt-cache show foo類似，但是還會顯示每個包是安裝了還是沒安裝。
@@ -109,7 +112,8 @@ dpkg -l | grep ^rc | cut -d' ' -f3 | sudo xargs dpkg --purge  完整删除所有
 窗口always on top，窗口标题栏右击
 
 Gedit
-对于中文乱码：
+1.在文件名上停留会显示文件编码
+2.对于中文乱码：
 Gedit 3.x 版本设置
 方法一.命令方式
 gsettings set org.gnome.gedit.preferences.encodings auto-detected "['GB18030', 'UTF-8', 'CURRENT', 'ISO-8859-15', 'UTF-16']"
@@ -117,7 +121,7 @@ gsettings set org.gnome.gedit.preferences.encodings auto-detected "['GB18030', '
 安装并运行dconf-editor
 展开/org/gnome/gedit/preferences/encodings auto-detected的Value中加入 'GB18030' ，加在UTF-8前面；
 对于显是行号：
-在preferences的View中选择，再在Font&Colors中选择Color Scheme为Kate，否则行号为文本没区分度。
+在preferences的View中选择，再在Font&Colors中选择Color Scheme为Kate，否则行号为文本没区分度。更建议用Oblivion，配色好。
 
 安装flash插件
 firefox:software center直接搜flash
