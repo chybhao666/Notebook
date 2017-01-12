@@ -1,3 +1,13 @@
+查看执行时间用time命令，比如要查看ls执行时间， 可以用"time ls"
+
+top命令的TIME/TIME+是指的进程所使用的CPU时间，不是进程启动到现在的时间
+
+Make a sound once process is complete:(http://askubuntu.com/questions/277215/make-a-sound-once-process-is-complete)
+Ubuntu: $spd-say done  (printf "\a" 没声音)
+mac os: $say ok  (printf "\a" 声音超低)
+
+ldconfig命令的用途, 主要是在默认搜寻目录(/lib和/usr/lib)以及动态库配置文件/etc/ld.so.conf内所列的目录下, 搜索出可共享的动态链接库(格式如lib*.so*), 进而创建出动态装入程序(ld.so)所需的连接和缓存文件. 缓存文件默认为/etc/ld.so.cache, 此文件保存已排好序的动态链接库名字列表. 
+
 进入目录，按ctrl+h.就能看见以点号开头的隐藏文件
 
 查看DNS：
@@ -48,7 +58,9 @@ rm:
 
 whereis:用于程序所在位置的搜索
 
-查看文本：nano
+查看文本：
+nano
+cat
 
 在终端中用命令打开文件夹：nautilus
 
@@ -163,6 +175,7 @@ sudo pip install shadowsocks
 4.设置火狐或chrome浏览器代理
 chrome可使用switchysharp插件，填写SOCKS代理和端口，选择SOCK v5！保存并选择这个代理即可。
 5.关闭终端即退出代理。别忘了把switchysharp改为直接链接。
+（mac os可以安装Shadowsocks）
 
 安装cmake:
 Ubuntu自带的apt-get install方式安装的CMake版本（2.8）有点老。

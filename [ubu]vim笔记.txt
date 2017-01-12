@@ -83,7 +83,7 @@ http://sourceforge.net/projects/vimcdoc/files/vimcdoc/
 10. echofunc提示函数原型（参考[3]）
 11. vim-addons，插件管理，$sudo apt-get install vim vim-scripts vim-doc时，一般会自动安装上vim-addons。若未安装可通过$sudo apt-get install vim-addon-manager手动安装, 查看系统中已有的vim-scripts中包含的插件及其状态$ vim-addons status
 12. calendar，除了最基本的日历查看功能，还支持日程管理等功能
-13. DoxygenToolkit，自动文档注释
+13. DoxygenToolkit，自动文档注释，如添加函数注释，作者信息
 14. tetris，俄罗斯方块游戏，开启命令 \te
 15. bufexplorer，可以配合WinManager使用
 
@@ -114,6 +114,8 @@ http://sourceforge.net/projects/vimcdoc/files/vimcdoc/
 重做  ctrl+r
 
 关于:set mouse=a后无法使用ctrl+shift+c复制，可以临时设置:set mouse=""
+更好的方法，选择同时按Shift。
+粘贴是可以直接用ctrl+shift+v的
 
 增强版状态栏：
 set laststatus=2 "显示状态栏(默认值为1, 无法显示状态栏)
@@ -160,5 +162,12 @@ viminfo信息（在用户目录下）中保存了命令行历史(history)、搜�
 　　:bdelete num -- 删除第num编号buffer，简写为bd，默认关闭当前
 
 清楚当前命令行输入，按两下<Esc>
+
+只要一个vimrc，自动安装插件：https://github.com/L0stSoul/vim-config， vimrc中先检测是否安装bundle插件，无则下载
+
+autoload 是在:call filename#funcname()时自动调用
+plugin 是在vim启动的时候加载
+after 也会在vim每次启动的时候加载，不过是等待~/.vim/plugin/加载完成之后才加载
+ftplugin 当vim给缓冲区的filetype设置一个值时，vim将会在~/.vim/ftplugin/ 目录下来查找和filetype相同名字的文件。例如你运行set filetype=derp这条命令后，vim将查找~/.vim/ftplugin/derp.vim此文件，如果存在就运行它
 
 
