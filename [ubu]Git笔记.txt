@@ -1,0 +1,91 @@
+2015/12/28 目前github没有linux客户端
+
+（已有github账户情况下）
+## 从源中安装git
+$sudo apt-get install git
+
+## 配置用户信息
+$git config --global user.name "Your Name Here"
+$git config --global user.email your_email@example.com
+查看已有的配置信息：
+$git config --list
+## 分支推送
+$git config --global push.default matching  推送所有有对应的远程分支的本地分支
+$git config --global push.default simple  只推送当前分支
+
+## 把GitHub里的项目复制到本地：
+$git clone git_address
+(地址如：https://github.com/hritt/Notebook.git)
+
+## 获取远程的更新
+$git pull
+
+## 把要提交的文件的信息添加到索引库中
+$git add . 整个目录
+$git add a.cpp 指定文件
+$git add -u 所有tracked文件中被修改过或已删除文件的信息添加到索引库,不处理untracted的文件
+$git add -A所有tracked文件中被修改过或已删除文件和所有untracted的文件信息添加到索引库
+
+## 提交暂存区里面的内容到本地仓库
+$git commit   使用编辑器添加描述，可以使用 git config --global core.editor 命令更改为你喜欢的编辑器
+$git commit -m "comment msg"
+除了将暂存区里的文件提交外，还提交被修改但未添加到暂存区的文件
+$git commit -a -m "comment msg"
+
+## 创建验证用的公钥(要先有ssh)
+使用命令：ssh-keygen -t rsa
+会在用户目录 ~/.ssh/ 下建立相应的密钥文件， 将public key(id_rsa.pub文件)拷贝到github服务器的Account settings——> SSH Keys中
+可以使用 ssh -v git@github.com 命令来测试链接是否畅通（我连接不通也能提交的？）
+
+## 提交到远程
+命令格式：git push <远程主机名> <本地分支名>:<远程分支名>
+$git push origin master 将本地的master分支推送到origin主机的master分支。如果后者不存在，则会被新建。
+这边要输入用户名和密码，是github的，千万别输错成操作系统的；输错给出的提示是fatal: Authentication failed for 'https://github.com/hritt/Notebook.git/'
+
+## 在本地新建库并提交到远程
+$git init
+$git add .
+$git commit -m 'Initial commit project'
+$git remote add origin https://github.com/hritt/new.git
+$git push origin master
+
+## 提交日志
+$git log   (按q退出)
+## 查看最近一次改变的內容
+$git diff
+## 目前工作树的状态
+$git status
+列出所有文件
+$git ls-files
+
+1. git log filename
+可以看到fileName相关的commit记录
+2. git log -p filename
+可以显示每次提交的diff
+3. git show commit-id filename
+只看某次提交中的某个文件变化
+
+The current branch master has no upstream branch解决方法：
+$git push -u origin master
+
+下载项目中某个文件，类似下面这样：
+wget https://raw.githubusercontent.com/hritt/vim-config/master/vimrc
+
+## ignore
+被.gitignore忽略过的文件就算不再被忽略，仍可能是处于被忽略...具体还不清楚
+
+包含git的子文件夹会被ignore
+
+可以在子文件夹中写.gitignore
+
+*/   忽略所有文件夹，不忽略文件
+
+忽略dbg文件和dbg目录：
+dbg
+只忽略dbg目录，不忽略dbg文件：
+dbg/
+只忽略dbg文件，不忽略dbg目录：
+dbg
+!dbg/
+只忽略当前目录下的dbg文件和目录，其他子目录的dbg不在忽略范围内：
+/dbg
