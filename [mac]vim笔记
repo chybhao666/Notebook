@@ -1,11 +1,9 @@
 mac OS升级vim7.3到最新版本8.0
-
 安装brew：http://brew.sh/
 安装vim $brew install vim --with-lua --with-override-system-vi
 
 系统自带的, 可执行程序是 /usr/bin/vim, 安装目录是 /usr/share/vim/, 版本7.3
 brew安装的，在/usr/local/Cellar/vim/, 版本8.0.，并且有一个指向它的链接: /usr/local/bin/vim -> ../Cellar/vim/../bin/vim 
-
 
 在vi的命令状态下 :
 :%!xxd ——将当前文本转换为16进制格式。

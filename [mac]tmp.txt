@@ -1,12 +1,3 @@
-vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-vnoremap $q <esc>`>a'<esc>`<i'<esc>
-vnoremap $e <esc>`>a"<esc>`<i"<esc>
-" 括号自动生成
-
-
 回到Command模式：
 ctrl+c ctrl+[ alt+esc
 
@@ -15,11 +6,3 @@ alias[别名]=[指令名称]
 /etc/bashrc和~/.bashrc 区别就在于一个是设置给全系统一个是设置给单用户使用.
 
 “ ”转义“\ ”
-
-if has('win32')
-... 
-elseif has('unix')
-... 
-elseif has('mac')
-... 
-endif

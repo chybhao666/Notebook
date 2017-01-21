@@ -43,13 +43,6 @@ type命令用来区分某个命令到底是由shell自带的，还是由shell外
 自带输入法无法用shift来切换中英文输入，无法设置shift为快捷键
 中文输入法中打开caps lock就是默认小写英文输入，要大写的话按着shift 键输入就行
 
-剪切 cmd+option+v
-
-显示隐藏文件方法
-一、打开Finder,使用 Command+F 组合键，打开Finder管理器的搜索功能，选择“其他”，找到——“文件是否可见”的选项（搜索“是否”）。
-二、显示：defaults write com.apple.finder AppleShowAllFiles -bool true
-　　隐藏：defaults write com.apple.finder AppleShowAllFiles -bool false
-
 设置环境变量:
 命令行 PATH="/Applications/CMake.app/Contents/bin":"$PATH"
 (一)全局设置
@@ -66,22 +59,47 @@ sudo vim /etc/paths.d/mysql
 (二)单个用户设置
 http://www.th7.cn/system/mac/201409/70274.shtml
 
+
+没有终端的快捷键，可以在spotlight里输入终端来快速开启终端
+
+按option时，菜单中的执行命令立即可执行，关机不需确认
+
+批量调整图片大小：多选图片打开，菜单栏－工具－调整大小
+
+快速预览（视频，音频，图片，文本，文件）：选中按空格或三指单击
+
+听写功能：fn键两次 或 编辑－开始听写
+
+桌面与屏幕保护程序中有个触发角功能，能够设置鼠标移到屏幕左上 左下 右上 右下时的功能
+
+全屏应用软件将出现在Mission Control中
+
+如果是“图标”的显示模式，则按住shift只能一个个的多选（类似win中的按住ctrl）
+如果是 其他例如“列表”的显示模式，则按住shift能够如win中首尾间的文件全选
+
+慢动作特效（装逼利器）：很多特效 按住 shift 键 在操作 就会有慢动作的特效 不信可以试试按住shift 然后在点击应用文件夹的快捷方式！
+
+
+#### 应用 ####
+删除Mac App Store安装的应用程序：按住图标至抖动，点击“X”。
+删除不是Mac App Store安装的应用程序：在“应用程序”文件夹中删除
+
+安装程序包：
+    dmg 删除时拖到废纸篓即可 (dmg是MAC上的压缩镜像文件，相当于在Windows上常见的iso文件。)
+    pkg 自带卸载程序 (pkg文件也就是安装包配置文件)
+
+Quick Time可用于录制音频／视频／屏幕录像
+
+重启Finder：鼠标单击窗口左上角的苹果标志-->强制退出-->Finder-->重新启动；
+
+#### 命令 ####
+终端中打开文件夹：open 路径
+
 查看命令的详细帮助：man 命令名
 运行脚本命令：sh 脚本文件名
 文本编辑：nano 文件名
 
-mac os x terminal清屏快捷键: cammand+k （clear其实没鸟用）
-linux系统清屏快捷键 : ctrl+l (reset)
-windows 命令行清屏命令: cls
-
-重启Finder：鼠标单击窗口左上角的苹果标志-->强制退出-->Finder-->重新启动；
-
-终端中打开文件夹：open 路径
-
-vi下退出insert模式可以用Ctrl＋C(先按cmd+esc,再按esc，也可以)
-
-没有终端的快捷键，可以在spotlight里输入终端来快速开启终端
-
+#### 快捷键 ####
 切换程序      command＋tab
 
 退出程序快捷键  command＋Q
@@ -116,28 +134,25 @@ ctrl+V	下移一个页面
 
 显示／隐藏Dock  option+command＋D
 
-删除Mac App Store安装的应用程序：按住图标至抖动，点击“X”。
-删除不是Mac App Store安装的应用程序：在“应用程序”文件夹中删除
+mac os x terminal清屏快捷键: cammand+k （clear其实没鸟用）
+linux系统清屏快捷键 : ctrl+l (reset)
+windows 命令行清屏命令: cls
 
-安装程序包：
-	dmg 删除时拖到废纸篓即可 (dmg是MAC上的压缩镜像文件，相当于在Windows上常见的iso文件。)
-	pkg 自带卸载程序 (pkg文件也就是安装包配置文件)
+对于文件，复制后，剪切 cmd+option+v
 
-按option时，菜单中的执行命令立即可执行，关机不需确认
+打开文件：点击后，Command + O打开文件
 
-批量调整图片大小：多选图片打开，菜单栏－工具－调整大小
+Finder
+Command+ ↑，返回上一层;
+Command+ ↓ ，回到下一层
 
-快速预览（视频，音频，图片，文本，文件）：选中按空格或三指单击
-
-听写功能：fn键两次 或 编辑－开始听写
-
-Quick Time可用于录制音频／视频／屏幕录像
-
-桌面与屏幕保护程序中有个触发角功能，能够设置鼠标移到屏幕左上 左下 右上 右下时的功能
-
-全屏应用软件将出现在Mission Control中
+锁屏：ctrl＋shift＋右上角的电源键，就是关闭屏幕啦，移动鼠标或者敲击任意键都可以再次打开屏幕。
 
 #### 系统设置 ####
 在当前文件夹打开terminal：System Preferences -> Keyboard -> Shortcuts -> Services -> New Terminal at Folders/New Terminal Tab at Folder 一个打开的是窗口，一个是标签
 
+显示隐藏文件方法
+一、打开Finder,使用 Command+F 组合键，打开Finder管理器的搜索功能，选择“其他”，找到——“文件是否可见”的选项（搜索“是否”）。
+二、显示：defaults write com.apple.finder AppleShowAllFiles -bool true
+　　隐藏：defaults write com.apple.finder AppleShowAllFiles -bool false
 
