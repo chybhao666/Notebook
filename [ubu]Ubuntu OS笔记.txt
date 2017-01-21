@@ -8,8 +8,6 @@ mac os: $say ok  (printf "\a" 声音超低)
 
 ldconfig命令的用途, 主要是在默认搜寻目录(/lib和/usr/lib)以及动态库配置文件/etc/ld.so.conf内所列的目录下, 搜索出可共享的动态链接库(格式如lib*.so*), 进而创建出动态装入程序(ld.so)所需的连接和缓存文件. 缓存文件默认为/etc/ld.so.cache, 此文件保存已排好序的动态链接库名字列表. 
 
-进入目录，按ctrl+h.就能看见以点号开头的隐藏文件
-
 查看DNS：
 1)网络管理器 nm-tool
 2)less /etc/resolv.conf
@@ -30,11 +28,44 @@ export PATH=/home/yan/share/usr/local/arm/3.4.1/bin:$PATH
 2)$HOME/.bash_profile-------->$HOME/.bashrc---------->/etc/bashrc
 
 #﻿# 快捷键 #########################################################
+长按super，显示快捷键；或是看All Setting->Keyboard
+
+Alt + Tab，显示程序切换条
+显示程序切换条后，按住 Alt ，       然后按 Tab，切换从左到右的顺序
+显示程序切换条后，按住 Alt 和 Shift，然后按 Tab，切换从右到左的顺序
+不按住 Alt 键，而是快速地短按Alt + Tab，会在最近打开的两个不同的程序窗口间切换，而不会切换到第三个程序
+
+Alt + ` 在当前程序的不同窗口间切换，再按 Tab ，即可转换到不同程序间切换的模式
+
+Super + w 启动“展览”切换模式
+
+Nautilus/gedit：
+CTRL + Q  关闭程序当前窗口
+CTRL + W  关闭Tab
+
+Nautilus/终端/Chrome:
+Ctrl+Page Up   上一个标签
+Ctrl+Page Down 下一个标签
+Alt+N          切换到第N个标签（N为数字）
+
 在终端下：
 复制命令：Ctrl + Shift + C
 粘贴命令：Ctrl + Shift + V
 剪切光标前内容：Ctrl + U
 剪切光标后内容：Ctrl + K
+光标移动到开头：Ctrl + A
+光标移动到末尾：Ctrl + E
+查找历史命令：Ctrl + R
+光标移动到上一个单词的词首：Ctrl+Left
+光标移动到下一个单词的词尾：Ctrl+Right
+关闭Tab：Ctrl + D
+翻页/头部/末尾：Shift + PgUp/PgDn/Home/End
+
+Nautilus：
+CTRL + D  收藏到书签
+F9        开关显示Nautilus侧边栏
+Ctrl + H  开关显示隐藏文件夹
+Shift+Ctrl+N  新建文件夹
 
 使用多标签式窗口：
 终端下 Ctrl+Shift+t
@@ -50,6 +81,15 @@ Screenshots of an area:  Shift+Print
 截图应用：screenshot
 
 #﻿# 命令 #########################################################
+系统：
+# uname -a # 查看内核/操作系统/CPU信息 
+# cat /proc/cpuinfo # 查看CPU信息 
+# hostname # 查看计算机名 
+# lspci -tv # 列出所有PCI设备
+# env # 查看环境变量 
+# w # 查看活动用户
+# last # 查看用户登录日志 
+
 rm:
   -v, --verbose         explain what is being done
   -i                    prompt before every removal
@@ -61,6 +101,8 @@ whereis:用于程序所在位置的搜索
 查看文本：
 nano
 cat
+
+显示磁盘使用：df -h
 
 在终端中用命令打开文件夹：nautilus
 
@@ -143,8 +185,8 @@ chrome: 1)拷贝 libflashplayer.so，尝试失败
 
 搜狗输入法安装：
 官网下载，ubuntu14.04直接双击安装即可
-发现ctrl+空格的快捷键切换输入法无效，是因为ibus和fcitx快捷键冲突。
-在dash面板找到 “系统设置”，进入”文本输入”，修改 “切换到下一个源的快捷方式”，不要设置成ctrl+空格或ctrl+shift，再次点击ctrl+space就可以切换搜狗输入法了。
+发现ctrl+空格的快捷键切换输入法无效，是因为ibus和fcitx快捷键冲突。在dash面板找到 “系统设置”，进入”文本输入”，修改 “切换到下一个源的快捷方式”，不要设置成ctrl+空格或ctrl+shift，再次点击ctrl+space就可以切换搜狗输入法了。
+ctrl+alt+b快捷键是调出虚拟键盘的，与CLion冲突导致CLion中这个快捷键无法使用，取消这个快捷键：输入法设置->高级->fcitx设置->Addon选项卡->取消Virtual key Board，注销或重启电脑
 
 chrome：
 Software Center可以直接安装Chromium，但这个版本的Chromium无法登录google账户进行同步，所以建议下载最新版chrome：

@@ -148,7 +148,7 @@ Cannot use GPU in CPU-only Caffe: check mode.
 尝试解决方法 https://www.zhihu.com/question/41493725/answer/91819847，没法解决这个问题
 
 放弃～～～
-替换 include/caffe/util/cudnn.hpp
+替换 include/caffe/util/cudnn.hpp 导致更多错误
 
 /************************** faster-rcnn(python) *******************************/
 https://github.com/rbgirshick/py-faster-rcnn
@@ -158,7 +158,7 @@ Shaoqing Ren and Kaiming He and Ross Girshick and Jian Sun
 
 和fast-rcnn使用的caffe属于不同分支
 
-我自己已经Download pre-computed Faster R-CNN detectors
+Download pre-computed Faster R-CNN detectors
 
 根据github上推荐的Makefile.config来修改配置
 
@@ -179,28 +179,60 @@ opencv的问题，取消Makefile.config中USE_PKG_CONFIG := 1注释
 
 /************************** yolo *******************************/
 http://pjreddie.com/darknet/yolo/
+You Only Look Once: Unified, Real-Time Object Detection
+Joseph Redmon(华盛顿大学), Santosh Divvala, Ross Girshick, Ali Farhadi
 
 下载darknet，修改Makefile：GPU=1， OPENCV=1
 make -j4
 下载pre-trained weight，放在darknet目录下
 测试 ./darknet detect cfg/yolo.cfg yolo.weights data/dog.jpg
 
+GPU=1
+CUDNN=0
+OPENCV=1
+DEBUG=0
 # Training YOLO on VOC
 下载数据，挺快的。
 根据官方教程来就行。
-13:21开始训练，
-14:05得到yolo-voc_100.weights，
-14:50得到yolo-voc_200.weights，
-17:14得到yolo-voc_500.weights
-21:06得到yolo-voc_1000.weights
+1.11 13:21开始训练，
+1.11 14:05得到yolo-voc_100.weights
+1.11 14:50得到yolo-voc_200.weights
+...
+1.11 21:06得到yolo-voc_1000.weights
+1.12 04:32得到yolo-voc_2000.weights
+1.12 11:57得到yolo-voc_3000.weights
+1.12 19:29得到yolo-voc_4000.weights
+1.13 02:57得到yolo-voc_5000.weights
+1.13 10:26得到yolo-voc_6000.weights
+1.13 17:53得到yolo-voc_7000.weights
+1.14 01:21得到yolo-voc_8000.weights
+1.14 08:45得到yolo-voc_9000.weights
+1.14 16:23得到yolo-voc_10000.weights
+...
+自己停掉训练程序了
 GPU使用（含系统使用）一直在3.3G
+
+max_batches 见cfg/*.cfg
+
+youtube - watch later
 
 /************************** ssd *******************************/
 https://github.com/weiliu89/caffe/tree/ssd
+SSD: Single Shot MultiBox Detector
+Wei Liu(北卡罗来纳大学教堂山分校), Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu, Alexander C. Berg
 
-按官方教程编译
+千万别取消注释 # USE_OPENCV := 0，否则跑demo会遇到vedio的错误
+按官方教程编译，其中make runtest -j4需要8小时
 直接用提供的模型，下载models_VGGNet_VOC0712_SSD_300x300.tar.gz
-尝试到 make test
+
+尝试python examples/ssd/ssd_pascal_webcam.py，
+出现错误：ImportError: No module named caffe
+添加相应的caffe Python路径：export PYTHONPATH=.../caffe-ssd/python:$PYTHONPATH  (这点在caffe官方教程中提过，我把export写在了/etc/profile)
+出现错误：Aborted at 1484534223 (unix time) try "date -d @1484534223" if you are using GNU date
+尝试重新编译解决，依然是同样的错误
+
+别人的错误总结：http://blog.csdn.net/u013832707/article/details/53426923d
+
 
 /************************** begin *******************************/
 https://www.zhihu.com/question/35887527  如何评价rcnn、fast-rcnn和faster-rcnn这一系列方法？
@@ -221,10 +253,6 @@ Alex提出的alexnet网络结构模型赢得了2012届的冠军
 
 去看DPM
 
-ImageNet Large Scale Visual Recognition Competition (ILSVRC)
-The PASCAL Visual Object Classes Challenge 2007 (VOC2007)
-
-Cifar-10由60000张32*32的RGB彩色图片构成，共10个分类。50000张训练，10000张测试（交叉验证）。这个数据集最大的特点在于将识别迁移到了普适物体，而且应用于多分类（姊妹数据集Cifar-100达到100类，ILSVRC比赛则是1000类）。
 
 
 

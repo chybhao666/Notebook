@@ -1,9 +1,40 @@
+帮助文档：菜单栏->help
+列出快捷键：菜单栏->Keymap Reference
+视频介绍：菜单栏->Demos
+
+CLion读法 c-lion
+
 删除项目：
 Project窗口是无法删除项目的，要菜单栏File - Close(或Open) Project，退到welcome页面才行。
 
 当前文件搜索：ctrl+f
 当前项目搜索：ctrl+shift+f
+功能搜索：ctrl+shift+a
+声明和定义间跳转：ctrl+b
+全局搜索：连按两下Shift
+查找符号在哪被使用： Alt+F7，快捷键和系统的快捷键冲突，改用鼠标右击->Find Usages
 
+使用git功能，查看文件修改了哪里：右击->Git
 
+折叠：右击->Folding-> 全部折叠/展开
 
+书签开关：ctrl+shift+num， ctrl+F11
+跳转到书签：ctrl+num
 
+自动生成：
+添加类，项目右击->new->C++ class，会添加.h和.cpp文件
+alt+Insert，可以选择插入构造函数，析构函数等
+alt+Return，在函数声明后，可以选择生成函数定义
+            switch时自动生成case
+            错误修正
+
+自动补全：basic ctrl+space，smart ctrl+shift+space
+
+导航后退：鼠标侧键左键
+导航前进：鼠标侧键右键
+
+Alt + Right/Left: 前往上/下tab
+
+Ctrl + Alt + Shift +T: 重构，rename很有用
+
+点击左下角图标，出现cmake tool，terminal等选项

@@ -40,3 +40,19 @@ sudo service xrdp restart
 这个相当于在当前用户的home目录下新建一个名为.xsession的隐藏文件，并向文件中写入一行xfce4-session。
 ·至此安装和配置工作完成，即可在Windows中使用“远程桌面连接”程序连接Ubuntu主机。也可以通过任何其它支持RDP协议的终端连接，比如iOS平台上微软官方的远程桌面客户端RD Client。
 
+# ubuntu使用vncviewer远程其他服务器
+方法一：
+安装VNC客户程序：  $ sudo apt-get install xvnc4viewer
+命令行启动远程登录：$ vncviewer 10.102.8.161:1 
+方法二：
+software center下载SSL/SSH VNC Viewer
+比方法一好在任务栏有个快捷方式，输用户信息是界面形式的，可以记住ip
+
+linux间传输文件
+复制文件：
+scp local_file remote_username@remote_ip:remote_folder
+或者
+scp local_file remote_username@remote_ip:remote_file
+复制目录：
+scp -r local_folder remote_username@remote_ip:remote_folder
+

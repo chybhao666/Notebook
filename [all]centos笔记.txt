@@ -1,0 +1,4 @@
+显示隐藏文件：
+菜单栏 -> control -> show hidden files
+
+

@@ -68,7 +68,7 @@ $git ls-files
 The current branch master has no upstream branch解决方法：
 $git push -u origin master
 
-下载项目中某个文件，类似下面这样：
+下载gtihub项目中某个文件，类似下面这样：
 wget https://raw.githubusercontent.com/hritt/vim-config/master/vimrc
 
 ## ignore

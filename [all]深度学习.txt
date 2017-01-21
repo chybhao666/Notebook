@@ -1,0 +1,99 @@
+【1】 【Valse首发】CNN的近期进展与实用技巧（上） http://mp.weixin.qq.com/s?__biz=MzI1NTE4NTUwOQ==&mid=2650324619&idx=1&sn=ca1aed9e42d8f020d0971e62148e13be&scene=0#rd
+【2】 对CNN中pooling的理解 http://blog.csdn.net/jiejinquanil/article/details/50042791
+【3】 CNN网络的pooling层有什么用？ https://www.zhihu.com/question/36686900
+【4】 零基础入门深度学习(4) - 卷积神经网络 https://www.zybuluo.com/hanbingtao/note/485480
+【5】 基于深度学习的目标检测研究进展 http://mp.weixin.qq.com/s?__biz=MzI1NTE4NTUwOQ==&mid=2650324780&idx=1&sn=1579155aacc83e991a9a39b142a7a0b8&scene=4#wechat_redirect
+
+pooling
+作用：【2】
+1）特征的不变性，更关注是否存在某些特征而不是特征具体的位置。？ 位移不变性
+2）减小下一层输入大小，减小计算量和参数个数，防止过拟合
+3）获得定长输出。（文本分类的时候输入是不定长的，可以通过池化获得定长输出）
+常用的有：【1】【2】
+1）mean-pooling，即对邻域内特征点只求平均：假设pooling的窗大小是2x2, 在forward的时候，就是在前面卷积完的输出上依次不重合的取2x2的窗平均，得到一个值就是当前mean pooling之后的值。
+2）max-pooling，即对邻域内特征点取最大。
+3)Stochastic-pooling则介于两者之间，通过对像素点按照数值大小赋予概率，再按照概率进行亚采样，在平均意义上，与mean-pooling近似，在局部意义上，则服从max-pooling的准则。
+
+卷积
+作用：特征提取
+
+全连接
+下一层的输出与上一层所有输入都有关，但是这样很容易导致overfitting。
+
+激活函数
+常见的：【1】
+Sigmoid, 双曲正切，ReLU（生物启发，克服了梯度消失问题）, PReLU（alpha可学习）, ELU和maxout。
+ReLU - max(0,x)
+
+Dropout：【1】
+由Hinton组提出于2012年，Dropout随机将比例为p的神经元输出设置为0，是一种避免深度网络过拟合的随机正则化策略，同时Dropout也可以看作是一种隐式的模型集成。
+
+
+proto网络结构可视化：
+http://ethereon.github.io/netscope/#/editor
+
+
+## 检测 ##
+一、传统目标检测方法
+  (1) 区域选择
+  (2) 特征提取
+  (3) 分类器，主要有SVM, Adaboost等
+二、基于Region Proposal的深度学习目标检测算法
+R-CNN -> Fast R-CNN ->   Faster R-CNN 【1】【5】
+R-CNN的目标检测流程：
+  (1) 输入测试图像
+  (2) 利用selective search算法在图像中提取2000个左右的region proposal。
+  (3) 将每个region proposal缩放（warp）成227x227的大小并输入到CNN，将CNN的fc7层的输出作为特征。
+  (4) 将每个region proposal提取到的CNN特征输入到SVM进行分类。（liblinear）
+Fast R-CNN：
+  (1) ROI pooling layer  ？
+  (2) 直接使用softmax替代SVM分类，同时利用多任务损失函数边框回归也加入到了网络中，这样整个的训练过程是端到端的(除去region proposal提取阶段)。
+  (3) Fast R-CNN在网络微调的过程中，将部分卷积层也进行了微调，取得了更好的检测效果。
+  缺点：region proposal的提取使用selective search，目标检测时间大多消耗在这上面
+Faster R-CNN：
+  RPN(Region Proposal Networks)网络应运而生。RPN的核心思想是使用卷积神经网络直接产生region proposal，使用的方法本质上就是滑动窗口。RPN的设计比较巧妙，RPN只需在最后的卷积层上滑动一遍。
+三、基于回归方法的深度学习目标检测算法
+YOLO：
+  (1) 首先将图像划分成7*7的网格
+  (2) 每个网格预测两个目标，每个目标的信息有4维坐标信息(中心点坐标+长宽)，1个是目标的置信度，还有类别数20(VOC上20个类别)，总共就是(4+1)*2+20 = 30维的向量
+  (3) 根据阈值去除可能性比较低的目标窗口，最后NMS去除冗余窗口即可
+  存在问题：没有了region proposal机制，只使用7*7的网格回归会使得目标不能非常精准的定位，这也导致了YOLO的检测精度并不是很高。
+SSD：
+  YOLO预测某个位置使用的是全图的特征，SSD预测某个位置使用的是这个位置周围的特征
+
+数据集
+1. ImageNet Large Scale Visual Recognition Competition (ILSVRC)
+2. The PASCAL Visual Object Classes Challenge 2007 (VOC2007)
+3. Cifar-10由60000张32*32的RGB彩色图片构成，共10个分类。50000张训练，10000张测试（交叉验证）。这个数据集最大的特点在于将识别迁移到了普适物体，而且应用于多分类（姊妹数据集Cifar-100达到100类，ILSVRC比赛则是1000类）。
+4. COCO微软图像识别大赛
+
+
+AlexNet 是一种典型的 convolutional neural network，它由5层 convolutional layer，2层 fully connected layer，和最后一层 label layer (1000个node, 每个node代表ImageNet中的一个类别) 组成。由Geoffrey Hinton (University of Toronto, Google) 的学生Alex Krizhevsky 设计。
+VGG-Net同样也是一种CNN，它来自 Andrew Zisserman 教授的组 (Oxford)，VGG-Net 在2014年的 ILSVRC localization and classification 两个问题上分别取得了第一名和第二名，VGG-Net不同于AlexNet的地方是：VGG-Net使用更多的层，通常有16－19层，而AlexNet只有8层。另外一个不同的地方是：VGG-Net的所有 convolutional layer 使用同样大小的 convolutional filter，大小为 3 x 3。
+
+LeNet5: http://blog.csdn.net/qiaofangjie/article/details/16826849
+Alex，DeepID网络结构  http://blog.csdn.net/stdcoutzyx/article/details/41596663
+
+全连接网络 VS 卷积网络 【4】
+全连接神经网络的问题：
+1）参数数量太多。
+2）没有利用像素之间的位置信息。 如果一个神经元和上一层所有神经元相连，那么就相当于对于一个像素来说，把图像的所有像素都等同看待，这不符合前面的假设。
+3）网络层数限制。 我们知道网络层数越多其表达能力越强，但是通过梯度下降方法训练深度全连接神经网络很困难，因为全连接神经网络的梯度很难传递超过3层。
+卷积神经网络怎样解决问题：
+1）局部连接。 这个是最容易想到的，每个神经元不再和上一层的所有神经元相连，而只和一小部分神经元相连。这样就减少了很多参数。
+2）权值共享。 一组连接可以共享同一个权重，而不是每个连接有一个不同的权重，这样又减少了很多参数。
+3）下采样。 可以使用Pooling来减少每层的样本数，进一步减少参数数量，同时还可以提升模型的鲁棒性。
+对于图像识别任务来说，卷积神经网络通过尽可能保留重要的参数，去掉大量不重要的参数，来达到更好的学习效果。
+
+FCN：Fully Convolutional Networks 全卷积网络
+
+长短时记忆网络(Long Short Term Memory Network, LSTM)
+
+图像旋转不变性：举个简单的例子，比如你用一种方法对一个轮廓进行了编码，假设编码为0-1-2-3-4-5-6，然后将该轮廓旋转后在用这种方法编码不变。比如静态手势识别，你的手正对摄像头可以识别出来，如果用同一个模板，你的手（同一个手势）旋转了90度还可以识别出了。这样就可以大大减少模板数目。
+
+标准梯度下降和随机梯度下降之间的关键区别:
+1）标准梯度下降是在权值更新前对所有样例汇总误差，而随机梯度下降的权值是通过考查某个训练样例来更新的
+2）标准梯度下降，由于使用真正的梯度，标准梯度下降对于每一次权值更新经常使用比随机梯度下降大的步长
+3）如果标准误差曲面有多个局部极小值，随机梯度下降有时可能避免陷入这些局部极小值中
+
+
