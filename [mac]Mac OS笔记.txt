@@ -131,6 +131,7 @@ ctrl+P	上移一行
 ctrl+D	删除光标前的字符
 ctrl+H	删除光标后的字符（fn＋delete）
 ctrl+V	下移一个页面
+光标移动一个单词 option＋→/←
 
 显示／隐藏Dock  option+command＋D
 
@@ -147,6 +148,10 @@ Command+ ↑，返回上一层;
 Command+ ↓ ，回到下一层
 
 锁屏：ctrl＋shift＋右上角的电源键，就是关闭屏幕啦，移动鼠标或者敲击任意键都可以再次打开屏幕。
+
+ctrl+ →/←， 相当于四指向左右，桌面间切换，见设置－键盘快捷键－Mission Control
+ctrl+下箭头，相当于四指向下，显示当前程序的打开列表/历史
+ctrl+上箭头，相当于四指向上
 
 #### 系统设置 ####
 在当前文件夹打开terminal：System Preferences -> Keyboard -> Shortcuts -> Services -> New Terminal at Folders/New Terminal Tab at Folder 一个打开的是窗口，一个是标签

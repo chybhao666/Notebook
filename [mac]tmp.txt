@@ -6,3 +6,51 @@ alias[别名]=[指令名称]
 /etc/bashrc和~/.bashrc 区别就在于一个是设置给全系统一个是设置给单用户使用.
 
 “ ”转义“\ ”
+
+
+Shadowsocks for OSX
+看帮助：
+如果你使用了 Chrome 扩展程序 SwitchySharp，请把它的模式设置为「使用系统代理设置」
+
+
+### mac－latex ###
+vim+latex:
+http://bbs.pinggu.org/thread-4657765-1-1.html
+安装evince(16M,但是依赖文件很多)
+    遇到问题：I/O error : Operation not permitted…try rerunning as root
+    对brew使用sudo，但提示：
+        Running Homebrew as root is extremely dangerous and no longer supported.
+        As Homebrew does not drop privileges on installation you would be giving all
+    build scripts full access to your system.
+    关于这个问题，见https://github.com/Homebrew/legacy-homebrew/issues/9953
+    采用：don't use sudo; adjust the permissions on directories in /usr/local accordingly. This is the recommended way to use Homebrew.
+    先不管这个问题，看能不能用。。。。能用
+安装插件vim-latex-live-preview，但是在mac下不自动刷新，需要在evince中手动刷新。
+所以还是不用evince了，就用skim/preview/texshop显示pdf。(http://blog.csdn.net/zhangsming/article/details/43341565)
+skim不会自动更新
+preview的问题是，如果失去了焦点就不会更新
+texshop不会自动更新
+
+Sublime text 3（2G） + MacTex + Skim（4M，比adobe reader强多了）
+(https://www.zhihu.com/question/20928639
+ https://www.zhihu.com/question/23918126/answer/29977055)
+1.安装这三个程序，MacTeX 是实际的 TeX 发行版，Skim 是要用到的 PDF 阅读器
+2.skim－选项－同步－选择sublime，命令行添加subl软链接
+3.安装sublime插件LaTeXTools
+3.编辑tex文件，Command+B 编译后，就会在所在目录生成一个pdf文件并在Skim显示
+4.在 Skim 窗口中，按下 Cammand + Shift，在需要的位置按下触摸板，即可跳转回 Sublime Text 到对应的代码位置。
+
+解决中文显示问题：
+方法一：（https://www.zhihu.com/question/22906637）
+\documentclass[UTF8]{ctexart}
+xeCJK 之解决了中文支持问题，以及一些关于标点的处理，并没有提供和中文版式相关的解决方案。ctex 宏包和文档类封装了 xeCJK，同时提供了中文版式的相关支持。
+方法二：（https://www.zhihu.com/question/20928639）
+%!TEX program = xelatex
+\documentclass[a4paper,10pt]{article}
+\usepackage{fontspec, xunicode, xltxtra}  
+\setmainfont{Hiragino Sans GB}  
+但是有warnning，连接中有解决方案
+
+
+photoshop
+ps矩形选框工具如何让它在选取时右上角显示的是像素而不是厘米：首选项（command＋k）－单位与标尺

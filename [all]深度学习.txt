@@ -34,7 +34,7 @@ http://ethereon.github.io/netscope/#/editor
 
 
 ## 检测 ##
-一、传统目标检测方法
+一、传统目标检测方法 流程：
   (1) 区域选择
   (2) 特征提取
   (3) 分类器，主要有SVM, Adaboost等
