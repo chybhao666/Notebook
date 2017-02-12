@@ -61,3 +61,7 @@ scp local_file remote_username@remote_ip:remote_file
 复制目录：
 scp -r local_folder remote_username@remote_ip:remote_folder
 
+命令行连接，software center下载putty
+开启vnc：$sudo systemctl start vncserver@9.service
+然而需要管理员权限。。。
+
