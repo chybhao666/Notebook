@@ -182,18 +182,28 @@ http://pjreddie.com/darknet/yolo/
 You Only Look Once: Unified, Real-Time Object Detection
 Joseph Redmon(华盛顿大学), Santosh Divvala, Ross Girshick, Ali Farhadi
 
+使用的版本是v2，不是v1
+
 下载darknet，修改Makefile：GPU=1， OPENCV=1
 make -j4
-下载pre-trained weight，放在darknet目录下
-测试 ./darknet detect cfg/yolo.cfg yolo.weights data/dog.jpg
+可下载pre-trained weight，放在darknet目录下，yolo.weights（269.9MB）
+或下载tiny-yolo-voc.weights（63.5MB）
+测试 ：
+./darknet detect cfg/yolo.cfg yolo.weights data/dog.jpg
+The detect command is shorthand for a more general version of the command. It is equivalent to the command:
+./darknet detector test cfg/coco.data cfg/yolo.cfg yolo.weights data/dog.jpg  //图片
+./darknet detector demo cfg/coco.data cfg/yolo.cfg yolo.weights               //摄像头
+./darknet detector demo cfg/coco.data cfg/yolo.cfg yolo.weights <video file>  //视频
 
 GPU=1
 CUDNN=0
 OPENCV=1
 DEBUG=0
-# Training YOLO on VOC
+
+# Training YOLO on VOC #
 下载数据，挺快的。
 根据官方教程来就行。
+./darknet detector train cfg/voc.data cfg/yolo-voc.cfg darknet19_448.conv.23
 1.11 13:21开始训练，
 1.11 14:05得到yolo-voc_100.weights
 1.11 14:50得到yolo-voc_200.weights
@@ -211,10 +221,97 @@ DEBUG=0
 ...
 自己停掉训练程序了
 GPU使用（含系统使用）一直在3.3G
+After 40,000 iterations (batches) Darknet will save the final model weights as yolo_final.weights. 
+
+测试：
+	./darknet detector test cfg/voc.data cfg/yolo-voc.cfg backup/yolo-voc_1000.weights data/dog.jpg
+
+计算recall：   （http://blog.csdn.net/hysteric314/article/details/54097845）
+	修改src/detector.c 第373行：list *plist = get_paths(...)
+	或是添加data/voc.2007.test，即将VOCDataset/2007_test.txt复制过来
+	可以修改代码添加precision值
+	./darknet detector recall cfg/voc.data cfg/yolo-voc.cfg backup/yolo-voc_1000.weights
+
+计算mAP：   （http://blog.csdn.net/northeastsqure/article/details/54848665）
+	1.生成检测结果文件
+	./darknet detector valid  cfg/voc.data cfg/yolo-voc.cfg backup/yolo-voc_1000.weights
+	用时11min。
+	2.用faster rcnn 中voc_eval计算mAP
+	编写compute_mAP.py：
+		from voc_eval import voc_eval
+		print voc_eval('/home/jy/darknet2/results/comp4_det_test_{}.txt', '/home/jy/VOCDataset/VOCdevkit/VOC2007/Annotations/{}.xml', '/home/jy/VOCDataset/VOCdevkit/VOC2007/ImageSets/Main/test.txt', 'aeroplane', '.')
+	第三个结果就是.
+	3.如果只想计算大于0.3的输出结果的mAP,把 voc_eval.py文件中如下代码更改：
+		sorted_ind = np.argsort(-confidence)
+		sorted_ind1 = np.where(confidence[sorted_ind] >= .3)[0]#np.argsort(-confidence<=-.3)
+		sorted_ind = sorted_ind[sorted_ind1]
+aeroplane，原始
+(array([ 0.00350877,  0.00701754,  0.01052632, ...,  0.71929825,
+        0.71929825,  0.71929825]), array([ 1.        ,  1.        ,  1.        , ...,  0.02836193,
+        0.028358  ,  0.02835408]), 0.42133578037452879)
+aeroplane，修改
+(array([ 0.00350877,  0.00701754,  0.01052632, ...,  0.72280702,
+        0.72280702,  0.72280702]), array([ 1.        ,  1.        ,  1.        , ...,  0.02551084,
+        0.02550768,  0.02550452]), 0.42779980240164417)
+
+
+对于data/dog.jpg，
+voc_300可以检测到dog；
+voc_400可以检测到dog，bicycle；
+voc_900可以检测到dog，car；（检测不到bicycle了）
+voc_1000可以检测到dog，bicycle，car。
 
 max_batches 见cfg/*.cfg
 
-youtube - watch later
+YOLO only displays objects detected with a confidence of .25 or higher（代码中为.24）. You can change this by passing the -thresh <val> flag to the yolo command. For example, to display all detection you can set the threshold to 0.
+示例：-thresh .10
+
+
+VOC：
+└── VOCdevkit
+    ├── VOC2007
+    │   ├── Annotations    000001.xml，…… 给出每张图片包含的object和窗口坐标，9963 items
+    │   ├── ImageSets
+    │   │   ├── Layout     test.txt，train.txt，trainval.txt，val.txt
+    │   │   ├── Main       aeroplane_test.txt，…… 根据分类划分
+    │   │   └── Segmentation    test.txt，train.txt，trainval.txt，val.txt 只使用部分图片
+    │   ├── JPEGImages     所有图片
+    │   ├── labels         000001.txt，…… voc_label.py程序生成，根据000001.xml得到。 分类为0~19！
+    │   ├── SegmentationClass   对部分图片在图片上标注出object，632 items
+    │   └── SegmentationObject  SegmentationClass中没个class同一颜色，SegmentationObject中每个object单独一个颜色
+    └── VOC2012    同VOC2007
+        
+
+5.5 16:27 开始训练
+5.5 17:11 100
+5.5 17:55 200
+
+CUDNN=1 （并没有什么用）
+20:40 开始训练
+21:24 100
+22:09 200
+04:04 1000
+
+# 用Clion调试，直接对可执行文件进行debug调试 # (或者直接用GDB调试)
+修改makefile中DEBUG=1，make生成darknet
+写个CMakeLists.txt:
+	cmake_minimum_required(VERSION 2.8.4)
+	project(darknet)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+	add_custom_target(darknet COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+CLion中Edit Configurations，Executable选择darknet
+下次修改代码后，可以直接在clion中生成可执行文件，不需要自己在命令行中make！
+
+
+
+data/dog.jpg: Predicted in 0.138807 seconds.
+car: 49%
+bicycle: 29%
+dog: 54%
+
+对于000129.jpg，voc_1000.weights
+原始darknet，不如修改后的（ float s=1.0; pow(relevance[i][j],1/3.0)）？还是只是该降低阈值？
+
 
 /************************** ssd *******************************/
 https://github.com/weiliu89/caffe/tree/ssd

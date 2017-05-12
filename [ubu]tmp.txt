@@ -8,3 +8,16 @@ format无效：
 要把代码修改正确后才能有效
 
 
+# 常用C++函数模板 #
+文件打开失败后的处理：
+void file_error(char *s)
+{
+    fprintf(stderr, "Couldn't open file: %s\n", s);
+    exit(0);
+}
+
+
+# python #
+错误：python Non-ASCII character '\xe6'
+在文件开头（就算开头是注释，也要加在注释之前）加入：# -*- coding: UTF-8 -*-    或者  #coding=utf-8
+

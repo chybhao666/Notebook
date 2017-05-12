@@ -38,3 +38,7 @@ Alt + Right/Left: 前往上/下tab
 Ctrl + Alt + Shift +T: 重构，rename很有用
 
 点击左下角图标，出现cmake tool，terminal等选项
+
+对于char数组，调试时只显示前50个字符！！！
+
+
