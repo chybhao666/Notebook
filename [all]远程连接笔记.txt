@@ -6,6 +6,10 @@
 注意：ubuntu下没能安装teamviewer成功，但可以使用teamviewer QuickSupport被连接
      ubuntu下安装teamviewer导致系统的软件包管理出现错误，根据提示解决问题后安装成功
 
+注册账户，使用账户密码登录，这样不用每次变密码：
+对于windows：菜单栏 - 其他 -选项 -安全性 - 授权轻松访问
+对于mac：菜单栏 - 连接 -设置无人值守访问
+
 ＃ Mac连接windows ＃
 使用微软提供的RDC，下载 https://www.microsoft.com/zh-cn/download/details.aspx?id=18140
 远程桌面大小建议选全屏，此时眼睛看的舒服
