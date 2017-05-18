@@ -24,7 +24,7 @@ using namespace std;
 #define EACH(it,a) for(auto it=begin(a);it!=end(a);it++)
 #define ALL(a) a.begin(),a.end()
 #define MEMA0(a) memset(a,0,sizeof(a))
-#define SZ(x) ((int)(x).size())
+#define SI(x) ((int)(x).size())
 template<typename T>T GCD(T a,T b){ return b?GCD(b,a%b):a; }
 #define LL long long
 typedef double DB;
@@ -156,7 +156,8 @@ LIS优化：简单的做法时间复杂度为n^2。保留满足dp[t] = k的所�
 上面两个问题的时间复杂度其实一样。
 在《王道》中，完全背包问题可以转为0-1背包问题，也就是让每件物品的数量为V/w_i，但当w_i较小时，时间复杂度太大。
 (多重背包)     解决方法是转为0-1背包问题，但有个技巧，将某物品按数量：1,2,4，...，k-2^c+1 来分。
-在空间上，背包问题需要一个二维数组存储。由于当前行数据只与上一行有关，所以可以优化为只使用两个一维数组。（比赛时没必要浪费时间去做这样的优化）
+在空间上，背包问题需要一个二维数组存储。由于当前行数据只与上一行有关，所以可以优化为只使用两个一维数组。（比赛时没必要浪费时间去做这样的优化）代码这样写：
+	dp[2][W]; now = 0, nxt = 1; ... swap(now, nxt);
 
 1. 以上背包问题都是单个背包，不适用于多个背包问题。
 2. 一些物品，不考虑重量，追求价值最接近某个值可用背包。 bool dp[price];

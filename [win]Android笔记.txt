@@ -1,10 +1,6 @@
-#模拟器中安装apk
-adb install D:\ucweb-7.2.2.54-999-139-10070817.apk
+模拟器中安装apk：adb install D:\ucweb-7.2.2.54-999-139-10070817.apk
 
-#想使用手机调试程序，查看手机是否可用(查看可用设备)
-adb devices
-
-Ctrl+F12 模拟器切换到横屏
+想使用手机调试程序，查看手机是否可用(查看可用设备)：adb devices
 
 文件目录
     src
@@ -16,12 +12,10 @@ Ctrl+F12 模拟器切换到横屏
     doc
       项目相关文档
     res
-      drawable
-        图像资源文件
-      layout
-        XML布局文件
-      values
-        常量和字符串等资源（方便快速配置程序状态，方便加入多语言支持）
+      drawable 图像资源文件
+      layout   XML布局文件
+      values   常量和字符串等资源（方便快速配置程序状态，方便加入多语言支持）
+			strings.xml 可以设置全局的键值对（key-value）
     AndroidManifest.xml
       设定了构建和安装该应用程序所需要满足的一些条件
     .classpath
@@ -39,6 +33,7 @@ AndroidManifest.xml文件
   声明需要用到的一些系统权限（可在开发文档中找到）
   3.<activity android:name=".MicroJobs" android:label="@string/app_name">
   name指定活动名称，但所有模块都在同一个包中，所以没必要列出包名，而用“.XXX”作为活动名称，名称中“.”也可以省略
+  name即activity java文件路径，name上右键->Goto->declaration可以跳转到文件。（android studio）
   label会出现在屏幕顶端的标题栏里
   4.意图过滤器<intent-filter>
   <action android:name="android.intent.action.MAIN" />
@@ -46,6 +41,15 @@ AndroidManifest.xml文件
   <category android:name="android.intent.category.LAUNCHER" />
   在系统应用程序菜单中显示
 
+Android开发入门经典实例：https://www.tianmaying.com/tutorial/a-simple-sample-for-android-development
+
+activity java文件：
+Acitivity的运行状况分为：onCreate对应onDestroy，onStart对应onStop，onResume对应onPause
+onCreate()函数
+	setContentView(R.layout.XXX) 完成Acitvity和layout的关联
+Intent() 页面跳转
+
+	
 尺寸
 1.px：（pixels）像素
 2.dip或dp：（Device-independent Pixels）设备无关像素
@@ -55,12 +59,9 @@ AndroidManifest.xml文件
 色彩
 以#开始的八位十六进制数字，Alpha值确定透明度（FF为完全不透明）
 
-import缺少的包
-Ctrl+Shift+O
 
 获取开发数字证书的认证指纹（MD5,SHA1）
-C:\Users\Naivete\.android>keytool -list -v -keystore "C:\Users\Naivete\.android\
-debug.keystore" -alias androiddebugkey -storepass android -keypass android
+C:\Users\Naivete\.android>keytool -list -v -keystore "C:\Users\Naivete\.android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
 
 Eclipse调试
 1.Display
@@ -73,6 +74,8 @@ Heap视图用于显示Dalvik虚拟机中堆内存的使用情况
 模拟电话功能和定位功能
 屏幕截图
 
+Ctrl+F12 模拟器切换到横屏
+
 性能测试工具--Traceview
 
 Android SDK Manager 下载缓慢解决办法
@@ -83,3 +86,111 @@ Android SDK Manager 下载缓慢解决办法
 samples的使用方法
 打开samples文件夹没有像早期那样看到一个个android程序代码
 需要创建Android Sample Project,选择具体项目
+
+------------------------------- android studio ---------------------------------
+# 快捷键 #
+先将快捷键设成VS的
+注释：
+Ctrl+/            //...
+Ctrl+Shift+/      /*...*/
+补全：
+Alt+Shift+Enter  语句补全
+Ctrl+空格        给出一个建议的变量名；字符补全
+跳转：
+Ctrl+Shift+F2    最近一次修改的代码
+对比：
+Local History -> show history
+格式化代码：
+Code→Reformed Code
+对于一段非常零碎的代码，格式化后行间距等仍然很不顺眼，可以尝试先把代码合并成一行之后再格式化。 http://www.jianshu.com/p/3e17ad4739c3
+generate：
+Ctrl+N / Alt+Insert
+
+Android studio 添加assets文件夹：
+app上右击 -> New -> Folder -> Assets Folder
+
+
+模拟器：Tools > Android > AVD Manager 工具栏上也有
+在真机上运行应用：方法和在模拟器相同，只是在Choose Device窗口中需要选择USB连接的真机（真机打开USB调试选项）
+
+打开一个已存在项目，会要下载gradle，下载的慢会卡在这儿。可以自己下载需要版本的gradle。
+gradle的配置目录在~/.gradle，把下载的gradle放在这个目录下的对应位置（wrapper\dists）。
+新建的项目会自动含有一个.gradle文件夹，我的是3.3版本。对于其他网上下载的程序，使用的可能是不同版本。
+
+Error:failed to find target with hash string 'android-23'
+我安装的sdk是25。打开Project Structure（工具栏倒数第三个，快捷键为ctrl+alt+shift+s），改为25。
+若是要继续使用23，可以按出错提示下载23版本sdk。
+
+原生开发工具包 (NDK) 是一组可让您在 Android 应用中利用 C 和 C++ 代码的工具。 
+导入使用NDK的Android sample时，Gradle会提示安装NDK。
+虽然我已安装并在path中添加了cmake，但Android studio提示找不到cmake，Gradle会提示安装cmake。
+尝试sample中的teapot，constraint-layout的版本要由1.0.0改为1.0.0-alpha7，电脑上没有1.0.0版本文件。
+
+错误：Could not find method android() for arguments
+（http://stackoverflow.com/questions/39046363/android-studio-errorerror23-0-could-not-find-method-android-for-arguments）
+apply plugin: 'com.android.application'
+又出现错误：Error:Cannot read packageName from D:\AndroidStudioProjects\AndroidOpenGLDemo\src\main\AndroidManifest.xml
+（http://stackoverflow.com/questions/38823794/android-studio-cannot-read-packagename-from-manifest）
+adding applicationId in defaultConfig (build.gradle)
+又出现错误：Error:Failed to find target with hash string 'android-24' in: D:\Android\sdk
+其实最开始该修改的build.gradle不该是根目录的，而该是app文件夹下的，那里写的是“24”！
+
+每个项目build.gradle文件通常有两个，一个在根目录，一个在app文件夹（见settings.gradle文件内容）
+
+compile support文件在sdk\extras\android\m2repository\com\android\support
+
+底部窗口如“Debug”拉离底部后，想拉回，右击窗口栏位置，取消floating mode。
+
+opengl matrix: https://developer.android.com/reference/android/opengl/Matrix.html
+
+创建Activity时选择empty，不要选basic
+
+Android OpenGL20世界坐标系, 坐标原点默认给在屏幕中间
+
+手机上显示“开发者选项”：设置-关于手机-快速点击“版本号”几次
+错误：This adb server's $ADB_VENDOR_KEYS is not set，解决：关闭开发者选项，重新开启
+
+查看手机rom：Tools --> Android --> Android Device Monitor -> DDMS-> File Explorer
+
+设计自己的应用图标：
+文件->new->Image Asset
+改变Asset Type可以使用自己的图片，或是设计自己的文字图标
+
+------------------------------- 编程 ---------------------------------
+线程里不能加Toast！ 线程通讯用Handler。
+
+android.os.NetworkOnMainThreadException异常：不要在主线程中访问网络
+解决：https://my.oschina.net/u/1425545/blog/519097
+	1）忽略这些强制策略
+	2）将网络访问放到单独线程
+	3）将网络访问放到异步任务AsyncTask中
+
+当前目录就是根目录，权限为Read-only
+	
+获取assets文件夹路径：
+AssetManager assetManager = getAssets();
+
+获取sdcard路径（ 即/mnt/sdcard 即/storage/sdcard(0)）：
+Environment.getExternalStorageDirectory()
+进行文件操作要有权限：
+    <!--  从SDCard读取数据权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!--在SDCard中创建与删除文件权限  -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+# 文件路径 #
+解析Android中应用程序文件存储用得到的一些文件路径 http://blog.csdn.net/afei__/article/details/51606747
+
+getCacheDir() 获取/data/data/<application package>/cache 目录
+getFilesDir() 获取/data/data/<application package>/files 目录
+getExternalFilesDir() 获取 SDCard/Android/data/<application package>/files 目录，一般放一些长时间保存的数据
+getExternalCacheDir() 获取 SDCard/Android/data/<application package>/cache 目录，一般存放临时缓存数据
+如果使用上面的方法，当你的应用在被用户卸载后，以上所有文件都会被删除
+目录分别对应 设置->应用->应用详情里面的”清除数据“与”清除缓存“选项
+
+External和不含External的区别在于：存储在“内部缓存“的文件在一个用程序卸载的时候将会呗删除，当系统运行在低运行空间中也可能会被删除，但是存放在”外部缓存“中的文件则不会被删除，因为Android系统不允许追踪外部媒介的空用控件。
+
+想应用卸载时保留数据，使用getExternalStorageDirectory()目录。
+
