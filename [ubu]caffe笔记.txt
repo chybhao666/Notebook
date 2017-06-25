@@ -233,6 +233,7 @@ After 40,000 iterations (batches) Darknet will save the final model weights as y
 	./darknet detector recall cfg/voc.data cfg/yolo-voc.cfg backup/yolo-voc_1000.weights
 
 计算mAP：   （http://blog.csdn.net/northeastsqure/article/details/54848665）
+	0.建立results文件夹
 	1.生成检测结果文件
 	./darknet detector valid  cfg/voc.data cfg/yolo-voc.cfg backup/yolo-voc_1000.weights
 	用时11min。
@@ -240,19 +241,13 @@ After 40,000 iterations (batches) Darknet will save the final model weights as y
 	编写compute_mAP.py：
 		from voc_eval import voc_eval
 		print voc_eval('/home/jy/darknet2/results/comp4_det_test_{}.txt', '/home/jy/VOCDataset/VOCdevkit/VOC2007/Annotations/{}.xml', '/home/jy/VOCDataset/VOCdevkit/VOC2007/ImageSets/Main/test.txt', 'aeroplane', '.')
+	注意：先删除cachedir和output_dir文件夹中文件！
 	第三个结果就是.
+(//没尝试
 	3.如果只想计算大于0.3的输出结果的mAP,把 voc_eval.py文件中如下代码更改：
 		sorted_ind = np.argsort(-confidence)
 		sorted_ind1 = np.where(confidence[sorted_ind] >= .3)[0]#np.argsort(-confidence<=-.3)
 		sorted_ind = sorted_ind[sorted_ind1]
-aeroplane，原始
-(array([ 0.00350877,  0.00701754,  0.01052632, ...,  0.71929825,
-        0.71929825,  0.71929825]), array([ 1.        ,  1.        ,  1.        , ...,  0.02836193,
-        0.028358  ,  0.02835408]), 0.42133578037452879)
-aeroplane，修改
-(array([ 0.00350877,  0.00701754,  0.01052632, ...,  0.72280702,
-        0.72280702,  0.72280702]), array([ 1.        ,  1.        ,  1.        , ...,  0.02551084,
-        0.02550768,  0.02550452]), 0.42779980240164417)
 
 
 对于data/dog.jpg，
