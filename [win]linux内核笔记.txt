@@ -1,0 +1,51 @@
+# 要用到的其他软件 #
+winima80.exe，WinImage的安装文件，可以查看img格式文件
+winhex，查看二进制文件
+
+Bochs使用某个img文件时，无法用WinImg查看这个文件
+
+# 使用bochs #
+下载 http://oldlinux.org/Linux.old/bochs/
+南师操作系统课程使用的是linux-0.11-devel-050518
+解压linux-0.11.rar ，安装Bochs-2.2.pre4.exe
+
+各文件介绍见 README
+
+############################-begin-###########################
+################ 以bootimage-0.11-hd.bxrc为例 ################
+双击运行bootimage-0.11-hd.bxrc
+
+bootimage是启动引导Image文件，其中主要包括内核执行代码。
+rootimage是根文件系统，其中包括操作系统最起码的一些配置文件和命令程序。
+这两个盘合起来就相当于一张可启动的DOS盘片。
+
+查看bootimage-0.11-hd.bxrc配置：
+L61  floppya: 1_44="bootimage-0.11-hd", status=inserted
+L129 boot: a
+可以看出 a盘是bootimage-0.11-hd，作为启动盘--就是内核Image
+L68  floppyb: 1_44=diska.img, status=inserted
+可以看出 b盘是diska.img
+L89  ata0-master: type=disk, path="hdc-0.11-new.img", mode=flat, cylinders=410, heads=16, spt=38
+可以看出 硬盘是hdc-0.11-new.img，作为root file system
+
+编译 Linux 0.11 内核源代码：
+进入目录/usr/src/linux
+make clean  ## 来清除所有编译好的*.o文件或其它模块
+make        ## 重新编译
+
+如何看是不是使用了自己编译的内核：
+http://blog.csdn.net/guotong1988/article/details/42100337
+替换成新的引导启动文件（用编译后的Image替换bootimage-0.11-hd）
+方法1）dd bs=8192 if=Image of=/dev/fd0
+方法2）利用mtools工具“ mcopy image b: ”，然后在windows下利用winimage工具拷贝出来
+
+mtools example: mdir b:, mcopy b:, mdel b:filename （来自README）
+
+################ 以bootimage-0.11-hd.bxrc为例 ################
+############################-end-#############################
+
+
+关于bootimage和rootimage问题的合集:http://blog.chinaunix.net/uid-237649-id-108015.html
+
+
+

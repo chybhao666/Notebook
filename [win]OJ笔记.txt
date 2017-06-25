@@ -101,6 +101,8 @@ http://www.shuizilong.com/house/archives/asia-hong-kong-online-preliminary/
 
 #include<bits/stdc++.h>包含C++的所有头文件(部分oj支持)
 
+const int INF = 1 << 30;
+
 STL模板列表:
 typedef vector<int> vi;
 typedef vector<vi> vvi;
@@ -130,6 +132,16 @@ void PrintSeparate(T t)
 	cout<<separator<<t;
 	separator=',';
 }
+
+打印矩阵格式：
+rep(i,0,n) rep(j,0,m){
+	printf("%d",d[i][j]);
+	if(j==m-1)printf("\n");
+	else printf(" ");
+}
+或
+rep(i,0,n) rep(j,0,m)
+	printf("%d%c",d[i][j],j==m-1?'\n':' ');
 
 cin，cout速度慢，是因为先把要输出的东西存入缓冲区，再输出，导致效率降低，而这段ios_base::sync_with_stdio(false)可以来打消iostream的输入输出缓存，可以节省许多时间，使效率与scanf与printf相差无几。一旦使用了这条语句，scanf和cin混用可能就会造成一些奇怪的错误。
 
@@ -167,6 +179,8 @@ LIS优化：简单的做法时间复杂度为n^2。保留满足dp[t] = k的所�
 在vs和G++中已有的:
 xutility:min(),max()
 utility: swap()
+
+memset定义在string.h中
 
 如果最大长度已知，使用数组也许比vector方便省时
 

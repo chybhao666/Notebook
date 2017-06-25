@@ -127,6 +127,8 @@ comctl32.lib
 error LNK2001: 无法解析的外部符号 _c_dfDIKeyboard：
 连接器中中添加dinput8.lib
 
+无法解析的外部符号 _Direct3DCreate9@4：
+添加d3d9.lib
 
 ---------- asmlibrary ---------
 google code：
