@@ -1,56 +1,56 @@
 ## MiKTex ##
-×Ô´ø±à¼­Æ÷TeXworks£¬´ò¿ªtexÎÄ¼þÊ±»á×Ô¶¯´ò¿ªpdfÎÄ¼þ
+è‡ªå¸¦ç¼–è¾‘å™¨TeXworksï¼Œæ‰“å¼€texæ–‡ä»¶æ—¶ä¼šè‡ªåŠ¨æ‰“å¼€pdfæ–‡ä»¶
 
-¶ÔÓÚÈ±ÉÙµÄ°ü£¬±àÒëÊ±»á×Ô¶¯ÌáÊ¾È±ÉÙµÄ°ü²¢¿ÉÒÔÏÂÔØ
+å¯¹äºŽç¼ºå°‘çš„åŒ…ï¼Œç¼–è¯‘æ—¶ä¼šè‡ªåŠ¨æç¤ºç¼ºå°‘çš„åŒ…å¹¶å¯ä»¥ä¸‹è½½
 
-Texworks±à¼­Æ÷´ò¿ªtexÖÐÎÄÂÒÂë£¬edit -> preferences -> editor -> EncodingÑ¡ÔñGB2312
+Texworksç¼–è¾‘å™¨æ‰“å¼€texä¸­æ–‡ä¹±ç ï¼Œedit -> preferences -> editor -> Encodingé€‰æ‹©GB2312
 
-Ê¹ÓÃnju-thesis£¬±àÒë³öÏÖdvipdfmx.def not found´íÎó£º
-ÐÞ¸ÄtexÎÄ¼þ¿ªÍ·\documentclass£¬¸ÄÎªdvipdfmx»òÕßpdftex
+ä½¿ç”¨nju-thesisï¼Œç¼–è¯‘å‡ºçŽ°dvipdfmx.def not foundé”™è¯¯ï¼š
+ä¿®æ”¹texæ–‡ä»¶å¼€å¤´\documentclassï¼Œæ”¹ä¸ºdvipdfmxæˆ–è€…pdftex
 
-Èý¼¶±êÌâÉÏ±ß¾à×ÜÓÐÎÊÌâ£¬²»ÖªµÀÔõÃ´»ØÊÂ£¬²»ÂÛÊÇÍøÉÏÏÂÔØµÄnju-thesis»¹ÊÇÁõÇúÌÎ¸øÎÒµÄ°æ±¾¡£¸ÄÓÃÍêÕû°æCTeX£¬Õâ¸öÎÊÌâµÃµ½½â¾ö£¨ÎÞÂÛÊÇÊ¹ÓÃWinEdt£¬Texwork»¹ÊÇTexstudio£©¡£
+ä¸‰çº§æ ‡é¢˜ä¸Šè¾¹è·æ€»æœ‰é—®é¢˜ï¼Œä¸çŸ¥é“æ€Žä¹ˆå›žäº‹ï¼Œä¸è®ºæ˜¯ç½‘ä¸Šä¸‹è½½çš„nju-thesisè¿˜æ˜¯åˆ˜æ›²æ¶›ç»™æˆ‘çš„ç‰ˆæœ¬ã€‚æ”¹ç”¨å®Œæ•´ç‰ˆCTeXï¼Œè¿™ä¸ªé—®é¢˜å¾—åˆ°è§£å†³ï¼ˆæ— è®ºæ˜¯ä½¿ç”¨WinEdtï¼ŒTexworkè¿˜æ˜¯Texstudioï¼‰ã€‚
 
 ## TeXstudio ##
-±à¼­Æ÷´ò¿ªtexÖÐÎÄÂÒÂë & ±êÇ©À¸ÖÐÎÄÂÒÂë£ºÑ¡Ïî->ÉèÖÃ->±à¼­Æ÷->Default Font Encoding Ñ¡Ôñ"System" 
+ç¼–è¾‘å™¨æ‰“å¼€texä¸­æ–‡ä¹±ç  & æ ‡ç­¾æ ä¸­æ–‡ä¹±ç ï¼šé€‰é¡¹->è®¾ç½®->ç¼–è¾‘å™¨->Default Font Encoding é€‰æ‹©"System" 
 
-µã»÷¹¤¾ßÀ¸view£¬ÔÚTeXstudio´°¿ÚÄÚÏÔÊ¾pdf²¢¶¨Î»ÔÚµ±Ç°´úÂëÎ»ÖÃ
+ç‚¹å‡»å·¥å…·æ viewï¼Œåœ¨TeXstudioçª—å£å†…æ˜¾ç¤ºpdfå¹¶å®šä½åœ¨å½“å‰ä»£ç ä½ç½®
 
-¿ÉÒÔÊµÏÖtex´úÂëºÍpdf¼äÏà»¥Ìø×ª
+å¯ä»¥å®žçŽ°texä»£ç å’Œpdfé—´ç›¸äº’è·³è½¬
 
-ÔÚÑ¡ÏîÖÐ¿ÉÒÔ½«½çÃæÉèÖÃÎªÖÐÎÄ¡£
+åœ¨é€‰é¡¹ä¸­å¯ä»¥å°†ç•Œé¢è®¾ç½®ä¸ºä¸­æ–‡ã€‚
 
-±àÒëÇ°»á×Ô¶¯±£´ætexºÍbibÎÄ¼þ¡£
+ç¼–è¯‘å‰ä¼šè‡ªåŠ¨ä¿å­˜texå’Œbibæ–‡ä»¶ã€‚
 
-¹¤¾ß -> ÇåÀí¸¨ÖúÎÄ¼þ
+å·¥å…· -> æ¸…ç†è¾…åŠ©æ–‡ä»¶
 
 ## CTeX ##
-ÏÂÔØ CTeX_2.9.2.164_Full.exe (1.31G) °üº¬ÍêÕû°æ MiKTeX¡£
+ä¸‹è½½ CTeX_2.9.2.164_Full.exe (1.31G) åŒ…å«å®Œæ•´ç‰ˆ MiKTeXã€‚
 
 
 -----------------------------------------------------------
 
-²Î¿¼ÎÄÏ×ÖÐµÄ&ÒªÐ´Îª\&£¬Èô³öÏÖÕâÑùµÄ´íÎóÒªÏÈÇåÀí¸¨ÖúÎÄ¼þ£¬ÔÙÖØÐÂ±àÒë¡£
+å‚è€ƒæ–‡çŒ®ä¸­çš„&è¦å†™ä¸º\&ï¼Œè‹¥å‡ºçŽ°è¿™æ ·çš„é”™è¯¯è¦å…ˆæ¸…ç†è¾…åŠ©æ–‡ä»¶ï¼Œå†é‡æ–°ç¼–è¯‘ã€‚
 
-ÖÐÎÄÊéÇ©ÂÒÂëÎÊÌâ£¬Ê¹ÓÃgbk2uni.exe´¦Àí.outÎÄ¼þ
-1£©ÔÚTexStudioÖÐ£¬F5±àÒë£¬µÃµ½ÊéÇ©ÂÒÂë°æ±¾
-2£©Ê¹ÓÃgbk2uni.exe´¦Àí.outÎÄ¼þ
-3£©ÔÙ´Î±àÒë£¨TexStudioÌáÊ¾³öÏÖ´íÎó£¬Êµ¼ÊÃ»ÎÊÌâ£©
+ä¸­æ–‡ä¹¦ç­¾ä¹±ç é—®é¢˜ï¼Œä½¿ç”¨gbk2uni.exeå¤„ç†.outæ–‡ä»¶
+1ï¼‰åœ¨TexStudioä¸­ï¼ŒF5ç¼–è¯‘ï¼Œå¾—åˆ°ä¹¦ç­¾ä¹±ç ç‰ˆæœ¬
+2ï¼‰ä½¿ç”¨gbk2uni.exeå¤„ç†.outæ–‡ä»¶
+3ï¼‰å†æ¬¡ç¼–è¯‘ï¼ˆTexStudioæç¤ºå‡ºçŽ°é”™è¯¯ï¼Œå®žé™…æ²¡é—®é¢˜ï¼‰
 
-Í¼±êÎ»ÖÃ£º
+å›¾æ ‡ä½ç½®ï¼š
 \begin{figure}[!htbp]
-ÆäÖÐhtbpÊÇ¿ÉÑ¡µÄ£¬ËüÃÇ·Ö±ð´ú±í
-!-ºöÂÔ¡°ÃÀÑ§¡±±ê×¼
+å…¶ä¸­htbpæ˜¯å¯é€‰çš„ï¼Œå®ƒä»¬åˆ†åˆ«ä»£è¡¨
+!-å¿½ç•¥â€œç¾Žå­¦â€æ ‡å‡†
 h-here
 t-top
 b-bottom
 p-page-of-its-own
 
-¹«Ê½»»ÐÐ¶ÔÆä£º
-²ÉÓÃ¡°&¡±·Ö¸î¸÷¸ö¶ÔÆëµ¥Ôª£¬Ê¹ÓÃ¡°\\¡±»»ÐÐ¡£
+å…¬å¼æ¢è¡Œå¯¹å…¶ï¼š
+é‡‡ç”¨â€œ&â€åˆ†å‰²å„ä¸ªå¯¹é½å•å…ƒï¼Œä½¿ç”¨â€œ\\â€æ¢è¡Œã€‚
 \begin{align*}
  f(x) &= (x+a)(x+b) \\
  &= x^2 + (a+b)x + ab
 \end{align*}
 
-Éú³ÉµÄpdf¸´ÖÆÂÒÂë£º¼Ó¸ö\usepackage{ccmap}¾ÍÐÐÁË
+ç”Ÿæˆçš„pdfå¤åˆ¶ä¹±ç ï¼šåŠ ä¸ª\usepackage{ccmap}å°±è¡Œäº†
 

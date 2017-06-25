@@ -1,120 +1,120 @@
-�����������ĺ�Ҫ�������Բ���Ч
-ʹ��������<��ʱ><����>��Ч������set BOOST_ROOT=D:\boost_1_63_0��ֻ�Ե�ǰ������Ч
+环境变量更改后要重启电脑才生效
+使环境变量<零时><立即>生效，例：set BOOST_ROOT=D:\boost_1_63_0，只对当前窗口有效
 
-����props���ã�
-vs��x86��x64��props�ǲ�ͬ�ļ������Կ��Խ��в�ͬ���ã�����Debug��Releaseʹ�õ�lib�ļ���ͬ��Ĭ��ʹ�õ�����ͬprops���л�ʱ��Ҫ�������á�
-���Զ�ÿ���ⵥ������props�ļ���Debug/Release-x86/x64��Ҫ�ĸ������ĸ���
-��һ�ֽ���������ڴ���������#pragma comment(lib,"*.lib")��ָ��lib�ļ���
-��һ�ֽ��������ֱ�ӰѶ�Ӧ��lib�ļ�����<��Ŀ>�ļ����У��л�ʱ����lib�ļ���
+关于props配置：
+vs中x86和x64的props是不同文件，所以可以进行不同配置，但是Debug和Release使用的lib文件不同，默认使用的是相同props，切换时需要重新配置。
+所以对每个库单独建立props文件，Debug/Release-x86/x64需要哪个添加哪个。
+另一种解决方法，在代码中添加#pragma comment(lib,"*.lib")来指定lib文件。
+再一种解决方法，直接把对应的lib文件拷到<项目>文件夹中，切换时更改lib文件。
 
-����path���ã�
-path���ǿ���ͬʱ���Ӳ�ͬ�汾opencv��binĿ¼�ģ���Ϊ�����ļ�����dllʱ��ͬ�汾�ļ�����ͬ��������ͬʱ����ͬһ�汾��x86��x64�汾��
+关于path配置：
+path中是可以同时添加不同版本opencv的bin目录的，因为根据文件名找dll时不同版本文件名不同。但不能同时配置同一版本的x86和x64版本。
 
-����-����-������� д�� *.vcxproj.user�ļ���,Debug|Win32,Debug|x64,Release|Win32,Release|x64�������Ƿֿ��ġ�
-���дӡ����ԡ��޸ĵ����ö��Ƿֿ���
+属性-调试-命令参数 写在 *.vcxproj.user文件里,Debug|Win32,Debug|x64,Release|Win32,Release|x64的设置是分开的。
+所有从“属性”修改的设置都是分开的
 
-cmakeĬ��ʱ��32λ�ı�������ָ��Ϊ64λ��cmake -G "Visual Studio 14 2015 Win64"�����������ݿ�cmake-gui configureʱ���档
-����opencv��-DOpenCV_DIR=D:\opencv320\build
+cmake默认时是32位的编译器！指定为64位：cmake -G "Visual Studio 14 2015 Win64"，引号中内容看cmake-gui configure时界面。
+添加opencv：-DOpenCV_DIR=D:\opencv320\build
 
 
 ---------- dlib---------
-�������ʹ�ã��Ƿ���Ҫ����� http://dlib.net/compile.html
-���±���example��ͬʱ������dlib.lib��
+关于如何使用，是否需要编译见 http://dlib.net/compile.html
+以下编译example（同时编译了dlib.lib）
 cd examples
 mkdir build
 cd build
 cmake .. [-G ]
-��dlib-19.2\examples\build\examples.sln�����룬ò����ʹ�õ�vs15 update1��c++11û����ȫ֧�֣�����example / thread_function_ex���и�������ֻҪ����thread_function_ex����Ӱ������ʹ�á�
-���ã�
-����Ŀ¼   - ��Ŀ¼ 
-���������� - dlib-19.2\examples\build\dlib_build\ Debug|Release \dlib.lib 
+打开dlib-19.2\examples\build\examples.sln并编译，貌似我使用的vs15 update1对c++11没能完全支持，编译example / thread_function_ex会有个错，但只要不用thread_function_ex，不影响其他使用。
+配置：
+包含目录   - 根目录 
+附加依赖性 - dlib-19.2\examples\build\dlib_build\ Debug|Release \dlib.lib 
 
-��һ���ҳ��Եı�����̣���Ŀ¼����build_x64�ļ��У�ʹ��cmake-guiѡ��win64��������ʹ�ø�Ŀ¼��cmakelists��
-���ã�
-����Ŀ¼ - ��Ŀ¼�����������Ŀ¼\dlib���ļ��� �������ᵼ��name collisions (e.g. dlib/string.h with string.h from the standard library)
-��Ŀ¼   - ��Ŀ¼\build_x64\dlib\Debug
-���������� - dlib.lib
+另一种我尝试的编译过程：根目录建立build_x64文件夹，使用cmake-gui选择win64编译器，使用根目录的cmakelists。
+配置：
+包含目录 - 根目录，别包含“根目录\dlib”文件夹 ，这样会导致name collisions (e.g. dlib/string.h with string.h from the standard library)
+库目录   - 根目录\build_x64\dlib\Debug
+附加依赖性 - dlib.lib
 
-������봦��x86��x64�������ʹ��lib�ļ�����������ʹ�ã�
-1������Ŀ¼���ӵ�����Ŀ¼
-2���������Ӵ�������dlib/all/source.cpp����Ŀ��
-3����Ҫ��ȡjpg������ʾ����DLIB_JPEG_SUPPORT���Ҳ���jpeglib.h����dlib\external\libjpeg���ӵ�����Ŀ¼�����Ӷ���DLIB_JPEG_STATIC���޷��������ⲿ���ţ���dlib\external\libjpeg�������ļ����ӵ���Ŀ�С�
+如果不想处理x86和x64问题而不使用lib文件，可以这样使用：
+1）将根目录添加到包含目录
+2）若有连接错误，添加dlib/all/source.cpp到项目里
+3）若要读取jpg，按提示添加DLIB_JPEG_SUPPORT。找不到jpeglib.h？将dlib\external\libjpeg添加到包含目录或添加定义DLIB_JPEG_STATIC。无法解析的外部符号？将dlib\external\libjpeg中所有文件都加到项目中。
 
-�ؼ����⣺
-������opencv����ȡjpg��Ҫ����DLIB_JPEG_SUPPORT����Ԥ����������DLIB_JPEG_SUPPORT ������#define DLIB_JPEG_SUPPORT����Ҫд���ļ��ʼ��
-Dlibʵ����One Millisecond Face Alignment with an Ensemble of Regression Trees�е��㷨��http://www.csc.kth.se/~vahidk/papers/KazemiCVPR14.pdf������ΪVahid Kazemi ��Josephine Sullivan��
-shape_predictor_68_face_landmarks.dat�ļ���Ҫ�Լ����أ����ص�ַ��dlib-19.2\examples\face_landmark_detection_ex.cpp����
+关键点检测：
+不依赖opencv，读取jpg需要定义DLIB_JPEG_SUPPORT，在预处理器添加DLIB_JPEG_SUPPORT （或者#define DLIB_JPEG_SUPPORT，但要写在文件最开始）
+Dlib实现了One Millisecond Face Alignment with an Ensemble of Regression Trees中的算法（http://www.csc.kth.se/~vahidk/papers/KazemiCVPR14.pdf，作者为Vahid Kazemi 和Josephine Sullivan）
+shape_predictor_68_face_landmarks.dat文件需要自己下载，下载地址见dlib-19.2\examples\face_landmark_detection_ex.cpp代码
 
-ע�⣬�����vector��string�������Լ��İ汾�����岻ͬ�ڱ�׼�⣡
+注意，里面的vector和string是作者自己的版本，定义不同于标准库！
 
 
 ---------- OpenGL ---------
-vs15���е���C:\Program Files (x86)\Windows Kits\8.1\Include\um\gl��GL.h��GLU.h��VC6.0����֮�⻹��GLAUX.h
-glu32.dll��opengl32.dll��C:\Windows\System32\
+vs15已有的在C:\Program Files (x86)\Windows Kits\8.1\Include\um\gl：GL.h，GLU.h，VC6.0除此之外还有GLAUX.h
+glu32.dll和opengl32.dll在C:\Windows\System32\
 
 ---glut---
-���غ�����˵��
+下载和配置说明
 https://www.opengl.org/resources/libraries/glut/
-���ز��˵Ļ�ֱ����http://www.opengl.org/resources/libraries/glut/glutdlls37beta.zip
-	1��glut.dll��glut32.dll����system32Ŀ¼�£���win10ϵͳ���г�����ʾ�Ҳ���dll��������regsvr32ע�ᣬ��ʾ�����ݡ��÷���C:\Windows\SysWOW64��
-	2����glut.h��������VC++ path��\include\GL\Ŀ¼�£���C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\GL\������GL�ļ���Ϊ�´����ģ�����ԭ�д���
-	3����glut.lib��glut32.lib��������VC++ path��\lib\Ŀ¼��
-	�򿪱������ڴ����ļ�������#include<GL/glut.h>����ʹ��OpenGL��
+下载不了的话直接用http://www.opengl.org/resources/libraries/glut/glutdlls37beta.zip
+	1）glut.dll和glut32.dll放在system32目录下，但win10系统运行程序提示找不到dll，尝试用regsvr32注册，提示不兼容。该放在C:\Windows\SysWOW64下
+	2）将glut.h拷贝至（VC++ path）\include\GL\目录下，即C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\GL\，其中GL文件夹为新创建的，并非原有存在
+	3）将glut.lib和glut32.lib拷贝至（VC++ path）\lib\目录下
+	打开编译器在代码文件中添加#include<GL/glut.h>就能使用OpenGL了
 
-����ʱֻ��ѡ����X86�������ƽ̨�£��������� LNK1104���޷����ļ���glut32.lib���Ĵ���
-��glutֻ֧��x86ƽ̨�µ����У������Ҫ��x64�£�����Ҫʹ��freeglut��
+编译时只可选择在X86解决方案平台下，否则会出现 LNK1104：无法打开文件“glut32.lib”的错误！
+此glut只支持x86平台下的运行，如果需要在x64下，则需要使用freeglut。
 
-LNK2026 ģ����� SAFESEH ӳ���ǲ���ȫ�ģ�
-������ - �߼� -ӳ����а�ȫ�쳣���������ΪNO
+LNK2026 模块对于 SAFESEH 映像是不安全的：
+连接器 - 高级 -映像具有安全异常处理程序改为NO
 
 ---glm---
-glm����Ҫ���룬���ؽ�ѹ��<Ŀ¼��glm�ļ���>����VSĬ��includeĿ¼
+glm不需要编译，下载解压后将<目录下glm文件夹>放入VS默认include目录
 
 ---glext.h---
-ֱ�ӽ�glext.h����VSĬ��includeĿ¼��(#include <>)������ĿĿ¼��(#include "")������Ҫ�����ļ�
+直接将glext.h放在VS默认include目录下(#include <>)或者项目目录下(#include "")，不需要其他文件
 
 ---glaux---
-��GLAUX.h��GLAUX.LIB���ڣ�VC++ path����ӦĿ¼
+将GLAUX.h和GLAUX.LIB放在（VC++ path）对应目录
 
-�����޷��������ⲿ���� _sscanf,�÷����ں��� _GetRegistrySysColors@8 �б�����
-���������#pragma comment(lib, "legacy_stdio_definitions.lib")�����������������������������У���֪��Ϊʲô
+错误：无法解析的外部符号 _sscanf,该符号在函数 _GetRegistrySysColors@8 中被引用
+解决：添加#pragma comment(lib, "legacy_stdio_definitions.lib")，在连接器附加依赖性中添加则不行，不知道为什么
 
 
 ---------- OpenCV ---------
-���ÿ�ִ���ļ�Ŀ¼û�ã���Ҫ���ӻ�������PATH�����߰�dll�ļ���������Ŀ��
+配置可执行文件目录没用，需要添加环境变量PATH，或者把dll文件拷贝到项目中
 
-����ʹ�ù̶��汾�̶�x86/x64��opencv��������������OpenCV_DIR=D:\openCV\build������cmakeʱ���Զ��ҵ�opencv
-���⣬vs����opencvʱ������$(OpenCV_DIR)
+如若使用固定版本固定x86/x64的opencv，环境变量添加OpenCV_DIR=D:\openCV\build，这样cmake时能自动找到opencv
+此外，vs配置opencv时可以用$(OpenCV_DIR)
 
-���opencv3.0��VS2015����msvcp120d.dll��msvcr120d.dllȱʧ�����⣺
-�������ҵ�msvcp120d.dll��msvcr120d.dll������system32��û�ã��ŵ�OpenCV��Ŀ¼�� ..\build\x86\vc12\bin
-��Щ������Ҫmsvcrtd.dll��ͬ������
+针对opencv3.0和VS2015出现msvcp120d.dll，msvcr120d.dll缺失的问题：
+在网上找到msvcp120d.dll，msvcr120d.dll，放在system32下没用，放到OpenCV的目录下 ..\build\x86\vc12\bin
+有些程序还需要msvcrtd.dll，同样操作
 
-����vs15+opencv3.0.0������opencv��build�ļ�����ֻ��vc11��vc12����vs15Ӧ����vc14�������Լ�����opencv����ֱ��ʹ��vc12��
-��ʹ��cmake����configureʱ���������Found OpenCV Windows Pack but it has no binaries compatible with your config
-������ʾ�ᷢ�����Ҳ���vc14�����⣬�޸�OpenCVConfig.cmake��86��set(OpenCV_RUNTIME vc14)Ϊset(OpenCV_RUNTIME vc12)
-������������vs����ʱ�ᵼ�£�LNK2038	��⵽��_MSC_VER���Ĳ�ƥ����: ֵ��1800����ƥ��ֵ��1900��
-���Ի�����opencv3.2.0�ɣ�������vc14�ġ���������ֻ��x64������cmake configureʱ��ѡ��Visual Studio 14 VS2015 Win64��
+对于vs15+opencv3.0.0，由于opencv的build文件夹下只有vc11和vc12，而vs15应该是vc14，不想自己编译opencv，而直接使用vc12。
+当使用cmake进行configure时，会出错：Found OpenCV Windows Pack but it has no binaries compatible with your config
+根据提示会发现是找不到vc14的问题，修改OpenCVConfig.cmake第86行set(OpenCV_RUNTIME vc14)为set(OpenCV_RUNTIME vc12)
+但是这样做在vs编译时会导致：LNK2038	检测到“_MSC_VER”的不匹配项: 值“1800”不匹配值“1900”
+所以还是用opencv3.2.0吧，里面是vc14的。但是由于只有x64，所以cmake configure时，选择【Visual Studio 14 VS2015 Win64】
 
-���Թ��̲鿴�ڴ���ͼƬ
+调试过程查看内存中图片
 Image Watch tutorial: http://docs.opencv.org/doc/tutorials/introduction/windows_visual_studio_image_watch/windows_visual_studio_image_watch.html#windows-visual-studio-image-watch
 
 
 ---------- DirectX ---------
-��β鿴�����Ƿ�װ��directx��
-�ڡ���ʼ���������С���ִ�� dxdiag.exe ����
+如何查看电脑是否安装了directx：
+在“开始”→“运行”中执行 dxdiag.exe 命令
 
-DirectX 11��DirectX 9�������汾������DirectX 11������DirectX 9�����Զ�Ҫ������װ���󲿷��[����Ҫ�õ�Directx 9��
+DirectX 11是DirectX 9的升级版本，但是DirectX 11不包含DirectX 9，所以都要独立安装。大部份遊戲需要用到Directx 9。
 
-����ǽ���DirectX ��������Ҫ��װMicrosoft DirectX SDK��������DirectX 9��
-DirectX SDK�����˿�����˶�ý��Ӧ���������ɻ�ȱ�Ŀ������ߣ��Լ�runtime��headers������⡢����ִ���ļ����ļ���DirectX���ߡ�����ͬʱ֧ԮC++ �Լ� Visual Basic��������. 
-��װDirectX SDK�����ʾ��װʧ�ܣ�����ʹ��û�����⡣���������ж���DXSDK_DIR
+如果是进行DirectX 开发，需要安装Microsoft DirectX SDK，而不是DirectX 9。
+DirectX SDK包含了开发尖端多媒体应用软件不可或缺的开发工具，以及runtime、headers及程序库、范例执行文件、文件、DirectX工具、并且同时支援C++ 以及 Visual Basic开发软件. 
+安装DirectX SDK最后提示安装失败，但是使用没有问题。环境变量中多了DXSDK_DIR
 
-���ã�
-������Ҫ�ⲽ��#.���ӡ�$(DXSDK_DIR)Utilities/Bin/x86����������˫���ţ��� ����ִ���ļ�Ŀ¼����
-#.���ӡ�$(DXSDK_DIR)Include����������˫���ţ��� ������Ŀ¼����
-#.���ӡ�$(DXSDK_DIR)Lib\x86����������˫���ţ��� ����Ŀ¼����
-��Щ�̳�ֻ�������ϼ����������лᱨ��LNK2001������
+配置：
+（不需要这步）#.添加“$(DXSDK_DIR)Utilities/Bin/x86”（不包括双引号）到 “可执行文件目录”；
+#.添加“$(DXSDK_DIR)Include”（不包括双引号）到 “包含目录”；
+#.添加“$(DXSDK_DIR)Lib\x86”（不包括双引号）到 “库目录”；
+有些教程只给了以上几步，我运行会报错LNK2001，添加
 d3d10.lib
 d3dx10d.lib
 d3dx9d.lib
@@ -122,102 +122,102 @@ dxerr.lib
 dxguid.lib
 winmm.lib
 comctl32.lib
-������������Щlib���ܵø�����Ŀ����
+（具体添加哪些lib可能得根据项目来）
 
-error LNK2001: �޷��������ⲿ���� _c_dfDIKeyboard��
-��������������dinput8.lib
+error LNK2001: 无法解析的外部符号 _c_dfDIKeyboard：
+连接器中中添加dinput8.lib
 
-�޷��������ⲿ���� _Direct3DCreate9@4��
-����d3d9.lib
+无法解析的外部符号 _Direct3DCreate9@4：
+添加d3d9.lib
 
 ---------- asmlibrary ---------
-google code��
+google code：
 https://code.google.com/archive/p/asmlibrary/
-github��
+github：
 https://github.com/greatyao/asmlibrary
-���ֹ���ASM & AAM ģ�ʹ���ʵ�ֵĶԱȣ�
+几种关于ASM & AAM 模型代码实现的对比：
 http://blog.sina.com.cn/s/blog_616f2fa40101ce85.html
 
-32λ��64λ����Ҫʹ�ö�Ӧλ��asmlibrary
+32位和64位程序要使用对应位的asmlibrary
 
-����include,lib,dll
-ʹ�ü�msvc/fit.sln
-��ֱ�Ӱѡ�.h���͡�.lib��������Ŀ�ļ����£�����������#pragma����.dll������exe�ļ�Ŀ¼�������Ͳ��������ˣ�
+配置include,lib,dll
+使用见msvc/fit.sln
+（直接把“.h”和“.lib”放在项目文件夹下，代码中添加#pragma，“.dll”放在exe文件目录，这样就不用配置了）
 
-68���ؼ����ibug�Ĺؼ���λ�ò�ƥ�䣡
-ʹ��ibug���ݼ�ѵ��(build)������û�г�����ʾ......ʹ��helen���ݼ���û�����⡣
+68个关键点和ibug的关键点位置不匹配！
+使用ibug数据集训练(build)出错，没有出错提示......使用helen数据集则没有问题。
 
 
 ---------- boost ---------
 vs15+boost1.63
-���룺1��Run bootstrap.bat  2��Run b2.exe [--build-type=complete]
-������64λ��1��x64���ݹ���������Run bootstrap.bat  2��b2.exe address-model=64 [--build-type=complete]
-����[--build-type=complete]���Զ�ƥ�䲻ͬ��link��runtime-link��
-���ã�
-���� ->C/C++ ->���Ӱ���Ŀ¼: ��Ŀ¼
-���� ->������ ->���� ->���ӿ�Ŀ¼: ��Ŀ¼\stage\lib
-������runtimeʹ��boost�Ķ�̬�⣬��dllĿ¼����PATH
+编译：1）Run bootstrap.bat  2）Run b2.exe [--build-type=complete]
+若编译64位：1）x64兼容工具命令行Run bootstrap.bat  2）b2.exe address-model=64 [--build-type=complete]
+添加[--build-type=complete]能自动匹配不同的link和runtime-link。
+配置：
+属性 ->C/C++ ->附加包含目录: 根目录
+属性 ->链接器 ->常规 ->附加库目录: 根目录\stage\lib
+若程序runtime使用boost的动态库，将dll目录加入PATH
 
-����link��runtime-link�ķ�����http://blog.csdn.net/yuanhubilie/article/details/44625501
- boost ��������ص㣺
-��1���ԡ�lib����ͷ���ǡ�link=static���汾����̬���ӿ�汾��û��dll������ֱ���ԡ�boost����ͷ���ǡ�link=shared���汾����̬���ӿ�汾������lib��dll����
-��2�����еĿⶼ����"boost"ǰ׺��
-��3������������boost�����ƣ�����date_time�⣩��
-��4��Ȼ���Ǳ������İ汾���������֮����"-"�������»���"_"�ָ������� -vc120����
-��5���С�mt����Ϊ��threading=multi���汾��û�е����ǡ�threading=single���汾��
-��6���С�s����Ϊ��runtime-link=static���汾��û�е����ǡ�runtime-link=shared���汾��
-��7���С�gd����Ϊdebug�汾��û�е�����release�汾��
-��8�����еĿⶼ����boost��İ汾�Ž�β������1_56�����е�"."���»���"_"���棩
-Ĭ��link=static runtime-link=shared��cmakelistsָ��д�����Լ���Ҫȥ�����ı��˵�cmakelists�ļ����ܿ��ܻ��������
+关于link和runtime-link的分析：http://blog.csdn.net/yuanhubilie/article/details/44625501
+ boost 库的命名特点：
+（1）以“lib”开头的是“link=static”版本（静态链接库版本，没有dll），而直接以“boost”开头的是“link=shared”版本（动态链接库版本，包含lib和dll）。
+（2）所有的库都含有"boost"前缀。
+（3）紧随其后的是boost库名称（比如date_time库）。
+（4）然后是编译器的版本，与库名称之间以"-"而不是下划线"_"分隔（比如 -vc120）。
+（5）有“mt”的为“threading=multi”版本，没有的则是“threading=single”版本。
+（6）有“s”的为“runtime-link=static”版本，没有的则是“runtime-link=shared”版本。
+（7）有“gd”的为debug版本，没有的则是release版本。
+（8）所有的库都含有boost库的版本号结尾（比如1_56，其中的"."以下划线"_"代替）
+默认link=static runtime-link=shared，cmakelists指明写法（自己不要去这样改别人的cmakelists文件，很可能会出错）：
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 
-BOOST_ALL_DYN_LINK - ʹ��dll��̬��ʽ����
-BOOST_ALL_NO_LIB   - ��ʹ��boost�ṩ��auto-link����
+BOOST_ALL_DYN_LINK - 使用dll动态方式链接
+BOOST_ALL_NO_LIB   - 不使用boost提供的auto-link机制
 
-����cmake��
-���Ӳ�����-DBOOST_ROOT=D:/boost_1_63_0x64-dll��
-����ʾ����Could not find the following Boost libraries���������ǣ�
- 1�������link��runtime-link��cmake���󲻷����⣬����boostʱ����[--build-type=complete]�����2��32λ/64λ������
+对于cmake：
+添加参数：-DBOOST_ROOT=D:/boost_1_63_0x64-dll。
+若提示：“Could not find the following Boost libraries”，可能是：
+ 1）编译的link和runtime-link和cmake需求不符问题，编译boost时添加[--build-type=complete]解决。2）32位/64位的问题
 
-����ʹ�ù̶��汾�̶�x86/x64��boost����������BOOST_ROOT��������������cmake�ҵ�boost(���������ʱ��32λ�ģ���ʱ��64λ�ģ���Ҫ�ı价���������ͱ�������)
+如若使用固定版本固定x86/x64的boost，建议设置BOOST_ROOT环境变量，方便cmake找到boost(但是如果有时用32位的，有时用64位的，需要改变环境变量，就别设置了)
 
 
 ---------- eigen---------
-��ѹ�����ã�
-���� ->C/C++ ->���Ӱ���Ŀ¼: eigen�ĸ�Ŀ¼
+解压后配置：
+属性 ->C/C++ ->附加包含目录: eigen的根目录
 
 
----------- vs���� ---------
-����opencv��boost��DirectX��asmlibrary��ʱ���Ե���������props��Ȼ�������Ҫ�ĳ���������Щprops���ο�https://github.com/grimoire/faceProject
-����opencv����debug��release����Debug|Win32��ѡ��debug��props�ļ���Release|Win32ѡ��release�ġ��������и����⣬��ҪΪÿ����Ŀ����һ�顣
+---------- vs技巧 ---------
+配置opencv、boost、DirectX，asmlibrary等时可以单独建立个props，然后对于需要的程序添加这些props，参考https://github.com/grimoire/faceProject
+对于opencv区分debug和release，在Debug|Win32中选择debug的props文件，Release|Win32选择release的。但这样有个问题，需要为每个项目添加一遍。
 
-������-������-<���ӿ�Ŀ¼>������·���󣬺�������Ҫ��������������ָ��<����������>
+在属性-链接器-<附加库目录>中添加路径后，好像还是需要在链接器输入中指定<附加依赖项>
 
-�������Ŀ¼ $(SolutionDir)
+解决方案目录 $(SolutionDir)
 
-Ĭ�ϵ����µ�ѡ�ʱ���µ�ѡ��������е���࣬��Ϊ�Ҳࣺ
-���� - ѡ�� - ���� - ѡ��ʹ��ڣ���ѡ����ѡ���������ѡ����Ҳࡱ
+默认当打开新的选项卡时，新的选项卡会在现有的左侧，改为右侧：
+工具 - 选项 - 环境 - 选项卡和窗口，勾选“将选项卡插入现有选项卡的右侧”
 
-1. vs��ĿĬ�Ϲ���Ŀ¼����ĿĿ¼����vcxproj�ļ�����Ŀ¼������Ŀ����-����-����Ŀ¼����������cpp�ļ�����Ŀ¼��������_getcwd()����
+1. vs项目默认工作目录是项目目录，即vcxproj文件所在目录（见项目属性-调试-工作目录），而不是cpp文件所在目录，可以用_getcwd()看：
 http://baike.baidu.com/link?url=IE5rjg--EsVbbIc91XivJyU47cLCXq--rDJYWXzNvKTA27PevtVSV03ZGLm6wbq3B6vGFEFypAVgr0vSCzDKj_
-�ڵ���ʱҪע�⣬����exe�ļ�����Ŀ¼��
-2. #include ����·�����λ��������ڵ�ǰcpp�ļ����Ե�
-�����ļ������ȡͼƬ����ǰĿ¼����Ŀ����Ŀ¼��
-3. vs�й���Ŀ¼��������������exe����Ŀ¼��ͬ�����´��������·��ָ��ĵط���ͬ��ô�죿
-��vs�е�ǰĿ¼�´������У�ͨ�����·������exe��
-Ҳ����vs���޸����Ŀ¼����Ŀ¼��
-4. �����ڿ���ʱ������ĿĿ¼�����Ŀ¼����ͬһ���ϡ�
+在调试时要注意，不是exe文件所在目录。
+2. #include “”路径相对位置是相对于当前cpp文件而言的
+其他文件（如读取图片）当前目录是项目工作目录。
+3. vs中工作目录和命令行中运行exe工作目录不同，导致代码中相对路径指向的地方不同怎么办？
+在vs中当前目录下打开命令行，通过相对路径运行exe。
+也可以vs中修改输出目录或工作目录。
+4. 所以在开发时，将项目目录和输出目录设在同一级上。
 
 
 
-vs15�б���ͼ������ɫ�����壬��������ɫ������
+vs15中变量图标是蓝色长方体，函数是紫色正方体
 
-vs���������ļ��У�
-ѡ�������Ŀ��Ȼ��ѡ����Ŀ���˵��еġ���ʾ�����ļ����˵�����ߵ���������Դ������������Ķ�Ӧͼ�꣩��
-�ڡ�������������������ҵ�����Ҫ���ӵ��ļ��У�������Ҽ��˵���ѡ�񡰰�������Ŀ�С�
+vs导入整个文件夹：
+选中你的项目，然后选择“项目”菜单中的“显示所有文件”菜单项（或者点解决方案资源管理器窗口里的对应图标），
+在“解决方案管理器”中找到你需要增加的文件夹，打开鼠标右键菜单，选择“包括在项目中”
 
-Ҫ�ڡ���ַ�����Դ����������Ŀ�������Լ����ļ��н���Ŀ¼�ṹ����Ŀ�һ�����ɸѡ����
-�ο� http://blog.csdn.net/u012852324/article/details/49686401 �ֶ��޸�.vcxproj.filters
+要在“结局方案资源管理器”项目下添加自己的文件夹建立目录结构，项目右击添加筛选器。
+参考 http://blog.csdn.net/u012852324/article/details/49686401 手动修改.vcxproj.filters
 
-������Щֻ�����hpp�ļ��Ϳ��ԵĿ⣬��ʹ��inline��
+对于那些只需包含hpp文件就可以的库，是使用inline。
