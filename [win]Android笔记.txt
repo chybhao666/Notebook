@@ -1,5 +1,3 @@
-模拟器中安装apk：adb install D:\ucweb-7.2.2.54-999-139-10070817.apk
-
 想使用手机调试程序，查看手机是否可用(查看可用设备)：adb devices
 
 文件目录
@@ -109,6 +107,14 @@ Ctrl+N / Alt+Insert
 Android studio 添加assets文件夹：
 app上右击 -> New -> Folder -> Assets Folder
 
+
+安装后的Android\Android Studio\jre实际为jdk（若安装java会得到jdk和jre两个文件夹）
+
+命令行中启动模拟器：sdk\tools>emulator.exe -avd -list-avds  列出模拟器列表
+                    sdk\tools>emulator.exe -avd Nexus_5X_API_26_x86  打开模拟器
+这样打开的模拟器和在Android Studio中打开了模拟器不是同一个？？？
+
+模拟器中安装apk：platform-tools>adb install D:\ucweb-7.2.2.54-999-139-10070817.apk
 
 模拟器：Tools > Android > AVD Manager 工具栏上也有
 在真机上运行应用：方法和在模拟器相同，只是在Choose Device窗口中需要选择USB连接的真机（真机打开USB调试选项）

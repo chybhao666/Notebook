@@ -1,0 +1,44 @@
+文件的比较以“行”为单位，判断每一行是增加的还是删减的方法是先采用最长公共子序列LCS找出未修改的行。
+
+SVN和Git的比较：
+1. Git是分布式的，可以不用联网在本地提交，这样可以在本地暂时提交只完成一半的代码；SVN是集中式的，适用于不准将代码带出公司的情况。
+2. Git在OffLine状态下可以看到所有的Log，SVN不可以。？
+3. SVN必须先Update才能Commit。？
+
+
+
+命令行：(PATH缺省指当前目录)
+Checkout到本地(使用命令行会创建父文件夹，而使用GUI则不创建)
+>svn co URL
+
+增/删文件或目录
+>svn add/(del,remove,rm) PATH
+
+查看文件或者目录状态 
+>svn status PATH
+	A 添加
+	D 删除
+	M 文件被修改
+	? 文件没加入版本库
+	! 文件丢失
+
+比较差异 
+>svn diff PATH(将修改的文件与基础版本比较) 
+
+恢复成原始未改变的工作副本文件
+>svn revert PATH
+
+更新版本 
+>svn update
+
+将改动的文件提交到版本库 
+>svn commit -m "LogMessage" PATH
+
+查看日志(PATH不写默认为当前目录)
+>svn log PATH
+
+查看文件详细信息
+>svn info PATH
+
+svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。
+
