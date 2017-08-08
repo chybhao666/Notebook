@@ -1,0 +1,1050 @@
+﻿《求职面试题整理》中也包含部分C笔记。
+
+在线编程：
+http://ideone.com/ 代码高亮，可编译
+http://codepad.org/ 可编译
+
+########## STL ##########
+#########################
+vector (http://www.jb51.net/article/44231.htm)
+一、初始化：
+（1）vector<int> a(10);  //定义了10个整型元素的向量（尖括号中为元素类型名，它可以是任何合法的数据类型）
+                         //但没有给出初值，其值是不确定的。（vs10中全为0）
+（2）vector<int> a(10,1); //定义了10个整型元素的向量,且给出每个元素的初值为1 （注意！不是赋值10和1）
+（3）vector<int> a(b);    //用b向量来创建a向量，整体复制性赋值
+（4）vector<int> a(b.begin(),b.begin+3); //定义了a值为b中第0个到第2个（共3个）元素
+（5）int b[7]={1,2,3,4,5,9,8}; vector<int> a(b,b+7); //从数组中获得初值
+二、对象的几个重要操作:
+（1）a.front();    //返回a的第一个元素
+（2）a.size();     //返回a中元素的个数；
+（3）a.capacity(); //返回a在内存中总共可以容纳的元素个数
+（4）a.max_size(); //返回能存储元素的最大数目
+（5）a.erase(a.begin()+1,a.begin()+3); //删除a中第1个（从第0个算起）到第2个元素
+（6）a.insert(a.begin()+2,8); //在迭代器中第二个元素前插入新元素
+ (7) a.clear();
+三、几种重要的算法，使用时需要包含头文件#include<algorithm> ：
+（1）sort(a.begin(),a.end());
+（2）reverse(a.begin(),a.end()); 
+四、其他
+1. erase()返回值是下一次的iterator！后面会前移(若是使用数组，这时不该i++！)
+    对于vector，it2=erase(it),it和it2中数据的地址部分相同，it在函数执行前后非地址的那部分数据改变了。
+    对于set则是指向下一个地址
+2. 对于删除这个问题，若是set，删除前可将迭代器next=++current;删除后再令current=next; 
+   但vector显然不能这样做，一是数据前移了，二是迭代器失效
+3. 删除多个相同的数：v.erase(remove(v.begin(),v.end(),val),v.end());
+    remove 和 erase 的区别 http://www.xuebuyuan.com/1422428.html
+4. insert()返回新插入元素的迭代器
+5. 获取最后一个数据：a.at(a.size()-1) 或 a[a.size()-1] 或a.back() 或用迭代器
+6. vector<int> v(0); //ok
+7. 对于vector或string，存储空间重新分配，则指向容器的迭代器、指针和引用都会失效；
+   空间未重新分配，指向 插入/删除 位置之前的仍然有效，/*之后的会失效(VS10测试，部分仍有效)*/。
+   （其他容器见《C++ primer》p315）
+8. vector<bool> 存储元素是以位为单位的
+
+map  (http://www.jb51.net/article/59762.htm)
+一、插入数据: (vector的insert第一个参数需要指定插入的位置)(map没有push)
+(1) my_Map[1] = 1; 
+(2) my_Map.insert(map<int, int>::value_type(2,2)); 
+(3) my_Map.insert(pair<int,int>(3,3)); 
+(4) my_Map.insert(make_pair(4,4));  //make_pair自动推出类型！
+二、查找数据和修改数据:
+(1) int i = my_Map[1];  //若map中不存在key为1，则i赋值0，map中添加(1,0)
+    my_Map[1] = i;
+(2) map<int,int>::iterator my_Itr=my_Map.find(2);  //查找不到返回my_Map.end()
+    int j = my_Itr->second; 
+    my_Itr->second = j;
+注意:
+A.键本身是不能被修改的，除非删除。 
+B.不管键存不存在，比如my_Map[1] = i;，都会执行赋值操作。
+三、删除数据
+(1) my_Map.erase(my_Itr); 
+(2) my_Map.erase(3);  //vector中会有重复的数据，所以不可能这样删，insert()也是这样；
+                      //同理vector成员函数没有find()
+四、嵌套用法
+map<int,map<int,int> >multiMap;
+(1) map<int, int> temp;
+    temp[9] = 9;
+    temp[10] = 10;
+    multiMap[10] = temp;
+(2) multiMap[10][11]=11;
+五、其他
+判断一个键是否存在可以用find或count(没有则为0)
+
+string  (http://www.jb51.net/article/41725.htm)
+一、类的构造函数：
+a) string s;    //生成一个空字符串s
+b) string s(str) //拷贝构造函数 生成str的复制品
+c) string s(str,stridx) //将字符串str内“始于位置stridx”的部分当作字符串的初值
+d) string s(str,stridx,strlen) //将字符串str内“始于stridx且长度顶多strlen”的部分作为字符串的初值
+e) string s(cstr) //将C字符串作为s的初值
+f) string s(chars,chars_len) //将C字符串前chars_len个字符作为字符串s的初值。
+g) string s(num,c) //生成一个字符串，包含num个c字符
+h) string s(beg,end) //以区间beg;end(不包含end)内的字符作为字符串s的初值
+二、操作成员函数
+a) swap()     //交换两个字符串的内容
+b) +=,push_back(),append() //在尾部添加字符。前两者可以加char，而append不能！append参数同下面的assign
+c) compare()
+d) replace()  //既可以下标也可以迭代器！！！以下也是
+e) insert()
+f) erase()
+三、转换
+data()以字符数组的形式返回字符串内容，但并不添加'/0'；c_str()返回一个以‘/0'结尾的字符数组 （？）
+四、元素存取
+使用下标操作符[]和函数at()对元素包含的字符进行访问
+五、更改内容
+s.assign(str);
+s.assign("nico",5);//把'n' ‘I' ‘c' ‘o' ‘/0'赋给字符串，而不是从第5个字符开始赋值。
+                   //（类型为char *就是前几个，类型为string就是开始位置？）
+s.assign(str,1,3);   //如果str是”iamangel” 就是把”ama”赋给字符串
+s.assign(str,2,string::npos);//把字符串str从索引值2开始到结尾赋给s
+s.assign(5,'x');//把五个x赋给字符串
+六、npos
+npos表示“直到字符串结束”。
+s.find()查找不到返回string::npos (与s.npos是同一个值0xffffffff)，找到返回下标，find()中参数既可以是char也可以是string
+find(s.begin(),s.end(),'a')查找不到返回s.end()
+七、查找 (返回的是索引)
+第一个参数是被搜寻的对象，第二个参数（可选）是起点索引，第三个参数（可选）是搜寻的字符个数。
+string str="abcbca";
+str.find("bc")              // 1
+str.rfind("bc")             // 3 找到字符串中最后一个和搜索字串一致的位置
+str.find_first_of("bc")     // 1
+str.find_last_of("bc")      // 4
+str.find_first_not_of("bc") // 0
+str.find_last_not_of("bc")  // 5
+八、迭代器
+rbegin和rend用于从后向前的迭代访问，通过设置迭代器string::reverse_iterator,string::const_reverse_iterator实现
+iterator rbegin();   //返回string的最后一个字符的位置
+iterator rend();     //返回string第一个字符位置的前面 （使用rbegin和rend从后往前，it++，而非it--）
+str2.assign(str.rbegin(),str.rend()); //将str倒着赋给str2，不存在rbegin(str)
+                                      //rbegin只能是成员函数，而begin可以是普通函数
+				      //since C++14，rbegin也能是是普通函数？(http://en.cppreference.com/w/cpp/iterator/rbegin)
+cbegin和cend得到的是const_iterator (《C++ Primer p298》)
+九、其他
+1. string s.substr(int start=0,int count= -1) 如果字符串尾部小于count字符或者count为-1，则字符串尾停止复制
+2. 将char *转为string可以直接用s=string(chars)
+3. 用sort来给string中的字符排序，sort((char *)name.c_str(),(char *)name.c_str()+name.size());必须强制类型转换去除const。
+   或是sort(s.begin(),s.end());
+4. stoi/ll/f/d 见http://www.cplusplus.com/reference/string/
+   int stoi (const string&  str, size_t* idx = 0, int base = 10);
+   float stof (const string&  str, size_t* idx = 0);
+5. 数值类型转string：string to_string (int/long long/float/double val); 在vs10中只能是LL/ULL/LD
+6. itoa不是标准C/C++语言函数，在OJ中经常不能使用，但自己写一个也很快。
+...待整理《c++ primer》p328
+
+string s;
+s+=65;   //s为"A"，java会是"65"
+
+char：
+1. strtok()  因为返回的是指针，所以查找不到时返回NULL
+2. strstr() , strchr()  同上
+3. atoi() , itoa() 注意参数、返回值
+4. strncpy() , stricmp() -windows, strcasecmp() -linux
+
+将int转char *
+char str[n];
+sprintf(str, "%d", i);
+
+bitset （http://blog.163.com/lixiangqiu_9202/blog/static/53575037201251121331412/）
+一、构造
+string strval("1100");
+bitset<32> b(strval); //bs的位模式中第2和3的位置为1，其余位置都为0。注意顺序。
+二、操作
+b[pos]        访问b中在pos处的二进制位
+b.test(pos)   pos处是否置位
+b.set(pos)    把b中在pos处的二进制位置为1，无参则所有位执行操作
+b.reset(pos)  把b中在pos处的二进制位置为0
+b.flip(pos)   把b中在pos处的二进制位取反
+b.to_string() 转为string
+b.to_ulong()
+b.count()     b中置为1的二进制位的个数
+
+基于红黑树：set, map （元素自动排序，使用迭代器访问是有序的）
+基于哈希表：unordered_set, unordered_map （unordered_set内部解决冲突采用：链地址法）（头文件unordered_*）
+multiset，multimap允许元素重复，头文件同set, map
+
+set<int,greater<int>> st; //从大到小排序，第二个参数缺失时默认为less<T>
+map同理
+
+unordered_set（http://blog.csdn.net/dream_you_to_life/article/details/46785741）
+template < class Key,                        // unordered_set::key_type/value_type
+           class Hash = hash<Key>,           // unordered_set::hasher
+           class Pred = equal_to<Key>,       // unordered_set::key_equal
+           class Alloc = allocator<Key>      // unordered_set::allocator_type
+           > class unordered_set;
+hash<Key>通过相应的hash函数，将传入的参数转换为一个size_t类型值，然后用该值对当前hashtable的bucket取模算得其对应的hash值。（对于指针也是如此）
+
+set中数不重复，不能使用数字索引访问（应该使用迭代器），数据已排序
+在一堆不重复数中查找另一堆数，可以把这些数放在set中
+
+对于自定义的结构体，如果没定义“<”等函数，没法用set/map存储，因为set/map查找不到排序依据(unordered_* 也不行，会有==的问题)
+解决方法：定义这个结构体的“<”
+set/map不能存char数组，但可以存string（若存储string报错“未能推导模板”，“< 不定义”，可能是没#include <string>。clang700.1.81不需要include，但vs10需要）
+
+list
+以双链的链表来实现，不支持随机存取。即不能用 l.begin()+2 来指向list中的第三个对象。
+成员函数有push_back()和push_front()
+不能sort(l.begin(),l.end()); 若要排序，应为l.sort();
+
+deque（双端队列double-ended queue）
+在功能上和vector相似，但是可以在前后两端向其中添加数据，即push_back()和push_front()
+支持随机访问，即支持[]以及at()
+排序是用泛函sort()，成员函数没有sort() （vector同理）
+
+tuple
+(第一本C++ p255)(C++ primer 5e)
+类似于pair（见map insert部分）。不定义新数据结构情况下，将一些数据组合成单一对象
+
+1. get<i>(t) //返回tuple的第i个数据成员的引用
+2. p.first p.second //返回pair的数据成员
+3. itmp->first itmp->second //返回map的iterator的数据成员
+
+<stack>有top()
+<queue>有front()，back() （不是end）
+pop()虽然会移除一个元素，但是并不返回它，返回为void
+stack和queue都不能通过迭代器或是[]来访问！！！没有begin()和end()，所以也没法排序。
+
+heap (http://www.tuicool.com/articles/z6326f) (剑指offer p289)
+并不属于STL容器组件，它分为 max heap 和min heap，在缺省情况下，max heap是优先队列（priority queue）的底层实现机制。 
+而这个实现机制中的max-heap实际上是以一个vector表现的完全二叉树（complete binary tree）。
+push_heap()要和v.push_back()配套使用；pop_heap()同理
+对于已有数据的v，先用make_heap()
+
+priority_queue（http://blog.csdn.net/morewindows/article/details/6976468）
+函数列表与stack相同（http://www.cplusplus.com/reference/queue/priority_queue/）
+以别的容器作为底部结构，再根据堆的处理规则来调整元素之间的位置
+
+1. set<>.find(..)查找不到返回的是set<>.end()
+   string不同于其他STL，string::find()参数可以是字符或字符串，查找到返回的是下标，查找不到为0xffffffff （4294967295，int类型为-1）。
+2. 泛函find(),find_if()也是查找不到返回end()
+   对于数组，查找到返回int *。（查找到的是第一个满足的位置）
+   对于string同数组
+
+泛函：
+search()   相比于find()可以对多个元素搜索
+for_each() 遍历
+count()    返回给定值的出现次数
+equal()    返回是否相同
+unique()   去除相邻的重复元素，将重复元素放到尾部，并不改变容器大小。一般先sort() 《C++ Primer》 p343
+reverse()
+fill()     对每个元素赋值 《C++ Primer》 p340
+stable_partition //http://www.cplusplus.com/reference/algorithm/stable_partition/
+对于数组排序，sort的参数为指针，而非数组的某个值
+
+求和，该算法在numeric头文件中定义！
+double sum=accumulate(a,a+4,0.0); // ！第三个实参为初始值，返回类型就是这个实参的类型，容器内的元素类型必须与这个实参的类型匹配，或者可转换为它的类型
+string sum = accumulate(v.begin() , v.end() , string("")); //从空字符串开始，把vec里的每个元素连接成一个字符串。
+
+（http://blog.csdn.net/hermito/article/details/51472082）
+ForwardIter lower_bound(ForwardIter first, ForwardIter last, const _Tp& val) 算法返回一个非递减序列[first, last)中的第一个大于等于值val的位置。
+ForwardIter upper_bound(ForwardIter first, ForwardIter last, const _Tp& val) 算法返回一个非递减序列[first, last)中第一个大于val的位置。
+
+void *bsearch(const void *key, const void *base, size_t nmem, size_t size, int (*comp)(const void *, const void *));
+key指向所要查找的元素，base指向进行查找的数组，nmem为查找长度，一般为数组长度，size为每个元素所占的字节数，一般用sizeof(...)表示，comp指向比较子函数。
+数据必须是经过预先排序的，而排序的规则要和comp所指向比较子函数的规则相同。
+查找不到返回空指针。
+头文件#include <stdlib.h> 或 #include <iostream>（包含了stdlib.h）
+
+获得迭代器的地址：&*
+注意解引用运算符*是被重载的。为何重载？举一个例子，比如set，它的常见内部实现是RB-Tree。若你对它的一个迭代器做一个++操作，
+但为了符合语义（即表面上它表现得像指针），会把它的迭代器定义为一个类，当你用++运算符时，其通过重载++运算，先将内部保存的
+指针进行一次二叉树操作，之后把得到的结果返回，也就是隐瞒（抽象）了的底层的实现
+
+序列式容器vector的迭代器可以it = it + 1; 但关联式容器set不行。
+
+########## 输入输出 ##########
+##############################
+读取一行包含空格的字符串的方法：
+（http://www.cnblogs.com/tanky_woo/archive/2010/08/31/1813455.html）
+方法一：getline()
+读入整行数据，它使用回车键输入的换行符来确定输入结尾。
+调用方法: cin.getline(str, len);  //文件的读取是将cin改为ifstream定义的变量 ifs.getline(...);
+方法二：get()
+调用方法：cin.get(str, len);
+那么两者有何区别？
+两者都读取一行输入，直至换行符。
+然后，getline将丢弃换行符，而get()将换行符保留在输入序列里。 (scanf和cin也是会保留，但换行存在时get()无法读下面的数据)
+所以，再使用cin.get()输入多行数据时，中间可以使用get()消除换行符。
+因为get(str, len)和get()都是cin的类成员，所以可以合并起来写：
+cin.get(str1, 30).get();
+
+从cin读取一个字符(包含‘\n’)的两张方法:
+char ch=cin.get();
+cin.get(ch);
+放回：
+cin.putback(ch); //将刚才读取的ch字符返回到输入流中，或是用 ungetc(int ch, FILE *stream);
+查看而不读取：
+ch=cin.peek();
+
+int c=getchar();   //字符可以作为返回值，但字符串不行
+int putchar(int c);
+
+//参数同fXX
+int getc(FILE *stream );
+int putc(int ch, FILE *stream );
+
+gets(char *buf); 不会判断上限，易发生内存越界 //clang下使用gets()会出现 warning: this program uses gets(), which is unsafe.
+puts(char *buf);
+
+f开头的四个输入和四个输出函数, 要#include <fstream>，否则在g++下会报错：（书《C语言程序设计教程·南师》p258）
+1)fgetc(FILE *stream)
+  fputc(int ch, FILE *stream)
+2)fgets(char *buf, int bufsize, FILE *stream); 指定大小 第三个参数可用stdin，但不能是char * (f开头函数要指定输入输出，在stdio中)
+  fputs(char *buf, FILE *stream);  (不需要bufsize)
+3)fread(void *buf, unsigned int size, unsigned int count, FILE *stream)
+  fwrite(...)
+4)fscanf(FILE *stream,char *format,...) 读到文件尾返回EOF(-1)，不是返回0。第一个参数可以是char *
+  fprintf(...)
+
+sprintf与sscanf：(参数列表类似于fprintf，fscanf)
+http://www.cnblogs.com/Anker/p/3351168.html
+
+stringstream的使用
+1.
+#include <sstream> //头文件！类似于fstream
+int main(){
+    stringstream strm;
+    int age;
+    string name;
+    strm<< "456abc"; //注意是“<<”！
+    strm>> age>> name;
+    strm.clear(); //在进行多次转换前，必须清除（Set error state flags）！不然下次还是"456abc"
+    ...
+}
+2.
+stringstream继承自istream，ostream
+其他用法：（http://www.cplusplus.com/reference/sstream/stringstream/）
+strm.str()  //返回保存的string的拷贝
+strm.str(s) //拷贝string s
+strm.peek() //inherited from istream
+3.
+ostream& put (char c);  //不是pop，push，参考cin.get()。
+int get();
+istream& get (char& c);
+istream& get (char* s, streamsize n);
+例：
+stringstream ss;
+ss<<123;
+char c;
+while(!ss.eof()){
+    ss.get(c);
+    cout<<c; //输出1233
+}
+而改写为：
+while(!ss.get(c).eof()){ //先后经历了get和eof
+    cout<<c; //输出123
+}
+总之get很不好用，平时不要用。可将stringstream转为string操作。
+4.
+stringstream的内容无法清除掉？如果不进行>>和clear()，读取的还是原有内容！
+“=”操作是私有的，所以要想替换内容，我想到的方法是用swap函数，在vs中使用swap没问题，但在leetcode上编译出错。另一个方法是strm.str(s)
+
+通过函数参数，想输出到屏幕时输到屏幕，想输出到文件时输到文件 write_result(ostream &out,..)
+
+对于以下代码，若cin将要读取的值超过了int范围（如20个1），while循环会结束！
+int a;
+while(cin>>a){ ... }
+
+读取一行不定个数的int值：
+while(cin.peek()!='\n'){
+    cin>>a[i++];
+}
+或是借助stringstream
+
+格式化输出：(详见《C语言 南师》p44)
+%p  指针，16进制
+%x  以16进制输出
+
+########### 位操作 ###########
+##############################
+补码表示实现加减运算的统一，直接进行位运算
+
+~0 得到的不是1，而是-1 （对每位操作），同理~1 得到的不是0，而是-2
+
+对于负数可以通过对其取反后加1来得到正数(比起先减1后取反做起来更舒服)，~a+1
+
+2^N : i = (1 << N)
+n>>1不改变n的值，应该是n=n>>1;
+
+位操作只能用于整形数据，对float和double类型进行位操作会被编译器报错
+
+cout<<(0x01<<10); //输出1024
+cout<<(0x01<<31); //输出-2,147,483,648 （可以看出0x01为int类型）
+cout<<(0x01<<32); //输出0
+
+long long inf=1LL<<62; 不要写为 long long inf=1<<62; 后者为0
+其中LL也可以用小写
+longlong 为%lld或%I64d，别误写为%ld。
+
+空间压缩：
+char: p+(i / 8) |= (0x01 << (i % 8))
+int:  flag[j / 32] |= (1 << (j % 32))
+
+右移中逻辑移位的高位补0而算术移位的高位是补符号位
+对于int，算术移位
+对于unsigned，逻辑移位
+
+32位二进制逆序： （http://blog.csdn.net/morewindows/article/details/7354571）
+a = ((a & 0xAAAA) >> 1) | ((a & 0x5555) << 1);  //第一步：每2位为一组，组内高低位交换
+a = ((a & 0xCCCC) >> 2) | ((a & 0x3333) << 2);  //第二步：每4位为一组，组内高低位交换
+a = ((a & 0xF0F0) >> 4) | ((a & 0x0F0F) << 4);  //第三步：每8位为一组，组内高低位交换
+a = ((a & 0xFF00) >> 8) | ((a & 0x00FF) << 8);  //第四步：每16位为一组，组内高低位交换
+
+############ 数值 ############
+##############################
+size_type减去int得到的是size_type类型值，即unsigned int，而不是int！注意类型转换 （STL的size()就是size_type类型）
+
+某种类型的最大值 numeric_limits<int>::max()
+INT_MAX定义在limits.h
+
+全局变量默认为0
+栈上分配后的空间为0xcc（0xcccc为烫，若每次输出一个char，第一次不显示任何内容，第二次显示烫) (char c[10]="a";数组中除了c[0]其他全为0）
+堆上分配后的空间为0xcd（0xcdcd为屯）
+静态局部变量初始值为0。
+
+2.0是double型，2.0f才是float型。
+
+得到一个整数的二进制：itoa(number,string,2);
+
+unsigned类型即unsigned int （《谭浩强C++》p20）
+
+cout<<012; //输出10
+
+int数值范围：-2,147,483,648 ~ 2,147,483,647
+
+float型1.0f表示为：0x3f 80 00 00，在内存中为00 00 80 3f （复习计组浮点数表示）
+float型0为00 00 00 00
+
+float f1=1.00001;    //54 00 80 3f
+float f2=1.000001;   //08 00 80 3f cout默认输出精度和存储值的精度是不同的，cout默认输出小数点前后加起来6位
+float f3=0.99999;    //58 ff 7f 3f
+float f4=0.9999999;  //fe ff 7f 3f
+float f5=0.99999999; //00 00 80 3f 已经超出能够存储的精度
+float f6=1.00000001; //00 00 80 3f 已经超出能够存储的精度
+float f7=1.000000001;//00 00 80 3f
+int a1=f1;           //
+int a2=f2;           //
+int a3=f3;           //
+int a4=f4;           //
+double d1=f1;        //
+double d2=f2;        //
+double d3=f3;        //
+double d4=f4;        //
+以上cout 1,2,3,4分别为：
+1.00001 1 0.99999 1
+1 1 0 0
+1.00001 1 0.99999 1
+
+float 小数点前后加起来有效数字只有7位
+double小数前后加起来的有效数字只有16位
+输出  小数点前后加起来6位
+
+如果通过某些计算得到一个float类型值为某个整数，之后转为整形，得到的一定是这个整数。不用去考虑精度的问题。
+对于小数，如以下例子，8.2是在表示精度内的，所以表示不会出错
+string str="8.2";
+float  cc=atof(str.c_str());  //cc的值为8.1999998，但是由二进制转为十进制得到的会是8.2
+
+浮点数陷阱（《算法竞赛入门经典》p28）
+double d=9.7;
+for(int i=0;i<3;i++)
+    d+=0.1;
+cout<<d<<endl;        //10
+cout<<(d==10)<<endl;  //0，不等
+
+二进制反转，如6，二进制表示为110，反转后为011，代表3：
+while (x){
+   n = (n << 1) | (x & 1);
+   x = x >> 1;
+}
+return n;
+
+得到逆串：
+string s2(s1.rbegin(),s1.rend());
+
+########## 出错调试 ##########
+##############################
+VS编译器是“cl.exe”：cl /c /EHsc hello.cpp
+"/c"表示只编译不连接
+“/EHsc”指定编译器使用何种异常处理模型
+连接器是“link.exe”：link hello.obj
+
+图片存在，但使用opencv读图却失败？原因在之前吧链接器中debug版的dll删了，只留下release版，而程序在debug模式下运行。此外，在属性管理器中修改链接器后要保存才有效。
+
+error:LNK2005 已经在*.obj中定义:
+被重复定义了，有可能是在头文件中定义了变量
+
+修改代码一定要将相关处都修改完全。
+代码结果出错可能不是自己用的算法或结构有问题，可能是该修改的代码没修改完全。
+
+一段代码里即int max;又用了max()，在VS10下可以正确运行，但在clang下会编译错误：called object type 'int' is not a function
+定义的变量不要和常用函数或模板重名！
+
+vs的math.h中有y1()函数，如果定义int y1;“有可能”会冲突。
+
+查看对象内存布局：
+cl [filename].cpp /d1reportSingleClassLayout[className]   没空格的地方就是没空格！
+
+查看程序依赖的dll，使用dumpbin命令。（VC++深入详解中有）
+
+调试：a=fun();当从fun()中调试出来，当前调试到这行时，a尚未赋值，要再单步调试下才行！
+
+调试时发现跳过了应该运行的语句，那么可能是自己代码写错了！！！比如把“a=1”写出了“a==1”，这样调试时会跳过这句的。
+
+命令行运行程序，重定向输入输出 test <1.in >2.out
+
+在VS10中调试时，无法直接看到动态分配的数组内容，而用vector则可以看到
+
+在vs2010中若定义的变量名和类型同名（不区分大小写），编辑器可能报警告，但能成功运行。
+如Tree tree[3]; set<int> set; 这也会导致调试时无法查看变量内容。
+
+编译器内置宏：
+__LINE__：行号；
+__FILE__：文件名；
+__FUNCTION__：函数名
+__DATE__：编译日期；
+__TIME__：编译时间；
+__cplusplus：当编写C++程序时该标识符被定义；
+__STDC__：若编译器遵循ANSI C标准，其值为1；否则未定义(不确定GCC以外是编译器是否有，前面几个在VS10中皆有)
+
+#ifdef _DEBUG
+#define debug(...) fprintf(stderr, __VA_ARGS__)
+#else
+#define debug(...) 
+#endif
+
+（http://blog.csdn.net/cp1300/article/details/7773239）
+（http://www.cnblogs.com/pengyingh/articles/2407265.html）
+指定是否输出：
+#ifdef _PR
+    #define PR(info) printf(info)
+#else
+    #define PR(info)
+#endif
+但使用这样的语句时就会报错：PR("%s",msg)，因为PR(info)这条宏定义只支持一个参数的替换。
+自C99规范以后，编译器就开始支持不定参数的宏定义，于是可以：
+#define PR(format, ...) printf (format, ##__VA_ARGS__)
+	可变宏参数...(ellipses)必须为最后一个参数，将代替__VA_ARGS__（variable arguments）；
+    ' ## '的作用，当可变参数的个数为0时，将使预处理器（preprocessor）去除掉它前面的那个逗号；
+还可以这样：#define PR(format, ...) printf("FILE: "__FILE__", LINE: %d: "format"\n", __LINE__, ##__VA_ARGS__)
+
+#define语句中的#是把参数字符串化，##是连接两个参数成为一个整体
+#define f(a,b) a##b
+#define d(a) #a
+#define s(a) d(a)
+puts(f("a","b")); //输出ab
+puts(d(f(a,b)));  //输出f(a,b)
+puts(s(f(a,b)));  //输出ab（为什么不是f(a,b)？这个较为复杂，此处不展开）
+
+
+########## 奇淫巧技 ##########
+##############################
+交换两个数：a^=b^=a^=b;
+注意：若*a^=*b; 一定要保证a!=b
+
+switch中每次case前都要写break很烦，可以这样 #define CASE break;case
+
+可以这样使用数组 ：4[a]
+
+case中default的‘l’误打为数字‘1’，不会编译错误。编译器会把defau1t当成标号（goto语句目的地，分号前的标识符）
+
+
+######### 类&结构体 ##########
+##############################
+struct可以用{}赋值，如下：
+struct A{
+    char c;
+    int b;  };
+A a={'x',3};
+如果一个类的成员为public的，也可以用{}赋值，但继承类不能这样用。
+
+struct A{
+   int x,y; //可以写在一行，先初始化x，后y
+};
+
+protected变量：在无继承的类中，和private控制符是没区别的。在继承中，派生类函数可以访问基类的protected对象(私有继承也能访问)。（《程序员面试宝典》p129及例题2！）
+
+class A{};
+class B{};
+class C: public A,public B{};
+C *pc=new C;
+B *pb=dynamic_cast<B*>(pc); //pb实际指向对象C中子类B部分
+cout<<(pc==pb)<<endl; //1 ，隐式类型转换
+cout<<((int)pc==(int)pb)<<endl; //0
+(《程序员面试宝典》p136)
+
+struct A{
+   int x:1;
+   int y:2;
+   //int z:33; 超过4字节不合法
+};
+cout<<sizeof(a); //4
+
+class A{
+public:
+  void print(){ cout<<"A"<<endl; }
+};
+1. A * a;      a->print();//运行出错，a未初始化
+2. A * a=NULL; a->print();//可以
+
+类静态成员数组赋值：
+class A{ static int n[5]; };
+int A::n[5]={1,2,3,4,5};
+
+
+############ 命名 ############
+##############################
+命名前缀：
+1、  整型前缀
+int               nId;
+short             sId;
+unsigned int      unId;
+long              lId;
+2、  浮点型前缀
+float             fValue;
+double            dValue;
+3、  字符型前缀
+char              chChar;
+4、  字符串前缀
+char              szPath;
+string            strPath;
+CString           strPath;
+5、  布尔型前缀
+bool              bIsOK;
+BOOL              bIsOK;
+6、  指针型前缀
+char *            pPath;
+flost *           pfValue;
+7、  数组前缀
+int               arrnNum;
+CString           arrstrName;
+8、  结构体前缀
+STUDENT           tXiaoZhang;
+9、  枚举前缀
+enum              emWeek;
+10、  字节的前缀
+BYTE              byIP;
+11、  字的前缀
+DWORD             dwMsgID;
+WORD              wMsgID;
+12、  字符指针前缀
+LPCTSTR           ptszName;
+LPCSTR            pszName;
+LPSTR             pszName;
+13、  STL容器前缀
+vector            vecValue;
+14、  RECT矩形结构前缀
+RECT              rcChild;
+CRECT             rcChild;
+15、  句柄前缀
+HWND              hWndDlg;
+HBRUSH            hBr;
+HPEN              hPen;
+HBITMAP           hBmpBack;
+16、  Windows颜色前缀
+COLORREF          crFont;
+17、  Windows DC前缀
+CDC               dcClient;
+成员变量以m_开头，后面为变量，变量同时还要加前缀。
+CString           m_strName;    //m_+类型前缀+名称
+全局变量以g_开头
+静态变量以s_开头
+变量由多个单词组成，则每个单词的首个字母大写。
+int               nStudentID;
+CString           strStudentName;
+定义一个类以C或者T做为类名前缀。
+class             CMyListCtrl;
+class             TMyListCtrl;  //也有用S的
+MFC控件绑定值类别或者控件类类别，需要以m_开头并且加前缀。
+CEdit                      m_EDT_strValue;       //Edit绑定控件类别
+CListBox                   m_LB_nName;           //ListBox
+CListCtrl                  m_LC_Name             //ListCtrl;
+CComboBox                  m_CB_Name;            //ComboBox
+控件ID尽量简化并表明控件类型和意义。
+Button                     IDC_BTN_NAME;
+Edit                       IDC_EDT_NAME;
+ListBox                    IDC_LB_NAME;
+ListCtrl                   IDC_LC_NAME;
+ComboBox                   IDC_CB_NAME;
+
+定义自己的变量 my_开头
+
+不要把变量类型放在变量名中，这样会加重读者的精神疲劳。现在的编辑器能够很好的展示变量的类型。
+
+############ 其他 ############
+##############################
+
+strcmp("abc","ab")    //1
+strcmp("abc","abcd")  //-1
+
+判断条件 i<=sqrt(n) 可改为 i*i<=n 或 i<=t/i
+
+CopyFile()函数，在Debug下#define为CopyFileA，在Release下#define为CopyFileW，前者是ascii类型的参数，后者是unicode类型参数。
+Debug和Release转换时会出现参数类型错误问题。项目改为多字符编码可以解决这个问题。
+
+sqrt()有多匹配问题,匹配float和double，对于float类型可使用sqrtf()
+
+char * c="abc"; 在clang下会Warning，不赞成这样写
+
+Lambda表达式 (c++ primer 5e p346)(《我的第一本c++书》表述不清楚)
+[&] 表达式将以传引用的方式使用当前作用域内的变量
+[=]         以传值的方式(只读)
+
+类型转换
+C风格：   (类型说明符)表达式
+函数形式：类型说明符(表达式)
+C++风格： static_cast<类型说明符>(表达式)，如 double d=static_cast<double>(i);
+
+在new和delete时检测指针是否为NULL是多此一举。
+1.在C++中，如果没法分配足够内存，会抛出std::bad_alloc异常，new永远不会返回NULL
+2.如p为NULL，delete p不会做任何事情
+3.但在释放掉对象后，建议另p=nullptr；
+
+编程规范：
+http://blog.csdn.net/haoel/article/details/2872
+或是谷歌、华为的规范
+
+获取ms级当前时间：
+GetSystemTime()“协同世界时间”（即UTC)
+GetLocalTime() 本地时间
+使用：
+#include <Windows.h>
+SYSTEMTIME st;  
+GetLocalTime(&st);  
+printf("%.4u%.2u%.2u%.2u%.2u%.2u%.3u", st.wYear, st.wMonth, st.wDay,st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+
+main的参数可以这么用
+if(argc<2)
+    argv[1]="123.txt";
+
+VS 代码区域左边:
+行头是绿色的行表示修改过且已保存
+行头是黄色的行表示修改过尚未保存
+这些行都可以用 Undo 功能撤销改动，如果没有颜色就不能 Undo
+
+创建一个文件夹 
+system("md c:\\mydir");//或mkdir
+但使用system时，括号里需要为“\\”，如果使用参数，则传入的字符串得为“\\\\”，比较麻烦
+_mkdir("mydir")函数来创建（#include <direct.h>)，则可使用“\”或“/”或“\\”等。
+
+内存分配：
+free 不管你的指针指向多大的空间,均可以正确地进行释放
+new/delete、new[]/delete[]、malloc/free 三对均需配套使用
+
+a++ 是先取出持久对象a的一份拷贝,再使持久对象a的值加1,最后返回那份拷贝,而那份拷贝是临时对象(不可以对其取地址),故其是右值;
+++a 是使持久对象a的值加1,并返回那个持久对象a本身(可以对其取地址),故其是左值;
+(可见《C++ 谭浩强》p329 实现代码)
+
+++++a; //可以
+a++++; //不行
+i++ - --j; //可以
+
+x[i++] += y;
+被当做a[i]=a[i]+y; 而不是a[i++]=a[i++]+y;
+a[--j + i++]+= --b;
+扩展为：
+--j;
+--b;
+a[j+i]=a[j+i]+b;
+i++;
+
+在vc6.0中 vector <list<int>> veclis; 需将>>中间添加空格，避免与移位运算符混淆
+
+“!=”优先级高于“&”，以后遇到不确定时候还是加括号吧
+
+对bool类型的命名，尽量使值为“true”时命名含义为“是”
+
+if() ...
+    if() ...
+else ... //else和第二个if配对
+
+对于树的插入算法，构造子结点的函数中还得传入父节点指针，不如采用Insert(Node * &p,...)的方法，这样可以方便修改父节点中指针内容。（Insert(p->left,...)）
+
+在堆上new空间，释放时如何知道空间大小？
+new的空间之前会有记录分配空间的大小，若记录分配空间大小的那块内存区域被越界访问改写（改写不会报错），释放new空间时会报错。
+
+int a[i]; //#define i 3 或const int i=3; 都可以（可见const类型在编译阶段就替换了）
+
+若要记录数组长度，可将长度记录在a[0]
+
+typedef定义一个标识符,使之代表int数组：《谭浩强C++》p225
+
+math.h中 #define M_PI 3.14159265358979323846  /* pi */
+但是看代码会发现代码在#if defined中，默认是无效的
+
+pow()非power()
+
+文件结束符EOF:
+UNIX 中是^D (0x0d) 
+Win  中是^Z (0x1a)
+
+如何用printf输出%？ ASCII码
+
+命令行程序中弹出提示框：
+#include <Windows.h>
+MessageBox(NULL, "hello", "Notice", MB_OK); 
+
+ip地址a.b.c.d用以下方式存储，方便用子网掩码获得网络地址：
+unsigned int ip = (a << 24) | (b << 16) | (c << 8) | d;
+for (int i = 0; i < mask; ++i) { ... }
+
+以下两个语句的区别是：第一个动态申请的空间里面的值是随机值，第二个进行了初始化，里面的值为0
+int *p1 = new int[10];  
+int *p2 = new int[10]();
+
+大部分用户的操作系统（如windows, FreeBsd,Linux）是小端模式的；少部分，如MAC OS，是大端模式。（未测试）
+Java是平台无关的，默认是大端。在网络上传输数据普遍采用的都是大端。
+
+strlen的返回值为size_t，一定要小心参与加减运算！例：i<strlen("")-1
+
+#define x 1
+int a=x;
+#undef x
+int b=x;  //error，宏定义已取消
+
+char * p,* q; 若都指向'\n'返回true；若只某一个指向'\n'返回false；否则继续处理。代码如何写简便？
+if(*p=='\n')
+    return *q=='\0'; 
+...//继续处理代码
+
+注意逗号表达式的使用：
+double j;
+for(int i=1,j=1.2; ;){ } //j为int型
+int x=1,double y=1.1;    //error
+
+","执行顺序为从左至右，返回最右值
+
+string不一定以'\0'结尾，比如字符串长度为15时，capacity也为15，所以不能用str!='\0'来判断字符是否结束
+
+C语言文件操作 （《C语言 南师》p245）
+a，a+
+
+复习malloc和free的使用
+
+函数指针赋值：（《C++ primer》p221）
+pf=fun;  //函数自动转化为指针
+pf=&fun; //等价的赋值语句，取地址符是可选的
+调用：
+pf()；
+(*pf)();
+甚至(***pf)(); （《C专家编程》p184）
+如何定义函数指针数组：（《C专家编程》p183）
+int a(),b(),c();
+int (*fun[])()={a,b,c}; //根据结合性优先级分析
+关于函数指针，还可以使用std::function（c++11,#include <functional>），using（《C++ primer》p223）
+对于 int(*p)[20]; 这里p是一个函数，返回一个指向包含20个元素的数组的指针。（《C++ primer》p230）
+
+strlen()参数不能为NULL
+
+int* pint = 0; 
+pint += 6; 
+cout << pint << endl; //24，注意为int*，不是char*
+
+for(;it2!=v.end();it++,it2++){
+   if(...){
+       v.insert(it2,KJ(p,it->e+1,it->e+d));
+       break;
+    }
+}
+if( it2==v.end() ) ... //这边会运行错误：vector iterator incompatible
+                       //原因：insert后要对it2重新赋值，如it2=v.insert(...)
+
+a*=2+b 等同于a=a*(2+b)
+
+#define A 2+3
+#define B A*A
+cout<<B*B;    //23，完全替换的
+
+对于不含成员变量的类，大小为1。每个实例在内存中都有一个独一无二的地址，为了达到这个目的，编译器往往会给一个空类隐含的加一个字节。
+
+printf返回一个int值，表示被打印的字符数
+void fun(int a,int b){ cout<<a<<" "<<b<<endl; }
+fun(printf("a"),printf("bc"));  //bca1 2
+
+malloc默认返回的是空指针void* 需要程序猿在malloc 前面指定类型
+
+
+union U{
+  struct{
+    int a,b;
+  };
+  int x,y;  //（或者写为int x; int y;）x，y和a三者共享空间！
+};
+
+char *a=0;
+char *b=a+5;
+cout<<b-a<<endl;  //5
+
+cout<<-1%5 <<endl; //-1
+cout<<-1%-5<<endl;//-1
+
+关键字的颜色该为蓝色，却显示的黑色，看看是不是前面的符号打成中文符号了！
+
+c语言没有引用,只是作为取地址
+
+编译器对对象的访问是基于偏移量的
+class A{ public: int ma; int mb; };
+A a;
+cout<<&a<<endl;       //0033FC18
+cout<<&(a.ma)<<endl;  //0033FC18
+printf("%p\n",&A::ma);//00000000 ,此处不要用cout
+printf("%p\n",&A::mb);//00000004
+
+访问单行数组最后一个元素
+int a[]={1,2,3,4,5};
+cout<<*(*(&a+1)-1);
+int *p=(int *)(&a+1); cout<<*(p-1); //将双指针强转为指针了
+
+别把fun(a+1)写成fun(a++)！后者的输入参数是a，而非a+1
+
+全排列：bool next_permutation( BidirectionalIterator _First, BidirectionalIterator _Last); 头文件<algorithm>
+（《挑战程序设计竞赛》p37）
+
+关于const：
+http://blog.csdn.net/dingyuanpu/article/details/5807267
+1. C++中的const正常情况下是看成编译期的常量,编译器并不为const分配空间,只是在编译的时候将期值保存在名字表中,并在适当的时候折合在代码中.？？？
+   在C中,const是一个不能被改变的普通变量,既然是变量,就要占用存储空间,所以编译器不知道编译时的值.不能用于数组定义时的大小. 
+//C++
+int i=2;
+const int c1=i;
+const int c2=2;
+int a[c1]; //error
+int b[c2]; //ok
+i,c1,c2 都在栈上？
+2. C++可以在头文件中定义const变量，不同的cpp文件使用而不引起命名冲突.
+C++中,const默认使用内部连接.而C中使用外部连接.
+内连接:编译器只对正被编译的文件创建存储空间,别的文件可以使用相同的表示符.
+外连接:所有被编译过的文件创建一片单独存储空间.一旦空间被创建,连接器必须解决对这片存储空间的引用。全局变量和函数使用外部连接.通过extern关键字声明,可以从其他文件访问相应的变量和函数.
+3. C++中,是否为const分配空间要看具体情况.如果加上关键字extern或者取const变量地址,则编译器就要为const分配存储空间.？？？
+
+C++11初始化 （《C++ Primer p39》）
+int a=0;
+int a(10);
+int a={0};
+int a{0};
+后两者为列表初始化。
+
+char *可以转换为const char * ; 但char **无法转换为const char ** 。（《C专家编程 p19》）
+
+float型数据在运算时一律先转换成double型，即使是两个float相加。（《C专家编程 p4》《C++程序设计 谭浩强 p33》）
+关于signed和unsigned间转换，见《C专家编程 p22》
+
+编译时获取数组大小方法：
+int array[]={1,2,3};
+#define NUM (sizeof(array)/sizeof(array[0]))
+
+查看变量类型：typeid( obj ).name()
+
+int * a,* b;
+相除：*a/ *b;  “/*”会被当为注释，中间要加空格
+
+i= 1,2;   //i is 1
+i=(1,2);  //i is 2
+
+同一个项目的两个源文件定义了同名函数会冲突，将其中一个声明为static即可，表示在当前文件之外不可见
+
+有些C语言程序员采用一种规定，带“--”的参数表示“从这里开始，没有参数是选项开关”
+
+数组和指针的区别：
+char a[5]="abcd";
+extern char a[]; cout<<a[1]<<endl;  //运行错误
+extern char *a;  cout<<a[1]<<endl;  //ok
+所以说，定义和声明要匹配！在其他地方（函数传参，表达式中）可以认为两者相同。
+
+char a[]="gooseberry";
+想将前五个字符替换为"black"，可以这样：
+strncpy(a,"black",5);
+
+C编译器的组成：
+C预处理器
+前端（语法和语义分析）
+后端（代码生成器）
+优化器
+汇编程序
+链接-载入器
+
+一些函数：
+void* calloc (size_t num, size_t size);  Allocate and zero-initialize array
+void* realloc (void* ptr, size_t size);  Reallocate memory block
+在时间中，不用吧realloc的返回值直接付给字符指针。如果realloc失败，会使指针赋为NULL，就无法对指针访问。（《C专家编程》p236）
+
+signal.h是C标准函数库中的信号处理部分， 定义了程序执行时如何处理不同的信号（《C专家编程》p165-167）
+
+在C语言中定义一个结构体类型:
+typedef struct Stu{ //Stu是结构标签，可以省略不写
+}Stu;               //Stu是结构类型，建议和结构标签不同名，避免歧义，将结构标签写为tagStu。
+Struct Stu s1;  //使用结构标签，必须要struct
+Stu s2;         //使用结构类型
+若不用typedef，定义结构体变量只能使用s1形式，此时不加关键字struct的Stu是变量。但在C++中不再需要加struct。所以说在C中添加typedef关键字是为了定义结构体变量时偷懒不写struct。
+
+在自己定义的类中重载运算符“==”，但使用find等函数却说没有找到（或没有可接受），是因为函数形参要为const类型，自己却没有设为const！
+
+自己写命令行游戏时，为了使输出的符号长宽相等，会采用Unicode，这时要用wchar_t来存储（直接输出的话则不用）
+wchar_t的输出要用wcout，示例：
+wchar_t c=L'■';
+wcout.imbue(locale("chs"));
+wcout<<c<<endl;
+
+可以这样初始化二维数组：
+int a[3][3] = {1,2,3,4,5,6,7,8}; //末尾不够的为0
+
+*p.f , *ap[]  , *f() 
+.和[]和()的优先级都高于* 。（《C专家编程》p38）
+
+将数组放在结构体中，好处：（《C专家编程》p61）
+1）可用复制语句拷贝整个数组
+2）可以传值调用方式传递给函数
+3）可作为函数返回类型
+
+int i, j; 
+int k = scanf("%d %d", &i, &j); //若输入1 23 a 则k为2
+scanf返回接收到的变量值的个数.
+
+sizeof(short);      // 2
+sizeof(vector<..>); //不是vector中存储数据的大小
+sizeof 'A';         //C++为1，C语言为4（自动类型转换为int）
+
+#ifdef LJY
+或
+#if defined(LJY)  //否定为#if !defined(LJY)
+
+数据段和BSS段在内存空间分开（《C专家编程》p118）
+
+fill函数的作用是：将一个区间的元素都赋予val值
+fill(vec.begin(), vec.end(), val);
+
+当我们对文件流进行操作的时候，它们与一个streambuf类型的缓存(buffer)联系在一起。以下情况会进行同步(synchronization)：
+1）当文件被关闭时: 在文件被关闭之前，所有还没有被完全写出或读取的缓存都将被同步。
+2）当缓存buffer 满时:缓存Buffers 有一定的空间限制。当缓存满时，它会被自动同步。
+3）控制符明确指明:当遇到流中某些特定的控制符时，同步会发生。这些控制符包括：flush 和endl。
+4）明确调用函数sync(): 调用成员函数sync() (无参数)可以引发立即同步。
+ofstream ofs("a.txt", ios::out); //创建好txt
+ofs << "a";   //空
+ofs << endl;  //a \n
+ofs << "c" ;  //a \n
+ofs.flush();  //a \n c
+ofs << "d";   //a \n c
+ofs.close();  //a \n c d
+
+函数只在当前文件夹用，建议声明为static
+
+debug模式慢，换为release就可能很快了
+
+64位VC程序不能调用32位的dll
+
+"const char *" 类型的实参与 "LPCWSTR" 类型的形参不兼容
+原因：编码问题
+将unicode编码改为多字节编码还是不行
+解决方法一：
+添加_T("")，但是对于文件名好像还存在问题
+解决方法二：
+添加
+#undef UNICODE
+#undef _UNICODE
+
+在stdlib.h中有：#define _MAX_PATH   260
+
+windows命令行中执行子目录中程序要用“\”，而不能是“/”，如：Release\fit-model.exe
+
+求$log_2^a$ log(a)/log(2.0)，其中log函数以e为底
+
+对TCHAT数组操作：
+复制 _tcscpy_s()

@@ -1,0 +1,5 @@
+取消每次开启pycharm打开最近关闭项目：Settings - Appearance - System Settings - Reopen last project
+
+每次在新窗口中打开项目：Settings - Appearance - System Settings - Open project in new window
+
+tortoisesvn 在global ignore 默认添加了*.pyc
