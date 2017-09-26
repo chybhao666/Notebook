@@ -3,3 +3,10 @@
 每次在新窗口中打开项目：Settings - Appearance - System Settings - Open project in new window
 
 tortoisesvn 在global ignore 默认添加了*.pyc
+
+pycharm自动添加头部模板，File->settings->Editor->File and Code Templates->Python Script：
+# -*- coding: utf-8 -*-
+# @Time    : ${DATE} ${TIME}
+# @Author  : JY
+
+Project视图下文件名颜色为彩色，是因为svn等版本管理的原因。没有commit的文件会显示蓝色，没有被add进git的文件会显示为红色。

@@ -114,7 +114,13 @@ app上右击 -> New -> Folder -> Assets Folder
                     sdk\tools>emulator.exe -avd Nexus_5X_API_26_x86  打开模拟器
 这样打开的模拟器和在Android Studio中打开了模拟器不是同一个？？？
 
+显示连接设备：platform-tools>adb devices
 模拟器中安装apk：platform-tools>adb install D:\ucweb-7.2.2.54-999-139-10070817.apk
+
+模拟器允许键盘输入：在AVD Manager中编辑模拟器，Show Advanced Setting，勾选Enable keyboard input
+
+模拟器无法同时开两个
+
 
 模拟器：Tools > Android > AVD Manager 工具栏上也有
 在真机上运行应用：方法和在模拟器相同，只是在Choose Device窗口中需要选择USB连接的真机（真机打开USB调试选项）

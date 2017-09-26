@@ -1,0 +1,160 @@
+C#中out和ref：  （http://www.cnblogs.com/gsk99/archive/2010/12/13/1904557.html）
+相同：使参数按引用传递。
+若要使用 out/ref 参数，则方法定义和调用方法都必须显式使用 out/ref 关键字。
+不同：传递到 ref 参数的必须先初始化；out的参数在传递之前不需要显式初始化，在函数中必须对参数赋值（可以理解为out传递参数时把参数清空）。
+此外：如果一个方法采用 ref 或 out 参数，而另一个方法不采用这两个参数，则可以进行重载。
+ref 和 out 关键字在运行时的处理方式不同，但在编译时的处理方式相同。因此，如果一个方法采用 ref 参数，而另一个方法采用 out 参数，则无法重载这两个方法。
+
+C#中sleep：System.Threading.Thread.Sleep(5000);
+
+获取时间：
+DateTime.Now.ToString();   // 2008-9-4 20:02:10
+
+随机数：
+Random rd = new Random();
+rd.Next();
+rd.Next(int maxValue); //小于所指定最大值的非负整数
+rd.Next(int minValue, int maxValue); 
+rd.NextDouble();  //0.0-1.0
+
+
+子类重写父类方法：
+父类:public virtual void fun(){}
+子类：public override void fun(){ base.fun(); ...}
+
+
+抽象类   public abstract class ClassName{}
+抽象方法 public abstract void FunName();
+实现抽象方法 public override void FunName(){}
+
+Console.WriteLine("...{0,5}...{1,10}",i,j);
+{下标，长度}
+
+一个项目中想包含多个Main()，需要在Project->Properties->Application设置启动对象。不然会报多个Main的错。
+
+Vector3 中 Normalize和normalized 区别：
+vec2 = Vector3.Normalize(vec);
+vec2 = vec.normalized;
+
+Vector3.Distance(vec1,vec2); 两点间距
+vec.magnitude;  长度
+
+C# 值类型与引用类型：http://www.cnblogs.com/siqing99/archive/2012/04/03/2430918.html
+
+
+# 属性 #
+PropertyInfo.GetValue 方法只对属性有效，对字段无效！
+官方示例 https://msdn.microsoft.com/zh-cn/library/hh194385(v=vs.110).aspx :
+    Type t = obj.GetType(); //获得obj类类型，t.Name获得类名
+    PropertyInfo[] props = t.GetProperties(); //获得所有属性，GetProperty可以获得指定属性
+    foreach (var prop in props){
+        if (prop.GetIndexParameters().Length == 0) // non-indexed property
+            Console.WriteLine("   {0} ({1}): {2}", prop.Name, prop.PropertyType.Name, prop.GetValue(obj));
+        else // indexed property
+            Console.WriteLine("   {0} ({1}): <Indexed>", prop.Name, prop.PropertyType.Name);
+    }
+
+在字段上右击，快速操作，可以直接为字段生成属性代码
+输入prop后按Tab键两次会自动创建一个自动属性。
+
+
+
+################ 调试技巧 ################
+
+VS15中运行C#程序，如果是调试（F5），运行结束命令行窗口消失；如果是执行（Ctrl+F5），命令行窗口保留。
+若想调试时保留窗口：
+加上Console.ReadLine();  按任意键关闭命令窗口
+加上Console.ReadKey();   按回车键关闭命令窗口
+
+
+
+################ 变量类型 ################
+
+string->int:
+int i = Convert.ToInt32(s);
+int i = int.Parse(s);
+int->string:
+string s1 = a.ToString();
+string s2 = Convert.ToString(a);
+
+int/float/char->byte[]
+	byte[] b=BitConverter.GetBytes(*);
+string->byte[]
+	byte[] b=Encoding.Default.GetBytes(s);
+byte[]->int/float/char
+	BitConverter.ToInt32/ToSingle/ToChar(byte[] value, int startIndex) 其他类型看BitConverter文件
+byte[]->string
+	System.Text.Encoding.Default.GetString(byte[] value, int startIndex, int length)
+	System.Text.Encoding.ASCII.GetString(byte[] value, int startIndex, int length)    ASCIIbyte[]转成string
+	注意BitConverter.ToString(byte[] value, int startIndex, int length)是转成ASCII，如"ok"得到"6F-6B"
+byte -> string 16进制
+b.ToString("x")
+
+bool->int:
+Convert.ToInt32(bool)
+
+BinaryWriter在写string类型时会在之前加入string长度，对于：
+var str = new MemoryStream();
+var bw = new BinaryWriter(str);
+bw.Write(2);
+bw.Write("hello!");
+bw.Write(4);
+var bytes = str.ToArray();
+bytes为：
+2 0 0 0 6 104 101 108 108 111 33 4 0 0 0
+长度超过128，会用多个Byte表示长度
+因为有长度数据，所以不能直接传给python的Pack()
+
+//合并byte数组
+public static byte[] MergeByte(byte[] a, byte[] b)
+{
+	byte[] c = new byte[a.Length + b.Length];
+	a.CopyTo(c, 0);
+	b.CopyTo(c, a.Length);
+	return c;
+}
+
+byte[]截取：b.Skip(5).Take(3).ToArray() 从第5位开始截取3个字节
+
+bool与Boolean区别？：System.Boolean是.NET 各语言通用的，不限于C#。bool是C#语言为System.Boolean起的别名。可以认为没区别。
+C# 类型  .NET Framework 类型
+bool    System.Boolean
+byte    System.Byte
+sbyte   System.SByte
+char    System.Char
+decimal System.Decimal
+double  System.Double
+float   System.Single
+int     System.Int32
+uint    System.UInt32
+long    System.Int64
+ulong   System.UInt64
+object  System.Object
+short   System.Int16
+ushort  System.UInt16  //不能写成unsigned short，C#中不存在unsigned
+string  System.String
+
+字典类：Dictionary
+
+对于引用类型，List中添加的是引用，所以修改List中的值会改变引用对象的值。
+（对于string，没法修改原对象???）
+
+
+
+################ 网络 ################
+
+1. 当前程序在已经使用使用BinaryWriter/Reader进行网络传输情况下:
+TcpClient tcp_socket = new TcpClient(host, port);
+NetworkStream ns = tcp_socket.GetStream();
+BinaryWriter bw = new BinaryWriter(ns);
+用BinaryWriter/Reader没有问题，但接着使用StreamReader：
+StreamReader socket_reader = new StreamReader(ns);
+socket_reader.ReadLine();
+却读不到数据!!!并且会在这边停留一段时间（阻塞？？？）
+暂时不知道为什么！！！
+2. 网络收发时，使用BinaryReader.Read()读取不到数据会阻塞，用BinaryReader.PeekChar()先判断下并不能判断出来有无数据！！？？
+使用tcp_socket.Available!=0 能有效检测有无数据。
+3. 相邻发送的数据可能会一起BinaryReader，稍长时间的则不会
+
+
+
