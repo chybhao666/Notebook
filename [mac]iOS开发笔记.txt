@@ -1,0 +1,12 @@
+iOS开发，使用Xcode9，可以用普通apple账户而不需要开发者账户（Developer Program Account）。但对于Xcode7版本，需要在https://developer.apple.com注册开发者（不需要购买证书）。但这样的账户只能在3台设备上安装应用。
+
+Xcode通过appStore更新太慢，可以从以下下载安装包
+https://developer.apple.com/xcode/ 或 https://developer.apple.com/download/more/ 
+
+在低版本mac OS上解压高版本Xcode，会有以下错误，升级系统即可：
+cpio read error undefined error 0
+
+我的凭证：
+https://appleid.apple.com
+
+https://developer.apple.com
