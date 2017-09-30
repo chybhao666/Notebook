@@ -1,0 +1,482 @@
+安装版本 5.6.1f1 64-bit,安装过程中Choose Components会推荐安装visual studio2017，已有vs2015，不需安装2017。
+
+中文手册 http://docs.manew.com/
+界面排版RectTransform：http://blog.csdn.net/likendsl/article/details/50556580
+navmesh导出：https://github.com/LingJiJian/NavmeshExport
+
+
+连接android手机，build setting选择安卓平台，点击build and run，可以直接安装到android手机，不用自己先生成apk。
+
+多人修改同一个Scene时，使用Prefabs可以避免相互间冲突。若Prefabs放在了Hierarchy中，自己将修改的Prefabs提交，别人更新后会是更新后的结果。
+
+粉色材质在Unity中是Shader出错或丢失时的默认警示材质
+
+莫名其妙的贴图没了，重启程序就好了
+
+
+UI:
+1. position是根据世界原点为中心
+2. localPosition是根据父节点为中心,如果没有父节点,localpositon和position是没有区别的
+position和localPosition指的对象的中心位置，和Rect Transform中是何种anchor/pivot无关？？？用的哪个坐标系？？？
+position和localPosition不是Rect Transform中的Pos值。
+
+UI位置：
+PosX,PosY,PosZ: GetComponent<RectTransform>().anchoredPosition3D = new Vector3(posx,posy,posz);
+                GetComponent<RectTransform>().anchoredPosition = new Vector2(posx,posy);
+width，height: GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
+top: GetComponent<RectTransform>().offsetMax = new Vector2(GetComponent<RectTransform>().offsetMax.x, top);
+修改transform.postion，是在整个场景的位置
+修改transform.localPostion，是在父对象的位置（不是PosX,PosY,PosZ，这3个值会自动转换成对应其他值）
+
+UI对象在Awake和Start中获取的transform.position是不同的:
+Awake中获取的就是Inspector中的值；
+Start中获取的是运行时实际的值，不同分辨率下不同。
+
+
+类的static变量在Start等函数中赋值，而不是定义时赋值，否则再次进入这个场景会使用之前修改后保留的值。
+
+static变量无法在unity editor（Inspector）中赋值，因为static变量在程序最开始就存在了，而不是加载脚本所在场景时。
+
+对于public的“数组”对象，也能在unity Inspector视图中赋值。
+
+使用GetComponent<RectTransform>().sizeDelta得到的大小是RectTransform中大小，不是真实分辨率大小，使用* Screen.width / 1920 适配不同分辨率。
+transform.position和OnPointerUp等获得的位置是当前分辨率的位置。
+
+Unity 导入Texture图片分辨率不对：
+对于较大的图片默认导入大小是2的指数大小
+在Inspector视图的最底下可以看到大小
+
+实例化后设置父对象：
+B=Instantiate(BPrefab);
+B.transform.parent = A.transform;
+
+克隆：使用Instantiate
+
+获取对象的名字：
+*.name
+
+
+# 小地图 #
+使用Minimap Camera：
+http://forum.china.unity3d.com/thread-17192-1-1.html
+http://blog.csdn.net/u014725878/article/details/48665741
+也可以制作张地图，使用Sprite.Create() 截取 Texture2D 
+
+使用Camera来实现小地图，发现地图一块一块的，将Camera中Clipping Planes的Near设为0即可。
+
+小地图，把Camera放在Canvas里：
+1，坐标系不同于世界坐标系。
+2，不同分辨率下Camera的实际世界位置可能有略微不同。所以不该把Camera放在Canvas里。
+3，在做mini项目《Apple!Apple!》时发现，Camera中的水面会显示天空盒的倒影，使用shader为蓝色的河水显示为白色，不清楚原因。调整Camera位置和Clipping Planes，可以将河水显示为蓝色，原因不知。
+
+遮罩Mask会遮挡所有子对象，不管子对象位置是否已经超出Mask本身范围
+
+
+对象active设为false后，绑定在上面的脚本会停止执行
+
+Instantiate的对象的Scale会根据分辨率自动变化，导致在不同分辨率下显示的占屏幕比例不同，原因在于：实例化时未设置为原先的父对象。从世界坐标系移动到父节点的局部坐标系中，两个坐标系的尺量不一致。所以要进行转换。
+
+在UI界面上渲染3D模型（选角界面旋转模型）：
+http://blog.csdn.net/oldherowang/article/details/74626555
+天空盒仍在被渲染，我们将Camera的Clear Flags更改为solid color就可以了
+！如果模型上有自发光物体（使用shader），要将Camera的Rendering Path设为Deferred
+
+
+
+######################## 调试 ########################
+Window - Profiler：
+Profiler=>CPU 绿色渲染占用时间、蓝色逻辑代码、橙色物理模块、灰色GC占用时间
+1.CPU性能参考指标
+  帧率FPC 每秒绘制的帧数  
+    30帧 没秒30毫秒时 比较OK的体验、每秒60帧是较好的体验 显示器的刷新帧率是每秒60帧
+    开启垂直同步可以让帧率和显示器的刷新频率保持一致
+  DrawCall
+    以使用OpenGL的为参考  在每次绘制模型之前准备好顶点数据，调用一系列的API来设置材质和参数等环境
+    然后unity调用一个OpenGL接口 GLDraw来告诉GPU开始渲染
+    每个DC 只能绘制65535个顶点 带宽很有限
+2.GPU 性能诊断
+  透明物体 阴影 实时光照 屏幕后处理
+  透明物体overdraw查看
+3.内存诊断
+  资源内存占用
+  unity引擎内存占用
+  mono托管堆内存占用
+	
+Window - Frame Debug：帧调试器
+
+Game视图显示帧数：
+点击视图中的Status
+
+在现阶段的硬件设备中，对于硬件性能影响较大的指标除了面数，还有就是call（其实现在影响更大的还有shader）。call是指每帧中调用对象的绘制次数，一般来说，同一个材质的同一个mesh是作为一个Call来处理的（shader编写是一个call的前提下），所以按照这个原则，大家在制作资源的时候一定要尽量的把贴图集中起来，使用尽量少的张数，并在Unity中使用相同材质，在Unity中，这些使用相同材质的静态元素可以通过勾选Static来自动batch到一起（当然还有playerSettings中的Batching需要勾选）这样可以减少尽量多的Call，达到节约资源的目的，而这一步，在资源制作的时候就要严格规划好。
+
+######################## 基础操作 ########################
+
+Hierarchy视图中，游戏对象的名称颜色的含义：
+灰色：这个对象没有链接到任何的Prefab；
+蓝色：这个对象链接到了某个Prefab（，如果那个Prefab修改了，这个对象也会跟着变；？？）使用鼠标右键单击这个对象，可以使用弹出菜单的来选中所链接的Prefab；
+红色：这个对象原来链接到了某个Prefab，但是那个Prefab被删除了，或者是因为其他原因失去了链接；
+
+联网差unity docs太慢，可以下载 https://docs.unity3d.com/uploads/UnityDocumentation.zip
+在菜单栏Help中有本地文档！
+
+unity双开：重新点击unity快捷方式，而不要在当前窗口打开新项目。
+
+用VS打开项目：菜单栏-Assets-Open C# Project
+
+在unity文件上export，可以只导出这个场景使用的资源
+
+要想在VS中调试C#，需要先安装Visual Studio 2015 Tools for Unity，在VS的扩展和更新中下载。安装成功后再VS调试中会有“附加到Unity”。
+
+Camera Projection 分 orthographic和perspective
+
+Animation中出现无法添加Property情况（红点按钮是半灰色状态），应该在Hierarchy视图中选中添加Animation的对象。
+
+错误：AnimationEvent *** has no receiver!
+原因：在模型的动画的event的回调函数没实现
+
+unity Scene视图中网格边长为10，网格开关在Scene视图->Gizmos->Show Grid
+
+怎样把自己的图片加入UI-Image-Source Image？将自己图片拖到Assets视图，修改图片Texture Type为Spirited。
+
+对于Prefabs，在Hirrarchy中修改后要Apply！
+如果Hirrarchy中对Prefabs的对象选择了不Active，这时如果Apply了，使用Prefabs生成的对象也不Active，所以此时不要Apply！
+
+查看Nav Mesh：菜单栏Windows-Navigation，切换到Bake选项卡，点击Bake后开始烘焙导航网格数据，在Scene窗口可以看到Nav Mesh网格，在*.unity同名文件夹下有NavMesh.asset文件。
+
+# Canvas #
+绘制的顺序：
+	Hierarchy(层级视图)中的顺序
+Render Modes(渲染模式)：
+	Screen Space-Overlay：如果场景改变大小或改变分辨率，Canvas将自动改变大小去适配。
+	Screen Space-Camera：Canvas放置在了给定距离的摄像机的前面。如果摄像机设置为Perspective(透视视角)，UI元素将会通过透明视角渲染，通过摄像机可视区域控制。
+	World Space：Canvas将和场景中的其他对象一样显示。Scene可以通过手动设置Rect Transform 来控制大小。在场景中，UI元素将绘制在其他基于3D放置的对象的前面或后面。
+如果希望Canvas不是整个界面（比如挂载在人物上的血条），选择World Space模式
+
+给Canvas添加Canvas Group组件，可以对Canvas下所有对象起指定作用。
+Blcok Raycasts：是否需要图形射线(GraphicRaycaster)检测。注意，不适用于Physics.Raycast。
+	不勾选Blocks Raycasts，则点击Button等无效。
+	勾选Blocks Raycasts, 使用EventSystem.current.IsPointerOverGameObject()，在UI上点都被认为点在UI上，取消勾选，都被认为没点在UI上。
+
+对于Screen Space-Overlay，想设置固定大小：在Canvas Scaler中将UI Scale Mode修改为Scale with Screen Size，之后可以设置Reference Resolution。
+
+工具栏Local和Global区别：对于子对象，转动父对象，Local时子对象的坐标系也会跟着转，而Global则不会
+
+失去焦点后程序继续运行：Player Settings - Resolution and Presentation中勾选Run In Background
+
+
+输入框Input Field无法输入？看下Hierarchy视图中是否有EventSystem对象。 创建UI时会自动添加EventSystem，若UI对象是从其他场景复制过来的，别忘了复制EventSystem。
+
+场景加载顺序：按照场景序号。场景序号按Build Settings添加顺序来。
+上下拖动可以改变顺序。
+
+FixedUpdate的时间间隔可以在项目设置中更改，点击 Edit - Project Setting - time  找到 Fixed timestep
+
+设置手机应用横屏显示：在build settings - player settings - android图标 - Resolution... - Default Orientation
+
+
+# Joystick #
+在unity标准资源中有操纵杆，导入Assets-CrossPlantformInput，添加Prefabs-MobileSingleStickControl。运行程序会发现Joystick不显示，在Inspect视图，MobileSingleStickControl下的对象无法enable？在Build Settings中选择Android后Switch Plantform就可以选中了。 （视屏：https://www.youtube.com/watch?v=nGYObojmkO4）
+
+使用Standard Assets中的 MobileSingleStickControl - MobileJoystick作为遥感，出现以下错误：
+There is already a virtual axis named Horizontal registered.
+原因在于将脚本添加到了两个目标上。
+
+MobileJoystick使用方法，看CrossPlantformInput下的txt文档：
+float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+
+自己实现Joystick：
+方法一：为按钮图片添加Event Trigger，比如在Event Trigger中为Drag添加一个响应函数。
+方法二：实现IPointerDownHandler, IPointerUpHandler, IDragHandler等接口的拖动等函数，https://www.youtube.com/watch?v=uSnZuBhOA2U#t=2.610025
+注意，若给Canvas添加了Canvas Group，千万别取消Blocks Raycasts。
+
+使用Button的Event Trigger做Joystick，可能会是响应Button下的Text的点击拖动，不要删这个Text
+
+使用标准资源，MoveJoystick.cs拷贝自Joystick.cs，将MoveJoystick.cs添加到虚拟摇杆上，若修改了MoveJoystick.cs中内容，需要将脚本重新添加到虚拟摇杆才有效，为什么？？？
+
+摇杆据说EasyTouch更好用
+
+
+UI中 Raw Image会遮挡住其他画布上的UI，也会遮挡同一画布排在其之前的UI。
+
+往unity3d里拉入一张图片，到Assets下。点击图片在属性面板里当Texture Type 为Texture时，不能被Iamge 所用。只有改为Sprite(2D and UI)，然后点击Apply后，才能被Image所用。
+往unity3d里拉入一张图片，到Assets下。点击图片在属性面板里当Texture Type 为Texture时，发现可以被RawImag所用。
+
+UI - ScrollView:
+为Viewport - Content 添加组件，搜索Layout可以看到几种布局，如Horizontal Layout Group，之后添加到Content下的对象会自动排列&调整间距。
+
+
+Image Type：
+Sliced，九宫格切片，创建固定边框控件的最佳选择
+Tiled，平铺
+Filled，修改FillAmount值，显示Image的部分区域，如扇形区域
+
+Image对象不能添加Text Component：A GameObject can only contain one 'Graphic' component.
+
+显示图片的部分区域，如显示一个椭圆区域：为Image添加Mask组件
+
+在3D场景中使用UI，如Text，使用最小字体显示的文本仍然很大？调整scale即可。
+
+Slider默认value为0时血条仍会显示一点，将Fill的Width改为0即可，Width默认为10，修改后Background两端会有多余，修改Background的Rect Transform。
+
+字体描边：
+Add Component - UI - Effects - Outline
+
+######################## 编程 ########################
+
+场景重新加载，static变量的值会保留上一次加载场景后的值
+
+Time.timeScale不会影响Update和LateUpdate的执行速度。因为FixedUpdate是根据时间来的，所以timeScale只会影响FixedUpdate的速度。
+
+GameObject：
+	FindWithTag            返回一个用tag做标识的活动的游戏物体.如果没有找到则为空.
+	FindGameObjectsWithTag 返回一个用tag做标识的活动的游戏物体的列表.如果没有找到则为空.
+	Find                   找到并返回一个名字为name的游戏物体.
+
+Debug.Log() 在unity中显示会有延迟
+
+# 输入-鼠标键盘 #
+Input.GetButton(buttonName : string) : bool   edit->projects settings->input 在inspector面板中,fire1,fire2,fire3定义鼠标左,右,中键
+Input.GetMouseButton(button : int) : bool     button值设定为 0对应左键 ， 1对应右键 ， 2对应中键。
+Input.GetKeyDown (key : KeyCode) : bool       如Input.GetKeyDown(KeyCode.A)，Input.GetKeyDown (KeyCode.Space)
+
+# 鼠标位置 #
+获取鼠标的世界坐标系位置：Camera.main.ScreenToWorldPoint(Input.mousePosition)
+设定鼠标位置：
+	[System.Runtime.InteropServices.DllImport("user32.dll")] //引入dll
+    public static extern int SetCursorPos(int x, int y);
+	SetCursorPos(100, 100);  //这个位置是相对屏幕的
+
+# 销毁 #
+1. Destroy()不能销毁Canvas！！！  能销毁！！！不要用Destroy(this)，用Destroy(transform.gameObject);
+       要隐藏Canvas采用Canvas.enabled=false; ，Canvas下的其他object也会一同隐藏。
+   Destroy()能销毁其他GameObject。销毁后，Hierarchy中不会显示被销毁对象。（UI对象C#代码要using UnityEngine.UI;）
+2. 关闭脚本也是***.enabled=false;
+3. 隐藏Panel要用panel.SetActive(bool value);
+4. 隐藏图片，使用Image img； img.enable=false; 只能隐藏图片本身，不隐藏子对象。
+             使用GameObject img;	img.SetActive(false); 能隐藏本身和子对象，相当于取消Inspector视图中的勾。
+			     或Image img； img.gameObject.SetActive(false);
+
+
+Unity中C#的静态成员，就算不把脚本添加到对象上作为组件，也会自动运行？
+
+游戏场景A的转换到另一个场景B时怎样传递信息：
+1. 静态变量
+2. DontDestroyOnLoad(this) 或 DontDestroyOnLoad(transform.gameObject)，一个物体挂多个脚本，只需要一个脚本写这句就行；场景切换之后脚本的update等函数依然会运行
+
+			 
+# 获取组件或挂载脚本 #
+GetComponent<>()
+
+# 获取对象 #
+1. 定义为public，在unity中拖到所在位置
+2. 通过名字或路径查找游戏对象：
+   GameObject.Find 
+      1）无法查找隐藏对象！only returns active GameObjects
+	  2）出于性能考虑，不要写在Update函数中调用
+	  3）如果是查找子对象，用Transform.Find更方便
+	  4）可以用“/xxx/yyy”方式从Assets根目录查找
+   transform.Find  
+      1）可以查找隐藏对象，查找隐藏对象的前提是transform所在的根节点必须可见，示例：canvas.transform.Find("Panel").gameObject;
+	  2）不同于GameObject.Find ，transform.Find无法从根目录查找，只能查找子对象
+   因为得到的是GameObject类型，如果对象是Text等类型，可以再GetComponent<Text>()去使用Text。
+3. GameObject.FindWithTag/ FindGameObjectsWithTags/ FindObjectOfType/ FindObjectsOfType 无法查找影藏对象
+4. GetComponentInChildren<*>() 对于Panel这种对象就没法直接获取了
+5. 如果想通过点击Button来active某个对象，可以为Button在On Click中添加SetActive
+
+没有Panel类型，要定义Panel对象用GameObject定义。
+
+改变canvas控件之间的层级关系：
+ (1)同一canvas下：
+     改变控件transform的SiblingIndex,
+     transform.GetSiblingIndex();
+     transform.SetSiblingIndex(int index); //index值越大，越后渲染，层级越大，越显示在前面
+ (2)不同Canvas下：
+    设置Canvas下的Sort Order //Sort Order值越大，越后渲染，层级越大，越显示在前面
+	
+
+# 加载关卡 #
+旧版接口（在unity5.6.2f1中虽然能够使用，但不推荐）：
+	Application.LoadLevel();  //http://docs.manew.com/Script/index.htm 当加载新的关卡时，所有已经加载的游戏物体都将被销毁。 如果你想让物体在被加 载新关卡时不被销毁，使用Object.DontDestroyOnLoad 。
+	场景切换+过渡画面 示例：http://www.cnblogs.com/zsb517/p/4113538.html
+新版接口：
+	using UnityEngine.SceneManagement;
+	SceneManager.LoadScene(); 
+
+MonoBehaviour.OnEnable()
+	This function is called when the object becomes enabled and active.
+
+在vs中修改public成员变量值后，记得也要到unity中修改，否则使用的依然是unity中的值。
+
+定义了public变量，但不想在Inspect中显示，在变量定义上面一行添加：
+	[HideInInspector]
+定义了private变量，但想在Inspect中显示：
+	[SerializeField]
+
+判断鼠标或者手指是否点击在UI上：
+#if IPHONE || ANDROID
+	if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+#else
+	if (EventSystem.current.IsPointerOverGameObject())
+#endif
+		Debug.Log("当前触摸在UI上");
+	else
+		Debug.Log("当前没有触摸在UI上");
+对于添加了Canvas Group组件并不勾选Blocks Raycasts的Canvas，认为没点在UI上
+
+（http://www.cnblogs.com/tanrong/p/6905311.html）
+Resources.Load(string, Type)  // 加载Resources文件夹下资源，Resources可以在其他文件夹下（如Assets/Texture/Resources），会自动找出所有Resources文件夹
+Sprite.Create()               // 对Texture2D的区域创建Sprite
+
+sprite=Resources.Load("abc", typeof(Sprite)) as Sprite 不写第二个参数会加载失败！
+
+游戏对象编写AI脚本。游戏结束时，需要将这些功能暂停，一种办法是设置Time.timeScale = 0，不过这将停止一切。如果只想停止相关AI脚本，会用script.enabled=false。设置脚本的enabled为false时候，只是暂停了此脚本的Update和FixedUpdate等函数，而脚本中开启的协程（StartCoroutine）和用Invoke唤起的函数依然在执行不受影响。
+
+延时调用：
+Invoke(methodName: string, time: float): void;
+重复调用：
+InvokeRepeating
+
+脚本中的transform为其所在GameObject的transform；
+
+获取UI对象宽高：
+GetComponent<RectTransform>().sizeDelta 或者 GetComponent<RectTransform>().rect.size
+
+转动角度转向量：
+Quaternion q = Quaternion.Euler(0, y_angle, 0); 或者
+Quaternion q=Quaternion.AngleAxis(angle, Vector3.up);  第二个参数为旋转轴
+Vector3 v2 = q * v;   v为要旋转的向量，v2为旋转后的结果
+
+对UI在当前朝向下继续转向：
+*.transform.Rotate(0,0,弧度)  // 逆时针？
+修改Rect Transform的Rotation：
+transform.localEulerAngles=new Vector3(0,0,角度)
+
+欧拉角转四元数：
+Quaternion.Euler(x,y,z)
+
+对象旋转角度：
+eulerAngles        //The rotation as Euler angles in degrees.
+rotation           //The rotation of the transform in world space stored as a Quaternion.
+localEulerAngles   //The rotation as Euler angles in degrees relative to the parent transform's rotation.
+localRotation      //The rotation of the transform relative to the parent transform's rotation.
+
+切换到异步加载界面前卡顿（不是在异步加载界面卡顿），估计是因为开启异步协程写在了Start函数中。
+IEnumerator LoadNextScene()
+{
+    yield return new WaitForEndOfFrame();  // 添加这句
+    async = SceneManager.LoadSceneAsync("Game");
+    yield return async;
+}
+
+
+
+######################## 打包-Android ########################
+1. 安装Android studio，带有Android SDK & JDK & android模拟器，安装路径假设为Android/Android Studio和Android/sdk
+2. Unity菜单栏Edit-Preferences配置，SDK：Android/sdk； JDK：Android/Android Studio/jre
+3. 打包会有“unable to list target plantform”错误，解决方法是下载http://dl-ssl.google.com/android/repository/tools_r25.2.5-windows.zip ，替换原先的Android\sdk\tools （在官网下载的最新tools就是安装android studio后的）
+4. Unity菜单栏File-Build Settings-Player Settings-Other Settings，修改Package Name（只要改成不是原先的就行），之后就可以Build了。
+5. 添加到android模拟器：>adb push *.apk /sdcard/Download
+
+Unity导出android工程：http://blog.csdn.net/skunkluck/article/details/52758300
+
+
+######################## 英宝通 ########################
+002、第二讲 资源及资源类型 
+	Assets - Create -Prefab 预设，创建重复性的物体，运行实例化
+	Edit - preferences - External Tools 指定外部编辑软件
+003、第三讲 资源管理：模型和角色动画的输出设置（上）
+	model - scale factor：通常fbx-0.01 ，fb-1
+		修改需要点击apply按钮才生效
+005、第五讲 资源管理：材质和着色器
+	Inspector - Mesh Renderer - Materials - Shader - Texture
+	unity中纹理尺寸一般是2的幂次方
+	创建灯光：在Hierarchy视图中点击Create - Light
+	复制并粘贴：菜单栏 - Edit - Duplicate （ctrl+D） 
+	创建材质后 Shader：Diffuse, Bumped Diffuse, Bumped Specular
+	
+
+# Unity 5.X 3D游戏开发技术详解与典型案例 #
+第2章：
+F键放大显示
+操作对象：
+	W - 移动
+	E - 旋转
+	R - 缩放
+Scene面板 Ctrl+1
+Game 面板  Ctrl+2
+
+
+
+# 英语 #
+rendering  表演；渲染
+asset      资产
+terrain    地形
+lens flare 镜头光晕
+hierarchy  层级
+gizmos     小物件；线框
+
+sphere     球体
+capsule    胶囊
+collider   对撞机
+idle       空闲的
+bake       烘焙
+diffuse    四散的;散开的
+intensity  强度
+inspector  检查员
+specular   镜的;镜子似的
+rigidbody  刚体
+animator/animater 动画师;动画设计
+particle   颗粒;粒子
+sibling    兄弟姊妹
+component  组件
+legacy     遗产
+halo       光环;光晕
+projector  投影仪
+spatial    空间的
+miscellaneous 混杂的，各种各样的
+profile    n. 侧面；简况 vt. 描…的轮廓；扼要描述
+gravity    重力，地心引力
+trigger    引发；触发
+
+orthographic 直角的；正交
+perspective  透视的
+offset     抵消，补偿
+drag       拖累；阻力
+slope      斜坡；倾斜；斜率
+interactable 相互作用
+raycast    光线投射
+canvas     帆布；画布
+stretch    伸展
+shrink     收缩
+pivot      中心点；旋转运动
+clip       修剪；夹子；回形针
+lerp       线性插值
+gizmo      小发明
+curve      曲线
+Property   性质，性能；财产；所有权
+truncate   vt. 把…截短 adj. 截短的
+quaternion 四元数
+magnitude  大小；量级
+scroll     卷轴，画卷；名册
+clamp      vt. 夹紧，固定住 n. 夹钳
+elastic    adj. 有弹性的；灵活的
+obsolete   adj. 废弃的 vt. 淘汰
+obstacle   n. 障碍
+
+invoke     vt. 调用；祈求
+
+
+# SurvivalShooter #
+Unity - Survival Shooter tutorial https://unity3d.com/cn/learn/tutorials/projects/survival-shooter-tutorial 英文视屏
+
+如何找到Zombunny死亡时的回调函数？ Project视图-> 选中Models-Characters-Zombunny -> 在Inspect视图选择Animation ->在Clips中选择Death，点开Events可以看到时间刻度上有个游标，点击游标显示回调函数。
+
+
+----------------------- Scripting -------------------------
+Transform.root
+	Returns the topmost transform in the hierarchy.
+
+
+
+

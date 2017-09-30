@@ -1,4 +1,20 @@
-Sublime Text 使用笔记
+﻿Sublime Text 使用笔记
+
+注册码（免破解），菜单栏Help - Enter License输入：
+—– BEGIN LICENSE —–
+TwitterInc
+200 User License
+EA7E-890007
+1D77F72E 390CDD93 4DCBA022 FAF60790
+61AA12C0 A37081C5 D0316412 4584D136
+94D7F7D4 95BC8C1C 527DA828 560BB037
+D1EDDD8C AE7B379F 50C9D69D B35179EF
+2FE898C4 8E4277A8 555CE714 E1FB0E43
+D5D52613 C3D12E98 BC49967F 7652EED2
+9D2D2E61 67610860 6D338B72 5CF95C69
+E36B85CC 84991F19 7575D828 470A92AB
+—— END LICENSE ——
+
 
 1.Sublime Text 2 中文包(目前2014.1月网上存在的中文包不能完美匹配，不建议使用)
 下载文件解压后Default放进AppData\Roaming\Sublime Text 2\Packages(具体为菜单栏->Preferences->Browse Packages处文件夹)下面即可
@@ -170,3 +186,12 @@ SublimeText不仅仅是能够查看和编辑 Markdown 文件，但它会视它�
 在浏览器中预览Markdown文件，还可以导出html代码
 命令面板，输入mdp
 亦可 tools－build
+
+
+
+
+输入法不跟随光标: https://www.zhihu.com/question/36431832
+
+
+
+
