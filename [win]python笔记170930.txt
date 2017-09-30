@@ -1,0 +1,397 @@
+host      主机
+port      端口
+dispatch  派遣
+inspect   检查；视察
+
+
+python中，万物皆对象。python中不存在所谓的传值调用，一切传递的都是对象的引用，也可以认为是传址。
+python中，对象分为可变(mutable)和不可变(immutable)两种类型。
+元组（tuple)、数值型（number)、字符串(string)均为不可变对象，而字典型(dictionary)和列表型(list)的对象是可变对象。
+
+len()
+dir()，help()  #Python基础10
+
+数据结构list(列表)是一个类。
+
+词典中的函数：键，值，键值对，清空
+增，删
+
+单引号，双引号，三引号区别
+
+content = f.read()           # 读取所有行，返回字符串
+content = f.read(N)          # 读取N bytes的数据
+content = f.readline()       # 读取一行
+content = f.readlines()      # 读取所有行，储存在 列表 中
+
+python urllib2模块:
+urllib2是python自带的模块，不需要下载。
+urllib2在python3.x中被改为urllib.request
+
+
+查看python中已安装的包:pip list
+
+
+
+
+
+在python2.2中，为了统一class与type的概念，引入了新式类，与之相对应的class成为旧式类（old style class）或者经典类（classic class）。
+从新式类派生的类为新式类，那么作为父类的新式类从哪里来？Python 为了解决这个问题引入了一个特殊的类，object。
+
+（1）以r或R开头的python中的字符串表示（非转义的）原始字符串，常用于正则表达式。如“\n”表示一个反斜杠字符，一个字母n，而不是表示换行。
+（2）以u或U开头的字符串表示unicode字符串
+
+非：not
+位取反：~
+
+sql = "select id,type,name from xl_bugs where id = %s and type = %s" % (id, type)
+cur.execute(sql)  # sql注入漏洞。参数中有SQL语句的话，是有可能被执行的。
+cur.execute("insert into people values (?, ?)", (who, age)) # 放置SQL注入。“？”会把参数当做值来处理。
+
+编码(适用于python2，不适用于python3)：
+u = u'中文' #显示指定unicode类型对象u                                    # {unicode}u'中文'
+str = u.encode('gb2312') #以gb2312编码对unicode对像进行编码              # {str}'����'
+str1 = u.encode('gbk') #以gbk编码对unicode对像进行编码                   # {str}'����'
+str2 = u.encode('utf-8') #以utf-8编码对unicode对像进行编码               # {str}'中文'
+u1 = str.decode('gb2312')#以gb2312编码对字符串str进行解码，以获取unicode # {unicode}u'中文'
+u2 = str.decode('utf-8')#如果以utf-8的编码对str进行解码得到的结果，将无法还原原来的unicode类型 # 出错
+中文:
+	对于数据库，要转为unicode才能存储中文   cu.execute("select password from userinfo where  username=?", (user_name.decode('utf-8'),)) 
+	对于正则表达式，要转为unicode才能匹配   re.match(u'^[a-zA-Z0-9_\u4e00-\u9fa5]{3,20}$', user_name.decode('utf-8')) 
+	对于JSON，json.dumps(data, ensure_ascii=False)才能正确处理中文，否则会将中文str处理为\\u4e00这种形式
+	对于struct.pack，不能处理unicode，若为unicode要转回为str类型
+
+a='的'
+print len(a)                  # 3
+print len(a.decode('utf-8'))  # 1
+
+
+Python *与** 参数：
+* 用来传递任意个无名字参数，这些参数会一个Tuple的形式访问。
+**用来处理传递任意个有名字的参数，这些参数用dict来访问。
+
+Comparisons can be chained arbitrarily, e.g:
+"x < y <= z" isequivalent to "x < y and y <= z"
+
+class A(object):
+	def __init__(self,x):
+		pass
+class B(A):
+	pass
+可以 b=new B(x) 
+
+字典的key与value进行交换：
+dict_new = {value:key for key,value in dict_ori.items()} 或
+dict_new2= dict(zip(dict_ori.values(), dict_ori.keys()))
+
+获取当前运行的类名：
+self.__class__.__name__
+
+
+对于模块也可以赋值：
+import a
+b=a
+接下来可以使用b来操作a中成员
+
+三元表达式：
+true_part if condition else false_part
+
+Python中没有Switch/Case语句，可以使用字典映射实现：
+def numbers_to_strings(argument):
+    switcher = {
+        0: "zero",
+        1: "one",
+        2: "two",
+    }
+    return switcher.get(argument, "nothing")
+
+字符串格式化 (%操作符):
+raise Exception('bad command %s'%cid)
+print("I'm %s. I'm %d year old" % ('Vamei', 99))
+print("I'm %(name)s. I'm %(age)d year old" % {'name':'Vamei', 'age':99})
+
+python函数传参传的是引用，函数内对于可变类型和不可变类型的修改是不同的（http://www.cnblogs.com/loleina/p/5276918.html）
+判断是否同一个对象，使用id函数
+
+
+list拷贝： （http://www.jb51.net/article/64030.htm）
+1） a=[1,2]
+    b=a[:]
+2)  import copy
+    b=copy.copy(a)
+但当列表元素也是一个列表时[1,[2]]，只复制元素的引用，可以用方法2
+3） b=copy.deepcopy(a)
+
+列表，元组，字符串如何互相转换:
+s = "abc"
+list(s)   # ['a', 'b', 'c']
+tuple(s)  # ('a', 'b', 'c')
+"".join(list(s))  # 'abc'
+"".join(tuple(s)) # 'abc'
+str(tuple(s))     # "('a', 'b', 'c')"
+
+移除list中属于另一个list的元素：
+list3 = list(set(list1) - set(list2)) # 借助set（集合）
+list3 = [item for item in list1 if item not in set(list2)]
+
+list对应元素相减：
+list3 = list(map(lambda x: x[0]-x[1], zip(list2, list1)))
+
+
+不清楚动了那边设置，每次pycharm中调试前会先执行当前项目中select.py这个文件，在命令行中则不存在这个问题
+
+# coding: utf-8
+# -*- coding: utf-8 -*-
+
+math.sin()  # 参数单位为pie
+math.asin() # 返回值单位为pie
+
+根据类名实例化对象:
+class obj(object): 
+	pass 
+ a = eval('obj()')
+
+
+######################## Anaconda ############################
+
+安装Anaconda4.4.0 64bit（含python3.6）
+自带集成开发环境 spyder
+安装结束后没设置环境变量？不知道什么问题
+
+使用Visual Studio开发，打开vs创建python项目，会提醒安装需要的Python Tools for Visual Studio
+VS中自己添加python路径，按提示配置。配置Anaconda等绿条结束要等很久，配置完成后才能找到import的包。
+
+Anaconda添加python2.7：
+在Anaconda Prompt中
+1. >conda create -n python2 Python=2.7   //安装在 Anaconda3\envs下  注：python2是环境名，可以自己随便命名 
+2. >activate python2  切换环境
+>conda info -e   列出环境列表
+>conda list      列出所有包
+>conda install packasgename  安装包
+
+切换环境后，打开Anaconda Prompt，python还是最初的版本，但在其他cmd窗口是切换后的环境！
+
+切换spyder python解释器版本：spyder->tools->preferences->python interpreter
+
+目前来看，在anaconda中不同版本的python不共用包
+
+
+
+################################## sqlite ###############################
+使用sqlite，如c.execute('SELECT * FROM book WHERE name=?','Cook Recipe')，会出错：
+Incorrect number of bindings supplied. The current statement uses 1, and there are 4 supplied.
+将'Cook Recipe'改为 1)元组('Cook Recipe',) 不要少逗号 或2)列表['Cook Recipe']
+
+commit()：
+该方法提交当前的事务。如果您未调用该方法，那么自您上一次调用 commit() 以来所做的任何动作对其他数据库连接来说是不可见的。
+
+
+
+################################## 编码规范 ###############################
+（https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules/）
+
+使用模块的全路径名来导入每个模块
+
+异常：
+1. 像这样触发异常: raise MyException("Error message") 或者 raise MyException . 不要使用两个参数的形式( raise MyException, "Error message" )或者过时的字符串异常( raise "Error message" ).
+2. 当捕获异常时, 使用 as 而不要用逗号. 例如 except Error as error
+
+默认参数值：
+默认参数只在模块加载时求值一次.如果参数是列表或字典之类的可变类型,这可能会导致问题.如果函数修改了对象(例如向列表追加项),默认值就被修改了.
+
+1. 当你写下 if x: 时, 你其实表示的是 if x is not None
+2. 不要用==将一个布尔量与false相比较. 使用 if not x: 代替
+3. 对于序列(字符串, 列表, 元组), 要注意空序列是false. 因此 if not seq: 或者 if seq: 比 if len(seq): 或 if not len(seq): 要更好
+4. ‘0’(字符串)会被当做true
+
+1. Python会将 圆括号, 中括号和花括号中的行隐式的连接起来.例如一个文本字符串在一行放不下, 可以使用圆括号来实现隐式行连接:
+	x=('ab'
+	   'c')
+2. 避免使用反斜杠连接行.
+	print 'ab \
+		  c'
+	print 'de' \
+		  'f'
+	分别得到ab 	  c
+			def
+
+用4个空格来缩进代码.不同的平台对tab展开空格的个数的显示效果并不相同，windows上默认是缩进4，但在linux上默认是8.
+
+Shebang：
+大部分.py文件不必以#!作为文件的开始. 程序的main文件应该以 #!/usr/bin/python2或者 #!/usr/bin/python3开始.
+(注: Shebang (也称为Hashbang)是一个由井号和叹号构成的字符串行(#!), 其出现在文本文件的第一行的前两个字符. 在文件中存在Shebang的情况下, 类Unix操作系统的程序载入器会分析Shebang后的内容, 将这些内容作为解释器指令, 并调用该指令)
+
+如果一个类不继承自其它类, 就显式的从object继承.
+
+导入总应该放在文件顶部, 位于模块注释和文档字符串之后, 模块全局变量和常量之前. 导入应该按照从最通用到最不通用的顺序分组:
+1. 标准库导入
+2. 第三方库导入
+3. 应用程序指定导入
+
+导入父目录下的文件,并且在pycharm中能正常跳转:
+sys.path.append("..")
+import test
+
+#################################################################
+
+对于socket sock.setblocking(0) # 设置为非阻塞模式
+若没有连接会抛异常：Socket error 10035 - Resource temporarily unavailable
+
+def foo(*args, **kwargs):
+这两个是python中的可变参数。*args表示任何多个无名参数，它是一个tuple；**kwargs表示关键字参数，它是一个dict。并且同时使用*args和**kwargs时，必须*args参数列要在**kwargs前
+
+(http://blog.csdn.net/handsomekang/article/details/9615239)
+类中使用@staticmethod或@classmethod 的方法，不需要实例化类，直接类名.方法名()来调用。 
+1.	@staticmethod不需要表示自身对象的self和自身类的cls参数，就跟使用函数一样。
+	@classmethod也不需要self参数，但第一个参数需要是表示自身类的cls参数。
+2.	在@staticmethod中要调用到这个类的一些属性方法，只能直接类名.属性名或类名.方法名。
+	而@classmethod因为持有cls参数，可以来调用类的属性，类的方法
+
+heapq模块的用法：http://www.jb51.net/article/87552.htm
+
+异常：
+	SystemExit			解释器请求退出
+	KeyboardInterrupt	用户中断执行(通常是输入^C)
+	Exception			常规错误的基类
+	IOError				输入/输出操作失败
+	
+Python pass是空语句，是为了保持程序结构的完整性。
+
+单元测试unittest：（http://blog.csdn.net/hackerain/article/details/24095117）
+自动为当前文件中继承了unittest.TestCase的类构造对象，自动执行其中函数。
+一个完整的测试流程，包括测试前准备环境的搭建(setUp)，执行测试代码(run)，以及测试后环境的还原(tearDown)。
+对以“test_”开头的函数会分别构造对象进行测试。
+
+data_string = cPickle.dumps(data)  #将对象序列化保存到一个字符串变量中
+
+object.__getattribute__(self, name)   通过实例访问属性
+object.__setattr__(self, name, value) 设置对象的属性
+object.__delattr__(self, name, value) 删除对象的属性
+
+struct.pack()
+struct.unpack()
+struct.calcsize()  计算特定格式的输出的大小，例如struct.calcsize('HH4s')为8
+
+类中不带self的属性是静态的
+
+sleep：
+python：time.sleep(t)     单位为秒
+C#    ：Thread.Sleep(ms); 单位为毫秒
+
+获取时间：
+python：time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())   # 2016-03-20 11:45:39
+C#    ：DateTime.Now.ToString();   // 2008-9-4 20:02:10
+
+随机值：
+import random
+print random.randint(12, 20) #生成的随机数n: 12 <= n <= 20 
+
+
+
+python在变量前误将英文逗号打成中文逗号，提示的错误可能是：unresoveled reference '变量名'
+
+Python查询Mysql使用 fetchone() 方法获取单条数据, 使用fetchall() 方法获取多条数据。
+
+string-->int
+1、10进制string转化为int
+　　int('12')
+2、16进制string转化为int
+　　int('12', 16)
+int-->string
+1、int转化为10进制string
+　　str(18)
+2、int转化为16进制string
+　　hex(18)
+
+super机制保证公共父类初始化函数只调用一次，执行顺序按照MRO(method resolution order)
+class X(object):
+    # x1=10
+    def __init__(self):
+        super(X,self).__init__()
+        self.x=0
+        print 'x'
+class A(X):
+    def __init__(self):
+        super(A,self).__init__()
+        self.a=1
+        print 'a'
+class B(X):
+    def __init__(self):
+        super(B,self).__init__()
+        self.b=2
+        print 'b'
+class C(A, B, X):
+    def __init__(self):
+        super(C,self).__init__()
+        self.c = 3
+        print 'c'
+cc=C()
+结果：x b a c
+如果A，B中的属性同名都为a，则cc中只会有一个a
+
+条件表达式： x = 1 if cond else 2
+
+ 对一个块中的某个名称的任何赋值都会导致Python将对该名称的全部引用当做局部变量, 甚至是赋值前的处理.示例：
+i = 4
+def foo(x):
+    def bar():
+        print i,
+    
+    for i in x:  # Ah, i *is* local to Foo, so this is what Bar sees
+        print i,
+    bar()
+因此 foo([1, 2, 3]) 会打印 1 2 3 3 , 不是 1 2 3 4
+
+在Python中有三个内置的装饰器，都是跟class相关的：staticmethod、classmethod 和property。
+1. staticmethod 是类静态方法，其跟成员方法的区别是没有 self 参数，并且可以在类不进行实例化的情况下调用
+2. classmethod 与成员方法的区别在于所接收的第一个参数不是 self （类实例的指针），而是cls（当前类的具体类型）
+3. property 是属性的意思，表示可以通过通过类实例直接访问的信息
+
+
+# 字符串 #
+x = 'name: %s; score: %d' % (name, n)
+y = 'name: {}; score: {}'.format(name, n)
+
+s=s1+s2+s3+s4+s5                                # 3.751 （用时） 由于字符串是不可变的, 这样做会创建临时对象
+s=s1; s+=s2; s+=s3; s+=s4; s+=s5                # 3.736
+s="".join((s1,s2,s3,s4,s5))                     # 1.296
+import string; s=string.join((s1,s2,s3,s4,s5))  # 1.316
+s="%s%s%s%s%s"%(s1,s2,s3,s4,s5)                 # 3.821
+
+避免在循环中用+和+=操作符来累加字符串. 作为替代方案, 你可以将每个子串加入列表, 然后在循环结束后用 .join 连接列表：
+	items = ['<table>']
+	for last_name, first_name in employee_list:
+		items.append('<tr><td>%s, %s</td></tr>' % (last_name, first_name))
+	items.append('</table>')
+	employee_table = ''.join(items)
+
+# 字典迭代器 #
+for k in dict_obj.iterkeys(): pass
+for v in dict_obj.itervalues(): pass
+for k, v in dict_obj.iteritems(): pass # 获得下标方法
+
+for i in xrange(n): pass   # xrange 用法与 range 完全相同，所不同的是生成的不是一个list对象，而是一个生成器。
+for index, value in enumerate(seq_obj): pass  # 获得索引和值
+for v1, v2 in zip(seq1, seq2): pass  # 将对象中对应的元素打包成一个个tuple
+
+
+__dict__与dir()：
+__dict__仅存储与该实例相关的实例属性
+dir()会自动寻找一个对象的所有属性，包括__dict__中的属性。
+
+dir()可以查看模块定义了什么名字（包括变量名，模块名，函数名等）：dir(模块名)，没有参数时返回所有当前定义的名字
+
+• int, float, str, tuple, frozenset are immutable types.
+• list, dict, set, custom type are mutable types.
+
+# 模块搜索路径 #
+当导入一个模块时，解释器先在当前包中查找模块，若找不到，然后在内置的built-in模块中查找，找不到则按sys.path给定的路径找对应的模块文件(模块名.py)。sys.path的初始值来自于以下地方：
+    包含脚本当前的路径，当前路径
+    PYTHONPATH
+    默认安装路径
+
+模块：可理解为对应于一个文件。
+包：通常是一个目录，可以使用import导入包，或者from + import来导入包中的部分模块。包目录下为首的一个文件便是 __init__.py。
+
+多次import不会多次执行模块，只会执行一次。可以使用reload来强制运行模块，但不提倡。
+
+
